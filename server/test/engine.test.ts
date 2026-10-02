@@ -1,5 +1,6 @@
+import { demos, type Script } from "../src/debug/scenarios.js";
 import { describe, expect, it } from "vitest";
-import type { Guess, News, Role, Direction } from "@insider/shared";
+import type { Guess, News, Direction } from "@insider/shared";
 import {
   freshPlayer,
   startGame,
@@ -36,15 +37,6 @@ const guess = (
   stake: 100 | 200 | 300 = 100,
   callShark = false,
 ): Guess => ({ direction, stake, callShark });
-type Script = {
-  direction: Direction;
-  role: Role;
-  tip: Direction;
-  strong?: boolean;
-  guesses: Record<string, Guess>;
-  coins: number[];
-  trust: number[];
-};
 function replay(names: string[], scripts: Script[]) {
   let g = game(names);
   for (const s of scripts) {
@@ -71,60 +63,7 @@ function replay(names: string[], scripts: Script[]) {
 }
 describe("exact original-v1 document replays", () => {
   it("reproduces Appendix A, including sit-out, accusations, double bluff, standings and awards", () => {
-    const g = replay(
-      ["Maya", "Leo", "Priya", "Dev"],
-      [
-        {
-          direction: "DOWN",
-          role: "PARTNER",
-          tip: "DOWN",
-          guesses: {
-            Leo: guess("DOWN"),
-            Priya: guess("DOWN", 200),
-            Dev: guess("UP", 100, true),
-          },
-          coins: [1100, 1100, 1200, 750],
-          trust: [125, 100, 100, 100],
-        },
-        {
-          direction: "DOWN",
-          role: "SHARK",
-          tip: "UP",
-          strong: true,
-          guesses: {
-            Maya: guess("UP", 200, true),
-            Priya: guess("DOWN", 100, true),
-          },
-          coins: [1000, 900, 1400, 750],
-          trust: [125, 50, 100, 100],
-        },
-        {
-          direction: "UP",
-          role: "SHARK",
-          tip: "UP",
-          strong: true,
-          guesses: {
-            Maya: guess("DOWN", 200),
-            Leo: guess("DOWN", 300),
-            Dev: guess("UP"),
-          },
-          coins: [800, 600, 1500, 850],
-          trust: [125, 50, 130, 100],
-        },
-        {
-          direction: "UP",
-          role: "SHARK",
-          tip: "UP",
-          guesses: {
-            Maya: guess("UP", 300, true),
-            Leo: guess("DOWN", 200),
-            Priya: guess("UP"),
-          },
-          coins: [1200, 400, 1600, 800],
-          trust: [125, 50, 130, 105],
-        },
-      ],
-    );
+    const g = replay(demos.A.names, demos.A.rounds);
     expect(winners(g)).toEqual(["Priya"]);
     expect(
       Object.fromEntries(awards(g).map((a) => [a.title, a.playerIds])),
@@ -142,60 +81,7 @@ describe("exact original-v1 document replays", () => {
     ]);
   });
   it("reproduces Appendix B exactly without treating scripted bot choices as a bot-policy test", () => {
-    const g = replay(
-      ["Alex", "Lucy", "Sam"],
-      [
-        {
-          direction: "UP",
-          role: "PARTNER",
-          tip: "UP",
-          guesses: { Lucy: guess("UP"), Sam: guess("UP", 100, true) },
-          coins: [1100, 1100, 950],
-          trust: [125, 100, 100],
-        },
-        {
-          direction: "UP",
-          role: "SHARK",
-          tip: "DOWN",
-          guesses: { Alex: guess("DOWN"), Sam: guess("DOWN") },
-          coins: [1000, 1200, 850],
-          trust: [125, 80, 100],
-        },
-        {
-          direction: "UP",
-          role: "PARTNER",
-          tip: "UP",
-          guesses: { Alex: guess("UP"), Lucy: guess("UP") },
-          coins: [1100, 1300, 950],
-          trust: [125, 80, 115],
-        },
-        {
-          direction: "DOWN",
-          role: "SHARK",
-          tip: "UP",
-          guesses: { Lucy: guess("UP", 200), Sam: guess("UP") },
-          coins: [1200, 1100, 850],
-          trust: [105, 80, 115],
-        },
-        {
-          direction: "DOWN",
-          role: "PARTNER",
-          tip: "DOWN",
-          guesses: { Alex: guess("DOWN", 300), Sam: guess("DOWN") },
-          coins: [1500, 1200, 950],
-          trust: [105, 95, 115],
-        },
-        {
-          direction: "DOWN",
-          role: "SHARK",
-          tip: "UP",
-          strong: true,
-          guesses: { Alex: guess("DOWN", 200, true), Lucy: guess("UP", 200) },
-          coins: [1800, 1000, 850],
-          trust: [105, 95, 65],
-        },
-      ],
-    );
+    const g = replay(demos.B.names, demos.B.rounds);
     expect(winners(g)).toEqual(["Alex"]);
     expect(
       Object.fromEntries(awards(g).map((a) => [a.title, a.playerIds])),

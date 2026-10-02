@@ -26,3 +26,54 @@ describe("server foundation", () => {
     }
   });
 });
+
+it("checks WebSocket origins and notifies clients before idempotent shutdown", async () => {
+  const server = createApp({ origin: "https://insider.example" });
+  servers.push(server);
+  await new Promise<void>((done) => server.http.listen(0, "127.0.0.1", done));
+  const url = `http://127.0.0.1:${(server.http.address() as AddressInfo).port}`;
+  const blocked = client(url, {
+    autoConnect: false,
+    forceNew: true,
+    transports: ["websocket"],
+    reconnection: false,
+    extraHeaders: { Origin: "https://other.example" },
+  });
+  const allowed = client(url, {
+    autoConnect: false,
+    forceNew: true,
+    transports: ["websocket"],
+    reconnection: false,
+    extraHeaders: { Origin: "https://insider.example" },
+  });
+  try {
+    const denied = new Promise<Error>((done) =>
+      blocked.once("connect_error", done),
+    );
+    blocked.connect();
+    expect(await denied).toBeInstanceOf(Error);
+    const ready = new Promise<void>((done) => allowed.once("ready", done));
+    allowed.connect();
+    await ready;
+    const shutdown = new Promise<void>((done) =>
+      allowed.once("shutdown", done),
+    );
+    const closing = server.close();
+    expect(server.close()).toBe(closing);
+    await shutdown;
+    await closing;
+    expect(server.rooms.roomCount).toBe(0);
+  } finally {
+    blocked.disconnect();
+    allowed.disconnect();
+  }
+});
+it("rejects invalid origins rather than silently enabling broad access", () => {
+  for (const origin of [
+    "*",
+    "https://site.example/",
+    "file:///tmp/game",
+    "https://user:password@site.example",
+  ])
+    expect(() => createApp({ origin })).toThrow();
+});

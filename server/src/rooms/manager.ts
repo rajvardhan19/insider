@@ -94,6 +94,20 @@ export class RoomManager {
   get roomCount() {
     return this.rooms.size;
   }
+  get diagnostics() {
+    return {
+      rooms: this.rooms.size,
+      bindings: this.bindings.size,
+      scheduledTimers: [...this.rooms.values()].reduce(
+        (n, room) => n + room.timers.length,
+        0,
+      ),
+      cachedCommands: [...this.rooms.values()].reduce(
+        (n, room) => n + room.cache.size,
+        0,
+      ),
+    };
+  }
   close() {
     clearInterval(this.sweepTimer);
     for (const room of this.rooms.values()) this.clearTimers(room);
@@ -561,6 +575,7 @@ export class RoomManager {
     const later = (delay: number, run: () => void) => {
       const timer = setTimeout(
         () => {
+          room.timers = room.timers.filter((pending) => pending !== timer);
           if (
             this.rooms.get(room.code) !== room ||
             this.phaseKey(room) !== key ||

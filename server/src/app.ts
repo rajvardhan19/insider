@@ -8,15 +8,41 @@ import { RoomManager, type RoomOptions } from "./rooms/manager.js";
 export function createApp(
   options: { origin?: string; clientDir?: string; rooms?: RoomOptions } = {},
 ) {
+  const allowedOrigins = options.origin
+    ? [options.origin]
+    : ["http://localhost:5173", "http://127.0.0.1:5173"];
+  for (const origin of allowedOrigins) {
+    const parsed = new URL(origin);
+    if (
+      !["http:", "https:"].includes(parsed.protocol) ||
+      parsed.origin !== origin
+    )
+      throw new Error(
+        "PUBLIC_ORIGIN must be an HTTP(S) origin without a path or trailing slash.",
+      );
+  }
+  let closing: Promise<void> | undefined;
   const app = express();
   app.disable("x-powered-by");
   const http = createServer(app);
   const io = new Server(http, {
     maxHttpBufferSize: 16_384,
+    allowRequest: (req, done) =>
+      done(
+        null,
+        !closing &&
+          (!req.headers.origin || allowedOrigins.includes(req.headers.origin)),
+      ),
     cors: {
-      origin: options.origin ?? "http://localhost:5173",
+      origin: allowedOrigins,
       methods: ["GET", "POST"],
     },
+  });
+  app.use((_req, res, next) => {
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("Referrer-Policy", "same-origin");
+    res.setHeader("X-Frame-Options", "DENY");
+    next();
   });
   app.get("/health", (_req, res) =>
     res.json({ status: "ok", service: "insider" }),
@@ -47,8 +73,11 @@ export function createApp(
     io,
     rooms,
     close: () => {
+      if (closing) return closing;
+      io.emit("shutdown");
       rooms.close();
-      return new Promise<void>((done) => io.close(() => done()));
+      closing = new Promise<void>((done) => io.close(() => done()));
+      return closing;
     },
   };
 }

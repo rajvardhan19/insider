@@ -18,7 +18,8 @@
     "test:e2e": "playwright test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "check": "npm run typecheck && npm run lint && npm test && npm run build"
+    "check": "npm run typecheck && npm run lint && npm test && npm run build",
+    "debug:game": "tsx server/src/debug/localHarness.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

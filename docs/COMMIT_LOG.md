@@ -86,3 +86,12 @@ Verified: `npm run check` passes with 43 tests. Browser checks completed a solo 
 - Room/game/round/phase checks reject stale completions after deadline, disconnect, cleanup, or replay.
 
 Verified: `npm run check` passes with 58 tests, including fake-provider success/failures, bounds, timeout, budgets, publication races, and final/replay handling. No paid API calls were made; credentialed provider verification remains a release requirement.
+
+## 09 — Local replay harness and runtime hardening
+
+- Local-only interactive engine commands and executable Appendix A/B scenarios, sharing fixtures with the exact replay tests.
+- WebSocket origin checks in addition to CORS, validated production origin configuration, basic HTTP headers, and shutdown notification with idempotent cleanup.
+- Completed timers are removed from runtime bookkeeping; diagnostics expose aggregate counts to local tests only.
+- Accelerated multi-room soak verifies 15 seats, 12 matches, 60 rounds/reconnects, duplicate commands, API failures, isolation, arithmetic, bounded snapshots, and complete room cleanup.
+
+Verified: `npm run check` passes with 61 tests. Both `npm run debug:game -- --demo A` and `--demo B` match all coin/trust checkpoints. This accelerated soak does not replace real-device, human, or long-duration testing.

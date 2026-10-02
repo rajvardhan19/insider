@@ -38,3 +38,5 @@ Public deployment needs a chosen hosting destination. No site has been published
 - One server instance with in-memory rooms initially. A restart ends matches; ordinary reconnects preserve seats and accepted choices.
 
 See [narration configuration and verification](docs/narration.md) for optional API setup and limits.
+
+See [local debugging and replay commands](docs/debugging.md) for forced scenarios and multi-room verification.
