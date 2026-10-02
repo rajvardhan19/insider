@@ -25,7 +25,7 @@ Production start serves the built client and backend together at http://localhos
 
 ## Delivery status
 
-The backend includes rooms, authenticated reconnection, the original game engine, all five bot policies, 150 news records, authoritative phase timers, quick-chat, solo startup, and private player snapshots. Both design-document games have exact replay tests. The frontend currently shows the foundation home screen; interactive room and game screens are the next checkpoint. This is an intermediate build, not the finished game.
+The backend includes rooms, authenticated reconnection, the original game engine, all five bot policies, 150 news records, authoritative phase timers, quick-chat, solo startup, and private player snapshots. Both design-document games have exact replay tests. The interactive client includes solo onboarding, room controls, private tips, all stakes and Shark calls, staged reveals, scoring receipts, trust charts, awards, replay, themes, and sound. Live AI narration and release verification remain in progress. This is an intermediate build, not the finished game.
 
 Public deployment needs a chosen hosting destination. No site has been published yet.
 
@@ -35,4 +35,4 @@ Public deployment needs a chosen hosting destination. No site has been published
 - Per-player snapshots; private state stays server-side.
 - Server-owned deadlines.
 - Ordered commands and retry-safe mutations per room.
-- One server instance with in-memory rooms initially. A restart ends matches; ordinary reconnects preserve seats once room support is implemented.
+- One server instance with in-memory rooms initially. A restart ends matches; ordinary reconnects preserve seats and accepted choices.

@@ -67,3 +67,13 @@ Verified: `npm run check` passes with 37 tests. Content meets structural coverag
 Verified: `npm run check` passes with 41 tests, including exact document replays, privacy checks, live deadlines, scoring retries, active-game reconnection, replay, and chat eligibility/cooldown. Interactive client screens, live AI narration, polish, and release verification remain required.
 
 Repository delivery: verified commits are pushed to `origin/main` at `https://github.com/rajvardhan19/insider.git` under the user's standing authorization.
+
+## 07 — Interactive game client
+
+- Complete Home, tutorial, Create/Join, host lobby controls, bot selection, and direct room links.
+- Private hold-to-peek, Show Table decoy, tips/Strong, all stakes, Shark calls, locked choices, and quick-chat.
+- Server-timed countdowns and staged reveals, score receipts, trust charts, track records, awards, bot lessons, and replay.
+- Light/dark themes, saved mute preference, sound effects, reduced motion, focus-managed dialogs, and mobile controls.
+- Token-based recovery, monotonic snapshot acceptance, and same-ID command retries.
+
+Verified: `npm run check` passes with 43 tests. Browser checks completed a solo match and replay, restored a locked 200-coin choice after refresh, exercised a two-human lobby with bots and host-only controls, and checked 375×667 layouts. A fresh-build solo start shows a 20-second countdown. These are local browser checks; real-device and human playtests remain outstanding.
