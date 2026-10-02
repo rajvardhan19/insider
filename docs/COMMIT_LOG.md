@@ -46,3 +46,11 @@ Verified: `npm run check` passes with 18 tests, including eight socket integrati
 - Exact Appendix A and B fixtures verify every round's coins/trust and final awards; privacy tests compare views across secret-only changes.
 
 Verified: `npm run check` passes with 29 tests. The engine is not yet connected to live room actions; that is the next isolated checkpoint.
+
+## 05 — Five bot policies and full content inventory
+
+- All five personalities, bounded chat reactions, tell/non-tell lines, false tells, first-game tell boost, and Walt's timing tell.
+- Partner honesty takes precedence over personality/random branches; guessing policies accept only public observations.
+- 150 unique headline records across 30 fictional companies, balanced sentiment, and 40 narration leads.
+
+Verified: `npm run check` passes with 37 tests. Content meets structural coverage; human playtesting and editorial refinement remain on the release checklist.
