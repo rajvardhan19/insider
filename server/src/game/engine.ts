@@ -118,7 +118,7 @@ export function submitTip(
     "INVALID_INPUT",
   );
   const g = structuredClone(state);
-  g.current.tip = { ...tip };
+  g.current.tip = { direction: tip.direction, strong: tip.strong };
   g.phase = "GUESS";
   g.phaseStartedAt = now;
   g.phaseEndsAt = now + (g.mode === "QUICK" ? R.quickMs : R.fullMs);
@@ -143,7 +143,11 @@ export function submitGuess(
   );
   requireRule(guess.stake !== 300 || !player.allInUsed, "ALL_IN_USED");
   const g = structuredClone(state);
-  g.current.guesses[id] = { ...guess };
+  g.current.guesses[id] = {
+    direction: guess.direction,
+    stake: guess.stake,
+    callShark: guess.callShark,
+  };
   // The consumable is committed publicly only at reveal; a player cannot submit twice.
   return Object.keys(g.current.guesses).length === g.players.length - 1
     ? resolveRound(g, now)

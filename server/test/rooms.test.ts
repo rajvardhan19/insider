@@ -25,14 +25,12 @@ async function connect() {
 const enter = (s: Socket, input: unknown) =>
   s.timeout(2000).emitWithAck("entry", input) as Promise<Ack>;
 const command = (s: Socket, action: Action, id = randomUUID()) =>
-  s
-    .timeout(2000)
-    .emitWithAck("command", {
-      commandId: id,
-      gameId: null,
-      roundId: 0,
-      action,
-    }) as Promise<Ack>;
+  s.timeout(2000).emitWithAck("command", {
+    commandId: id,
+    gameId: views.get(s)?.gameId ?? null,
+    roundId: views.get(s)?.round ?? 0,
+    action,
+  }) as Promise<Ack>;
 async function until(predicate: () => boolean) {
   for (let i = 0; i < 60 && !predicate(); i++)
     await new Promise((r) => setTimeout(r, 5));
@@ -67,6 +65,128 @@ afterEach(async () => {
 });
 
 describe("rooms and authenticated seats", () => {
+  it("runs live tip/guess/reveal rounds, rejects late actions, and retries scoring only once", async () => {
+    const { host, code } = await room(),
+      guest = await connect();
+    await enter(guest, { type: "join", name: "Leo", code });
+    expect(await command(host, { type: "start" })).toMatchObject({ ok: true });
+    await until(() => views.get(guest)?.phase === "TIP");
+    expect(views.get(host)!.secrets).toBeDefined();
+    expect(views.get(guest)!.secrets).toBeUndefined();
+    const direction = views.get(host)!.secrets!.direction;
+    await command(host, { type: "tip", direction, strong: false });
+    await until(() => views.get(guest)?.phase === "GUESS");
+    const id = randomUUID();
+    const payload = {
+      commandId: id,
+      gameId: views.get(guest)!.gameId,
+      roundId: 1,
+      action: { type: "guess", direction, stake: 300, callShark: false },
+    };
+    const first = await guest.timeout(2000).emitWithAck("command", payload);
+    await until(() => views.get(host)?.phase === "REVEAL");
+    const balances = views.get(host)!.players.map((p) => p.coins);
+    expect(await guest.timeout(2000).emitWithAck("command", payload)).toEqual(
+      first,
+    );
+    expect(views.get(host)!.players.map((p) => p.coins)).toEqual(balances);
+    now = views.get(host)!.phaseEndsAt;
+    app.rooms.sweep();
+    await until(() => views.get(guest)?.phase === "TIP");
+    const deadline = views.get(guest)!.phaseEndsAt;
+    now = deadline;
+    expect(
+      await command(guest, { type: "tip", direction: "UP", strong: true }),
+    ).toMatchObject({ ok: false, code: "WRONG_PHASE" });
+    await until(() => views.get(host)?.phase === "GUESS");
+    expect(views.get(host)!.tip?.strong).toBe(false);
+  });
+  it("restores a locked private choice during a live game and blocks mid-game join/settings", async () => {
+    const { host, code } = await room(),
+      guest = await connect();
+    const joined = await enter(guest, { type: "join", name: "Leo", code });
+    if (!joined.ok) throw new Error("join");
+    await command(host, { type: "addBot", bot: "lucy" });
+    await command(host, { type: "start" });
+    await until(() => views.get(guest)?.phase === "TIP");
+    await command(host, { type: "tip", direction: "UP", strong: false });
+    await until(() => views.get(guest)?.phase === "GUESS");
+    await command(guest, {
+      type: "guess",
+      direction: "DOWN",
+      stake: 300,
+      callShark: true,
+    });
+    await until(() => Boolean(views.get(guest)?.ownGuess));
+    const other = await connect();
+    expect(
+      await enter(other, { type: "join", name: "Dev", code }),
+    ).toMatchObject({ ok: false, code: "GAME_IN_PROGRESS" });
+    expect(await command(host, { type: "mode", mode: "FULL" })).toMatchObject({
+      ok: false,
+      code: "WRONG_PHASE",
+    });
+    const reconnect = await connect();
+    await enter(reconnect, { type: "rejoin", code, token: joined.token });
+    expect(views.get(reconnect)!.ownGuess).toEqual({
+      direction: "DOWN",
+      stake: 300,
+      callShark: true,
+    });
+    expect(views.get(host)!.ownGuess).toBeUndefined();
+    expect(
+      views.get(host)!.players.find((p) => p.name === "Leo")!.allInUsed,
+    ).toBe(false);
+  });
+  it("finishes through authoritative deadlines and rejects old-game actions after replay", async () => {
+    const { host, code } = await room(),
+      guest = await connect();
+    await enter(guest, { type: "join", name: "Leo", code });
+    await command(host, { type: "start" });
+    await until(() => views.get(host)?.phase === "TIP");
+    const old = views.get(host)!.gameId;
+    for (let i = 0; i < 18; i++) {
+      const v = views.get(host)!;
+      now = v.phaseEndsAt;
+      app.rooms.sweep();
+      await until(() => views.get(host)!.revision > v.revision);
+    }
+    expect(views.get(host)!.phase).toBe("FINAL");
+    expect(views.get(host)!.history).toHaveLength(6);
+    await command(host, { type: "replay" });
+    await until(() => views.get(host)?.phase === "LOBBY");
+    const stale = await host.timeout(2000).emitWithAck("command", {
+      commandId: randomUUID(),
+      gameId: old,
+      roundId: 6,
+      action: { type: "tip", direction: "UP", strong: true },
+    });
+    expect(stale).toMatchObject({ ok: false, code: "STALE_GAME" });
+    expect(
+      views.get(host)!.players.every((p) => p.coins === 1000 && !p.allInUsed),
+    ).toBe(true);
+  });
+  it("starts solo with two distinct bots and enforces quick-chat eligibility and cooldown", async () => {
+    const solo = await connect();
+    expect(
+      await enter(solo, { type: "solo", name: "Alex", firstGame: true }),
+    ).toMatchObject({ ok: true });
+    const v = views.get(solo)!;
+    expect(v.solo).toBe(true);
+    expect(v.phase).toBe("TIP");
+    expect(new Set(v.players.filter((p) => p.bot).map((p) => p.bot)).size).toBe(
+      2,
+    );
+    expect(
+      await command(solo, { type: "chat", phraseId: "doubt" }),
+    ).toMatchObject({ ok: false, code: "UNAUTHORIZED" });
+    expect(
+      await command(solo, { type: "chat", phraseId: "trust" }),
+    ).toMatchObject({ ok: true });
+    expect(
+      await command(solo, { type: "chat", phraseId: "never" }),
+    ).toMatchObject({ ok: false, code: "RATE_LIMITED" });
+  });
   it("creates, joins, projects distinct identities and hides credentials", async () => {
     const { host, code, token } = await room(),
       guest = await connect();

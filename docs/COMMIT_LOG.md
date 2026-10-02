@@ -54,3 +54,16 @@ Verified: `npm run check` passes with 29 tests. The engine is not yet connected 
 - 150 unique headline records across 30 fictional companies, balanced sentiment, and 40 narration leads.
 
 Verified: `npm run check` passes with 37 tests. Content meets structural coverage; human playtesting and editorial refinement remain on the release checklist.
+
+## 06 — Live game runtime, solo startup, and authoritative scheduling
+
+- Room commands now start and play the original engine; only the server advances phases and resolves scores.
+- Delayed actions check room identity, game, round, and phase before running. Cleanup cancels timers; deadlines are reconciled before accepting an action.
+- Solo starts with two distinct bots. Bot guesses use public observations and current Insider chat, with delayed tips and reactions.
+- All snapshots use the allowlisted projection. Rejoining restores the viewer's locked choice while other players' choices and current All In consumption remain hidden.
+- Mid-game joining and roster/settings changes are rejected; replay resets balances, trust, and consumables and rejects old-game commands.
+- Game input normalization copies only defined tip/guess fields into engine state.
+
+Verified: `npm run check` passes with 41 tests, including exact document replays, privacy checks, live deadlines, scoring retries, active-game reconnection, replay, and chat eligibility/cooldown. Interactive client screens, live AI narration, polish, and release verification remain required.
+
+Repository delivery: verified commits are pushed to `origin/main` at `https://github.com/rajvardhan19/insider.git` under the user's standing authorization.

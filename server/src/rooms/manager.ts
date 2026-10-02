@@ -6,10 +6,27 @@ import {
   entrySchema,
   type Ack,
   type Command,
-  type PlayerView,
   type PublicPlayer,
   type Mode,
+  type News,
+  type Personality,
+  PHRASES,
 } from "@insider/shared";
+
+import { buildPlayerView } from "../game/projection.js";
+import {
+  expire,
+  freshPlayer,
+  startGame,
+  submitGuess,
+  submitTip,
+} from "../game/engine.js";
+import { type GameState, GameError } from "../game/state.js";
+import { samples } from "../game/rng.js";
+import { decideGuess, decideTip, tellPlan } from "../bots/decisions.js";
+import { RULES } from "../game/rules.js";
+import newsData from "../content/news.json";
+const newsPool = newsData as News[];
 
 type Seat = Omit<PublicPlayer, "submitted"> & {
   tokenHash: string;
@@ -25,6 +42,12 @@ type Room = {
   players: Seat[];
   emptySince?: number;
   cache: Map<string, { fingerprint: string; ack: Ack }>;
+  game?: GameState;
+  solo: boolean;
+  firstGame: boolean;
+  timers: ReturnType<typeof setTimeout>[];
+  scheduleKey?: string;
+  lastChat: Map<string, number>;
 };
 type Binding = { code: string; playerId: string };
 export interface RoomOptions {
@@ -62,6 +85,7 @@ export class RoomManager {
   }
   close() {
     clearInterval(this.sweepTimer);
+    for (const room of this.rooms.values()) this.clearTimers(room);
     this.rooms.clear();
     this.bindings.clear();
     this.admission.clear();
@@ -137,17 +161,8 @@ export class RoomManager {
         );
         return;
       }
-      if (entry.type === "solo") {
-        reply(
-          fail(
-            "NOT_READY",
-            "Solo play is coming in the game-engine checkpoint.",
-          ),
-        );
-        return;
-      }
       let room: Room | undefined;
-      if (entry.type === "create") {
+      if (entry.type === "create" || entry.type === "solo") {
         if (this.rooms.size >= (this.options.maxRooms ?? 100)) {
           reply(fail("CAPACITY", "The exchange is full. Try again shortly."));
           return;
@@ -167,11 +182,24 @@ export class RoomManager {
           mode: "QUICK",
           players: [],
           cache: new Map(),
+          solo: entry.type === "solo",
+          firstGame: entry.type === "solo" && entry.firstGame,
+          timers: [],
+          lastChat: new Map(),
         };
         this.rooms.set(code, room);
       } else room = this.rooms.get(entry.code);
       if (!room) {
         reply(fail("ROOM_NOT_FOUND", "No room matches that code."));
+        return;
+      }
+      if (room.game) {
+        reply(
+          fail(
+            "GAME_IN_PROGRESS",
+            "This game is underway. Join the next game.",
+          ),
+        );
         return;
       }
       if (room.players.length >= 5) {
@@ -202,6 +230,27 @@ export class RoomManager {
       };
       room.players.push(player);
       if (!room.hostId) room.hostId = player.id;
+      if (room.solo) {
+        const available = (Object.keys(BOTS) as Personality[]).filter(
+          (b) => BOTS[b].name.toLowerCase() !== player.name.toLowerCase(),
+        );
+        for (let i = 0; i < 2; i++) {
+          const bot = available.splice(randomInt(available.length), 1)[0];
+          room.players.push({
+            ...freshPlayer(randomUUID(), BOTS[bot].name, bot),
+            tokenHash: "",
+          });
+        }
+        room.game = startGame(
+          room.players,
+          room.mode,
+          randomUUID(),
+          randomInt(0x100000000),
+          this.now(),
+          newsPool,
+          room.firstGame,
+        );
+      }
       this.bind(socket, room, player);
       reply({ ok: true, code: room.code, token });
     });
@@ -238,7 +287,20 @@ export class RoomManager {
         this.send(room, player);
         return;
       }
-      const ack = this.execute(room, player, c);
+      this.advance(room);
+      let ack: Ack;
+      try {
+        ack = this.execute(room, player, c);
+      } catch (error) {
+        ack =
+          error instanceof GameError
+            ? fail(error.code, error.message)
+            : fail("INTERNAL_ERROR", "The action could not be completed.");
+        if (!(error instanceof GameError))
+          console.error(
+            JSON.stringify({ event: "command_error", roomId: room.id }),
+          );
+      }
       room.cache.set(key, { fingerprint, ack });
       while (room.cache.size > 1280)
         room.cache.delete(room.cache.keys().next().value!);
@@ -246,6 +308,7 @@ export class RoomManager {
       if (ack.ok) {
         room.revision++;
         this.broadcast(room);
+        this.schedule(room);
       }
     });
     socket.on("disconnect", () => {
@@ -261,6 +324,7 @@ export class RoomManager {
       if (!room.players.some((p) => !p.bot && p.connected))
         room.emptySince = this.now();
       this.broadcast(room);
+      if (room.emptySince !== undefined) this.clearTimers(room);
     });
   }
   private allowAdmission(address: string) {
@@ -270,6 +334,8 @@ export class RoomManager {
       rate = { count: 0, since: now };
       this.admission.set(address, rate);
     }
+    if (this.admission.size > 10000)
+      this.admission.delete(this.admission.keys().next().value!);
     return ++rate.count <= 60;
   }
   private bind(socket: Socket, room: Room, player: Seat) {
@@ -279,21 +345,28 @@ export class RoomManager {
     room.emptySince = undefined;
     this.bindings.set(socket.id, { code: room.code, playerId: player.id });
     room.revision++;
+    this.advance(room);
     this.broadcast(room);
+    this.schedule(room);
   }
   private execute(room: Room, player: Seat, c: Command): Ack {
-    if (c.gameId !== null)
+    if (c.gameId !== (room.game?.id ?? null))
       return fail("STALE_GAME", "This game is no longer active.");
-    if (c.roundId !== 0)
+    if (c.roundId !== (room.game?.round ?? 0))
       return fail("STALE_ROUND", "This round is no longer active.");
     const a = c.action;
     if (a.type === "leave") {
       if (player.socketId) this.bindings.delete(player.socketId);
-      room.players = room.players.filter((p) => p.id !== player.id);
+      if (room.game) {
+        player.connected = false;
+        player.socketId = undefined;
+        player.tokenHash = "";
+        player.disconnectedAt = this.now();
+      } else room.players = room.players.filter((p) => p.id !== player.id);
       if (room.hostId === player.id)
         room.hostId =
           room.players.find((p) => !p.bot && p.connected)?.id ??
-          room.players.find((p) => !p.bot)?.id ??
+          room.players.find((p) => !p.bot && p.tokenHash)?.id ??
           "";
       if (!room.players.some((p) => !p.bot && p.connected))
         room.emptySince = this.now();
@@ -304,6 +377,76 @@ export class RoomManager {
       player.id !== room.hostId
     )
       return fail("NOT_HOST", "Only the host can do that.");
+    if (a.type === "replay") {
+      if (room.game?.phase !== "FINAL")
+        return fail("WRONG_PHASE", "Finish this game first.");
+      room.players = room.players
+        .filter((p) => p.bot || p.tokenHash)
+        .map((p) => ({
+          ...p,
+          ...freshPlayer(p.id, p.name, p.bot),
+          connected: p.connected,
+        }));
+      room.game = undefined;
+      room.firstGame = false;
+      room.lastChat.clear();
+      this.clearTimers(room);
+      if (room.solo)
+        room.game = startGame(
+          room.players,
+          room.mode,
+          randomUUID(),
+          randomInt(0x100000000),
+          this.now(),
+          newsPool,
+          false,
+        );
+      return { ok: true };
+    }
+    if (a.type === "start") {
+      if (room.game) return fail("WRONG_PHASE", "A game is already active.");
+      if (room.players.length < 2)
+        return fail("INVALID_ROSTER", "Add another player or a bot.");
+      room.game = startGame(
+        room.players,
+        room.mode,
+        randomUUID(),
+        randomInt(0x100000000),
+        this.now(),
+        newsPool,
+        room.firstGame,
+      );
+      return { ok: true };
+    }
+    if (a.type === "tip" || a.type === "guess") {
+      if (!room.game) return fail("WRONG_PHASE", "Start a game first.");
+      room.game =
+        a.type === "tip"
+          ? submitTip(room.game, player.id, a, this.now())
+          : submitGuess(room.game, player.id, a, this.now());
+      return { ok: true };
+    }
+    if (a.type === "chat") {
+      const g = room.game;
+      if (!g) return fail("WRONG_PHASE", "Chat opens when the game starts.");
+      const phrase = PHRASES[a.phraseId];
+      const isInsider = g.current.insiderId === player.id;
+      if (
+        phrase.audience !== "all" &&
+        (phrase.audience === "insider") !== isInsider
+      )
+        return fail("UNAUTHORIZED", "Choose a phrase for your current seat.");
+      if (
+        this.now() - (room.lastChat.get(player.id) ?? -Infinity) <
+        RULES.chatMs
+      )
+        return fail("RATE_LIMITED", "Wait two seconds between messages.");
+      room.lastChat.set(player.id, this.now());
+      this.addChat(room, player.id, phrase.text, a.phraseId);
+      return { ok: true };
+    }
+    if (room.game)
+      return fail("WRONG_PHASE", "Roster and mode are locked during a game.");
     if (a.type === "mode") {
       room.mode = a.mode;
       return { ok: true };
@@ -339,48 +482,183 @@ export class RoomManager {
       room.players = room.players.filter((p) => p.id !== a.playerId);
       return { ok: true };
     }
-    return fail("NOT_READY", "Gameplay arrives in the next checkpoint.");
+    return fail("INVALID_INPUT", "Unsupported action.");
   }
   private send(room: Room, player: Seat) {
     if (!player.socketId) return;
-    const view: PlayerView = {
-      protocol: 1,
-      roomId: room.id,
-      code: room.code,
-      revision: room.revision,
-      serverNow: this.now(),
-      me: player.id,
-      hostId: room.hostId,
-      mode: room.mode,
-      solo: false,
-      phase: "LOBBY",
-      gameId: null,
-      round: 0,
-      totalRounds: 0,
-      phaseStartedAt: 0,
-      phaseEndsAt: 0,
-      players: room.players.map((p) => ({
-        id: p.id,
-        name: p.name,
-        bot: p.bot,
-        connected: p.connected,
-        coins: p.coins,
-        trust: p.trust,
-        trustHistory: [...p.trustHistory],
-        record: [...p.record],
-        allInUsed: p.allInUsed,
-        submitted: false,
-      })),
-      chat: [],
-      history: [],
-      awards: [],
-      winners: [],
-      analystNote: false,
-    };
+    if (room.game)
+      for (const p of room.game.players)
+        p.connected =
+          room.players.find((seat) => seat.id === p.id)?.connected ?? false;
+    const view = buildPlayerView(room, player.id, this.now());
     this.io.sockets.sockets.get(player.socketId)?.emit("state", view);
   }
   private broadcast(room: Room) {
     for (const p of room.players) this.send(room, p);
+  }
+  private addChat(
+    room: Room,
+    playerId: string,
+    text: string,
+    phraseId?: string,
+  ) {
+    const g = room.game;
+    if (!g) return;
+    g.chat.push({
+      id: randomUUID(),
+      playerId,
+      text,
+      phraseId,
+      at: this.now(),
+      round: g.round,
+    });
+    g.chat = g.chat.slice(-60);
+  }
+  private phaseKey(room: Room) {
+    return room.game
+      ? `${room.game.id}:${room.game.round}:${room.game.phase}`
+      : "lobby";
+  }
+  private clearTimers(room: Room) {
+    room.timers.forEach(clearTimeout);
+    room.timers = [];
+    room.scheduleKey = undefined;
+  }
+  private advance(room: Room) {
+    const g = room.game;
+    if (!g || g.phase === "FINAL" || this.now() < g.phaseEndsAt) return;
+    room.game = expire(g, this.now(), newsPool);
+    room.revision++;
+    this.broadcast(room);
+    this.schedule(room);
+  }
+  private schedule(room: Room) {
+    if (!room.game || room.emptySince !== undefined) {
+      this.clearTimers(room);
+      return;
+    }
+    const key = this.phaseKey(room);
+    if (room.scheduleKey === key) return;
+    this.clearTimers(room);
+    room.scheduleKey = key;
+    const g = room.game;
+    if (g.phase === "FINAL") return;
+    const later = (delay: number, run: () => void) => {
+      const timer = setTimeout(
+        () => {
+          if (
+            this.rooms.get(room.code) !== room ||
+            this.phaseKey(room) !== key ||
+            room.emptySince !== undefined
+          )
+            return;
+          this.advance(room);
+          if (this.phaseKey(room) !== key) return;
+          try {
+            run();
+            room.revision++;
+            this.broadcast(room);
+            this.schedule(room);
+          } catch (error) {
+            if (!(error instanceof GameError))
+              console.error(
+                JSON.stringify({
+                  event: "scheduled_action_error",
+                  roomId: room.id,
+                }),
+              );
+          }
+        },
+        Math.max(1, delay),
+      );
+      timer.unref();
+      room.timers.push(timer);
+    };
+    later(g.phaseEndsAt - this.now(), () => this.advance(room));
+    if (g.phase === "TIP") {
+      const insider = g.players.find((p) => p.id === g.current.insiderId)!;
+      if (insider.bot) {
+        const [r, next] = samples(g.botRng, 6);
+        g.botRng = next;
+        const plan = tellPlan(insider.bot, g.current.role, g.firstGame, r);
+        later(Math.min(plan.delay, g.phaseEndsAt - this.now() - 1), () => {
+          const current = room.game!;
+          const [values, next] = samples(current.botRng, 6);
+          current.botRng = next;
+          const tip = decideTip(
+            insider.bot!,
+            {
+              direction: current.current.direction,
+              role: current.current.role,
+              sentiment: current.current.news.sentiment,
+            },
+            values,
+          );
+          room.game = submitTip(current, insider.id, tip, this.now());
+          this.addChat(
+            room,
+            insider.id,
+            plan.line.replace("{tip}", tip.direction === "UP" ? "BUY" : "SELL"),
+          );
+        });
+      }
+    }
+    if (g.phase === "GUESS")
+      for (const bot of g.players.filter(
+        (p) =>
+          p.bot && p.id !== g.current.insiderId && !g.current.guesses[p.id],
+      )) {
+        const [r, next] = samples(g.botRng, 1);
+        g.botRng = next;
+        later(
+          g.phaseStartedAt +
+            (g.phaseEndsAt - g.phaseStartedAt) * (0.4 + r[0] * 0.35) -
+            this.now(),
+          () => {
+            const current = room.game!;
+            const [values, next] = samples(current.botRng, 6);
+            current.botRng = next;
+            const decision = decideGuess(
+              bot.bot!,
+              {
+                tip: current.current.tip!,
+                sentiment: current.current.news.sentiment,
+                trust: current.players.find(
+                  (p) => p.id === current.current.insiderId,
+                )!.trust,
+                round: current.round,
+                allInUsed: bot.allInUsed,
+                chat: current.chat.filter(
+                  (c) =>
+                    c.round === current.round &&
+                    c.playerId === current.current.insiderId,
+                ),
+              },
+              values,
+            );
+            room.game = submitGuess(
+              current,
+              bot.id,
+              decision.guess,
+              this.now(),
+            );
+            if (decision.reply) this.addChat(room, bot.id, decision.reply);
+          },
+        );
+      }
+    if (g.phase === "REVEAL") {
+      const result = g.history.at(-1)!;
+      later(500, () => {
+        for (const out of result.outcomes)
+          if (
+            out.guess &&
+            !out.correct &&
+            result.role === "SHARK" &&
+            g.players.find((p) => p.id === out.playerId)?.bot
+          )
+            this.addChat(room, out.playerId, "You LIED to me??");
+      });
+    }
   }
   sweep() {
     const now = this.now();
@@ -393,9 +671,11 @@ export class RoomManager {
       ) {
         for (const p of room.players)
           if (p.socketId) this.bindings.delete(p.socketId);
+        this.clearTimers(room);
         this.rooms.delete(room.code);
         continue;
       }
+      if (room.emptySince === undefined) this.advance(room);
       const host = room.players.find((p) => p.id === room.hostId);
       if (
         host &&

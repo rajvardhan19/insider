@@ -2,6 +2,8 @@
 
 A multiplayer game of tips, trust, and betrayal. Development follows [the full implementation plan](IMPLEMENTATION_PLAN.md), in small verified commits. All original features remain in scope.
 
+Verified implementation commits are pushed to [`rajvardhan19/insider`](https://github.com/rajvardhan19/insider) on `main`, as authorized by the project owner.
+
 ## Run locally
 
 Requires Node.js 22.12 or newer and npm.
@@ -23,7 +25,7 @@ Production start serves the built client and backend together at http://localhos
 
 ## Delivery status
 
-The initial foundation includes workspace tooling, a server health endpoint, a live Socket.IO connection, and a responsive home screen. Game controls remain disabled until the room and game commits. A working foundation is not the finished game.
+The backend includes rooms, authenticated reconnection, the original game engine, all five bot policies, 150 news records, authoritative phase timers, quick-chat, solo startup, and private player snapshots. Both design-document games have exact replay tests. The frontend currently shows the foundation home screen; interactive room and game screens are the next checkpoint. This is an intermediate build, not the finished game.
 
 Public deployment needs a chosen hosting destination. No site has been published yet.
 
