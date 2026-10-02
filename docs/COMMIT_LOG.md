@@ -77,3 +77,12 @@ Repository delivery: verified commits are pushed to `origin/main` at `https://gi
 - Token-based recovery, monotonic snapshot acceptance, and same-ID command retries.
 
 Verified: `npm run check` passes with 43 tests. Browser checks completed a solo match and replay, restored a locked 200-coin choice after refresh, exercised a two-human lobby with bots and host-only controls, and checked 375×667 layouts. A fresh-build solo start shows a 20-second countdown. These are local browser checks; real-device and human playtests remain outstanding.
+
+## 08 — Optional live narration with guarded publication
+
+- OpenAI Responses adapter with validated configuration, bounded facts/output, no response storage, timeout/cancellation, and global/room request limits.
+- Immediate template reports remain available for every failure path; narration never blocks game transitions.
+- Round text publishes before the narration stage and freezes on screen. Closing Bell is prepared during the final reveal.
+- Room/game/round/phase checks reject stale completions after deadline, disconnect, cleanup, or replay.
+
+Verified: `npm run check` passes with 58 tests, including fake-provider success/failures, bounds, timeout, budgets, publication races, and final/replay handling. No paid API calls were made; credentialed provider verification remains a release requirement.

@@ -215,7 +215,7 @@ export function expire(state: GameState, now: number, pool: News[]): GameState {
       g.phase = "FINAL";
       g.phaseStartedAt = now;
       g.phaseEndsAt = 0;
-      g.closingReport = closingNarration(g);
+      g.closingReport ??= closingNarration(g);
       return g;
     }
     return startRound(state, now, pool);

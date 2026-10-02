@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import {
   BOTS,
+  NARRATION_VISIBLE_MS,
   PHRASES,
   type Direction,
   type PlayerView,
@@ -577,13 +578,20 @@ function Reveal({ view, now }: { view: PlayerView; now: number }) {
         })}
       </div>
       <div
-        className={`breaking reveal-step ${elapsed >= 2800 ? "visible" : ""}`}
+        className={`breaking reveal-step ${elapsed >= NARRATION_VISIBLE_MS ? "visible" : ""}`}
       >
         <span>BREAKING</span>
-        <p>{r.narration}</p>
+        {elapsed >= NARRATION_VISIBLE_MS && (
+          <PublishedNarration text={r.narration} />
+        )}
       </div>
     </div>
   );
+}
+// Mount at publication time and preserve the text even if a delayed snapshot arrives.
+function PublishedNarration({ text }: { text: string }) {
+  const [published] = useState(text);
+  return <p>{published}</p>;
 }
 function Scoreboard({
   view,

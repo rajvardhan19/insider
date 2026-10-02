@@ -25,6 +25,13 @@ import { type GameState, GameError } from "../game/state.js";
 import { samples } from "../game/rng.js";
 import { decideGuess, decideTip, tellPlan } from "../bots/decisions.js";
 import { RULES } from "../game/rules.js";
+import { narrationFacts } from "../narration/facts.js";
+import {
+  templateOnly,
+  validNarration,
+  type NarrationProvider,
+} from "../narration/narrator.js";
+import { NARRATION_VISIBLE_MS } from "@insider/shared";
 import newsData from "../content/news.json";
 const newsPool = newsData as News[];
 
@@ -48,9 +55,13 @@ type Room = {
   timers: ReturnType<typeof setTimeout>[];
   scheduleKey?: string;
   lastChat: Map<string, number>;
+  narrationKey?: string;
+  narrationCalls: number;
+  narrationControllers: Set<AbortController>;
 };
 type Binding = { code: string; playerId: string };
 export interface RoomOptions {
+  narrator?: NarrationProvider;
   now?: () => number;
   hostGraceMs?: number;
   emptyGraceMs?: number;
@@ -186,6 +197,8 @@ export class RoomManager {
           firstGame: entry.type === "solo" && entry.firstGame,
           timers: [],
           lastChat: new Map(),
+          narrationCalls: 0,
+          narrationControllers: new Set(),
         };
         this.rooms.set(code, room);
       } else room = this.rooms.get(entry.code);
@@ -520,6 +533,8 @@ export class RoomManager {
       : "lobby";
   }
   private clearTimers(room: Room) {
+    for (const controller of room.narrationControllers) controller.abort();
+    room.narrationControllers.clear();
     room.timers.forEach(clearTimeout);
     room.timers = [];
     room.scheduleKey = undefined;
@@ -647,6 +662,7 @@ export class RoomManager {
         );
       }
     if (g.phase === "REVEAL") {
+      this.narrate(room);
       const result = g.history.at(-1)!;
       later(500, () => {
         for (const out of result.outcomes)
@@ -658,6 +674,59 @@ export class RoomManager {
           )
             this.addChat(room, out.playerId, "You LIED to me??");
       });
+    }
+  }
+  private narrate(room: Room) {
+    const g = room.game!;
+    const key = `${g.id}:${g.round}`;
+    if (room.narrationKey === key) return;
+    room.narrationKey = key;
+    const provider = this.options.narrator ?? templateOnly;
+    const kinds =
+      g.round === g.totalRounds
+        ? (["round", "closing"] as const)
+        : (["round"] as const);
+    for (const kind of kinds) {
+      // A persistent room cannot bypass its budget by replaying repeatedly.
+      if (room.narrationCalls >= 100) break;
+      room.narrationCalls++;
+      const controller = new AbortController();
+      room.narrationControllers.add(controller);
+      const deadline =
+        kind === "round"
+          ? g.phaseStartedAt + NARRATION_VISIBLE_MS - 400
+          : g.phaseEndsAt;
+      if (this.now() >= deadline) {
+        room.narrationControllers.delete(controller);
+        continue;
+      }
+      void Promise.resolve()
+        .then(() =>
+          provider.generate(narrationFacts(g, kind), controller.signal),
+        )
+        .then((text) => {
+          const current = room.game;
+          if (
+            controller.signal.aborted ||
+            this.rooms.get(room.code) !== room ||
+            room.emptySince !== undefined ||
+            !current ||
+            current.id !== g.id ||
+            current.round !== g.round ||
+            current.phase !== "REVEAL" ||
+            this.now() >= deadline ||
+            !validNarration(text, kind)
+          )
+            return;
+          if (kind === "round") current.history.at(-1)!.narration = text;
+          else current.closingReport = text;
+          room.revision++;
+          this.broadcast(room);
+        })
+        .catch(() => {
+          /* Templates remain authoritative on any provider failure. */
+        })
+        .finally(() => room.narrationControllers.delete(controller));
     }
   }
   sweep() {

@@ -1,10 +1,16 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { io, type Socket } from "socket.io-client";
 import type { AddressInfo } from "node:net";
 import { randomUUID } from "node:crypto";
 import type { Ack, Action, PlayerView } from "@insider/shared";
 import { createApp } from "../src/app.js";
 let app: ReturnType<typeof createApp>, url: string, now: number;
+const narrator = {
+  generate:
+    vi.fn<
+      import("../src/narration/narrator.js").NarrationProvider["generate"]
+    >(),
+};
 const clients: Socket[] = [];
 const views = new Map<Socket, PlayerView>();
 async function connect() {
@@ -44,8 +50,10 @@ async function room() {
 }
 beforeEach(async () => {
   now = 1000;
+  narrator.generate.mockReset().mockResolvedValue(null);
   app = createApp({
     rooms: {
+      narrator,
       now: () => now,
       hostGraceMs: 100,
       emptyGraceMs: 500,
@@ -307,4 +315,130 @@ describe("rooms and authenticated seats", () => {
     const handlers = [...app.io.sockets.sockets.values()][0].eventNames();
     expect(handlers).not.toContain("debug:force");
   });
+});
+
+describe("narration completion guards", () => {
+  async function reveal() {
+    const { host, code } = await room();
+    const guest = await connect();
+    await enter(guest, { type: "join", name: "Leo", code });
+    await command(host, { type: "start" });
+    await until(() => views.get(guest)?.phase === "TIP");
+    await command(host, { type: "tip", direction: "UP", strong: false });
+    await until(() => views.get(guest)?.phase === "GUESS");
+    await command(guest, {
+      type: "guess",
+      direction: "UP",
+      stake: 100,
+      callShark: false,
+    });
+    await until(() => views.get(host)?.phase === "REVEAL");
+    return { host, guest };
+  }
+  it("publishes a timely report without changing scores or phase", async () => {
+    let complete!: (text: string) => void;
+    narrator.generate.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          complete = resolve;
+        }),
+    );
+    const { host } = await reveal();
+    const before = views.get(host)!;
+    complete("The market has receipts.");
+    await until(
+      () => views.get(host)?.result?.narration === "The market has receipts.",
+    );
+    expect(views.get(host)!.players).toEqual(before.players);
+    expect(views.get(host)!.phaseEndsAt).toBe(before.phaseEndsAt);
+    expect(narrator.generate).toHaveBeenCalledTimes(1);
+  });
+  it.each(["visible", "next round", "cleanup"])(
+    "ignores completion after %s",
+    async (reason) => {
+      let complete!: (text: string) => void;
+      narrator.generate.mockImplementation(
+        () =>
+          new Promise((resolve) => {
+            complete = resolve;
+          }),
+      );
+      const { host, guest } = await reveal();
+      const before = views.get(host)!;
+      if (reason === "visible") now = before.phaseStartedAt + 2400;
+      if (reason === "next round") {
+        now = before.phaseEndsAt;
+        app.rooms.sweep();
+        await until(() => views.get(host)?.phase === "TIP");
+      }
+      if (reason === "cleanup") {
+        await command(host, { type: "leave" });
+        await command(guest, { type: "leave" });
+        now += 501;
+        app.rooms.sweep();
+        expect(app.rooms.roomCount).toBe(0);
+      }
+      complete("This must never be shown.");
+      await new Promise((resolve) => setTimeout(resolve, 15));
+      expect(JSON.stringify(views.get(host))).not.toContain(
+        "This must never be shown.",
+      );
+      if (reason === "visible")
+        expect(views.get(host)!.result!.narration).toBe(
+          before.result!.narration,
+        );
+      else expect(narrator.generate.mock.calls[0][1].aborted).toBe(true);
+    },
+  );
+});
+
+it("prepares Closing Bell before FINAL and ignores an old-game completion after replay", async () => {
+  const pending: {
+    request: import("../src/narration/narrator.js").NarrationRequest;
+    finish: (text: string | null) => void;
+  }[] = [];
+  narrator.generate.mockImplementation(
+    (request) =>
+      new Promise((finish) => {
+        pending.push({ request, finish });
+      }),
+  );
+  const { host, code } = await room(),
+    guest = await connect();
+  await enter(guest, { type: "join", name: "Leo", code });
+  await command(host, { type: "start" });
+  await until(() => views.get(host)?.phase === "TIP");
+  const oldGame = views.get(host)!.gameId;
+  for (let round = 1; round <= 6; round++) {
+    now = views.get(host)!.phaseEndsAt;
+    app.rooms.sweep();
+    await until(() => views.get(host)?.phase === "GUESS");
+    now = views.get(host)!.phaseEndsAt;
+    app.rooms.sweep();
+    await until(() => views.get(host)?.phase === "REVEAL");
+    if (round === 6) {
+      await until(() => pending.some((p) => p.request.kind === "closing"));
+      pending
+        .find((p) => p.request.kind === "closing")!
+        .finish("The closing report is ready.");
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    now = views.get(host)!.phaseEndsAt;
+    app.rooms.sweep();
+    await until(
+      () => views.get(host)?.phase === (round === 6 ? "FINAL" : "TIP"),
+    );
+  }
+  expect(views.get(host)!.closingReport).toBe("The closing report is ready.");
+  await command(host, { type: "replay" });
+  await until(() => views.get(host)?.phase === "LOBBY");
+  await command(host, { type: "start" });
+  await until(() => views.get(host)?.phase === "TIP");
+  pending
+    .filter((p) => p.request.kind === "round")
+    .forEach((p) => p.finish("Stale old-game report."));
+  await new Promise((resolve) => setTimeout(resolve, 10));
+  expect(views.get(host)!.gameId).not.toBe(oldGame);
+  expect(views.get(host)!.history).toEqual([]);
+  expect(views.get(host)!.closingReport).toBeUndefined();
 });

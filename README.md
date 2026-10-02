@@ -25,7 +25,7 @@ Production start serves the built client and backend together at http://localhos
 
 ## Delivery status
 
-The backend includes rooms, authenticated reconnection, the original game engine, all five bot policies, 150 news records, authoritative phase timers, quick-chat, solo startup, and private player snapshots. Both design-document games have exact replay tests. The interactive client includes solo onboarding, room controls, private tips, all stakes and Shark calls, staged reveals, scoring receipts, trust charts, awards, replay, themes, and sound. Live AI narration and release verification remain in progress. This is an intermediate build, not the finished game.
+The backend includes rooms, authenticated reconnection, the original game engine, all five bot policies, 150 news records, authoritative phase timers, quick-chat, solo startup, and private player snapshots. Both design-document games have exact replay tests. The interactive client includes solo onboarding, room controls, private tips, all stakes and Shark calls, staged reveals, scoring receipts, trust charts, awards, replay, themes, and sound. Optional live AI narration is integrated with bounded requests and template fallbacks; credentialed API and release verification remain outstanding. This is an intermediate build, not the finished game.
 
 Public deployment needs a chosen hosting destination. No site has been published yet.
 
@@ -36,3 +36,5 @@ Public deployment needs a chosen hosting destination. No site has been published
 - Server-owned deadlines.
 - Ordered commands and retry-safe mutations per room.
 - One server instance with in-memory rooms initially. A restart ends matches; ordinary reconnects preserve seats and accepted choices.
+
+See [narration configuration and verification](docs/narration.md) for optional API setup and limits.
