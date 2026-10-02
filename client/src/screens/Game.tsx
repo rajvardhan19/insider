@@ -684,7 +684,9 @@ function Scoreboard({
 }
 function Final({ view, connection }: Omit<GameProps, "now">) {
   const [drawer, setDrawer] = useState(false);
-  useEffect(() => save("insider:hasPlayed", "true"), []);
+  useEffect(() => {
+    if (!view.spectating) save("insider:hasPlayed", "true");
+  }, [view.spectating]);
   const sorted = [...view.players].sort(
     (a, b) =>
       b.coins - a.coins ||
@@ -794,7 +796,9 @@ function Final({ view, connection }: Omit<GameProps, "now">) {
           onClick={() => void connection.act({ type: "replay" })}
         >
           {view.me === view.hostId
-            ? "Trade another round"
+            ? view.spectating
+              ? "Watch another match"
+              : "Trade another round"
             : "Waiting for the host"}
           <ArrowUpRight size={18} />
         </button>
@@ -806,6 +810,94 @@ function Final({ view, connection }: Omit<GameProps, "now">) {
           Back home
         </button>
       </div>
+      {drawer && <Scoreboard view={view} onClose={() => setDrawer(false)} />}
+    </section>
+  );
+}
+
+export function Watch({ view, connection, now }: GameProps) {
+  const [drawer, setDrawer] = useState(false);
+  if (view.phase === "FINAL")
+    return <Final view={view} connection={connection} />;
+  const insider = view.players.find((p) => p.id === view.insiderId)!;
+  return (
+    <section className="watch-game">
+      <div className="spread">
+        <div>
+          <p className="eyebrow">BOT SIMULATION · SPECTATING</p>
+          <h1>Watch the trading floor.</h1>
+        </div>
+        <button className="secondary" onClick={() => setDrawer(true)}>
+          Scoreboard
+        </button>
+      </div>
+      <p>
+        Round {view.round} / {view.totalRounds} ·{" "}
+        {view.phase === "TIP"
+          ? "Waiting for the Insider’s tip"
+          : view.phase === "GUESS"
+            ? "Bots are making their reads"
+            : "The reveal"}{" "}
+        · {secondsRemaining(view.phaseStartedAt, view.phaseEndsAt, now)}s
+      </p>
+      <div className="watch-roster">
+        {view.players.map((p, i) => (
+          <div className="panel" key={p.id}>
+            <Avatar player={p} index={i} />
+            <strong>{p.name}</strong>
+            <span>
+              {number(p.coins)} coins · Trust {p.trust}
+            </span>
+            <small>
+              {p.id === view.insiderId
+                ? "INSIDER"
+                : p.submitted
+                  ? "Read locked in"
+                  : "Watching the market"}
+            </small>
+          </div>
+        ))}
+      </div>
+      {view.phase === "REVEAL" ? (
+        <Reveal view={view} now={now} />
+      ) : (
+        <div className="panel">
+          <p className="eyebrow">
+            {view.news!.company} ·{" "}
+            {view.news!.sentiment === "UP" ? "GOOD NEWS ↗" : "BAD NEWS ↘"}
+          </p>
+          <h2>{view.news!.headline}</h2>
+          <p>
+            {view.phase === "TIP"
+              ? `${insider.name} is preparing a tip. Their role and market direction are private.`
+              : `${insider.name} says ${view.tip!.direction === "UP" ? "BUY" : "SELL"}${view.tip!.strong ? " — Strong tip" : ""}. ${view.players.filter((p) => p.submitted).length} of ${view.players.length - 1} reads locked in.`}
+          </p>
+        </div>
+      )}
+      <div className="panel">
+        <h2>Floor chatter</h2>
+        {view.chat
+          .filter((c) => c.round === view.round)
+          .slice(-8)
+          .map((c) => (
+            <p key={c.id}>
+              <strong>
+                {view.players.find((p) => p.id === c.playerId)?.name}:
+              </strong>{" "}
+              {c.text}
+            </p>
+          ))}
+        {!view.chat.some((c) => c.round === view.round) && (
+          <p className="note">The bots are sizing each other up.</p>
+        )}
+      </div>
+      <button
+        className="secondary"
+        onClick={() => void connection.leave()}
+        disabled={!connection.ready || connection.busy}
+      >
+        Stop watching
+      </button>
       {drawer && <Scoreboard view={view} onClose={() => setDrawer(false)} />}
     </section>
   );

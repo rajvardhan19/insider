@@ -104,3 +104,19 @@ Verified: `npm run check` passes with 61 tests. Both `npm run debug:game -- --de
 - Full-scope release checklist maps every plan task to actual evidence and outstanding acceptance work.
 
 Verified: `npm run check` passes with 61 tests plus bundle and built-server smoke checks. Docker daemon unavailable, so image build remains unverified; public deployment and remote CI execution are not claimed.
+
+## 11 — Explicit names and expanded personality roster
+
+- Every human entry flow asks for a name; solo no longer silently uses a stored or fallback identity. Tutorial completion carries the name entered in memory.
+- Added Patient Penny, Opposite Ollie, and Risky Rex with distinct guessing/stake/call policies and tell lines. Original five bots and five-seat match limits remain.
+
+Verified: name-entry checkpoint passed 61 tests; expanded-roster checkpoint passed 65 tests, including Partner honesty across all eight personalities and deterministic new-policy checks.
+
+## 12 — Bot-only spectator simulations
+
+- Home offers Watch bots play, a 2–5 distinct-bot picker, and Quick/Full mode.
+- The observer is authenticated separately from the game roster. Server-authoritative bots complete the match without player input; observers can inspect scores/chat/receipts, reconnect, leave, and replay.
+- Spectator commands cannot tip, guess, or chat, and projections never expose unrevealed roles, directions, or choices. Ordinary games still require a human player.
+- Watching a final does not mark the observer as having completed their first solo game.
+
+Verified: 67 tests pass plus build/bundle/production smoke checks. Deterministic runtime verification finishes a five-bot match using real bot policies, confirms all guesses were submitted, reconnects the observer, tests privacy/authorization, replays with reset balances, and cleans up abandoned simulations. Local browser checks verify the blank name prompt, eight-bot picker, four-bot startup, automatic progression, spectator refresh recovery, and scoreboard. The browser simulation reached FINAL, replayed with reset balances, and returned home; custom-name lobby creation and adding a new personality also passed.

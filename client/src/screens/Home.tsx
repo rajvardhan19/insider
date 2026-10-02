@@ -7,7 +7,7 @@ import {
   ShieldCheck,
   Radio,
 } from "lucide-react";
-import { nameSchema } from "@insider/shared";
+import { BOTS, type Personality, type Mode, nameSchema } from "@insider/shared";
 import { Modal, Sparkline } from "../components/Common";
 import {
   readSaved,
@@ -23,14 +23,24 @@ export function Home({
   connection: Connection;
   onHelp: (name: string) => void;
 }) {
-  const [panel, setPanel] = useState<"create" | "join" | "solo" | null>(
-      roomFromPath() ? "join" : null,
-    ),
+  const [panel, setPanel] = useState<
+      "create" | "join" | "solo" | "watch" | null
+    >(roomFromPath() ? "join" : null),
     [name, setName] = useState(""),
     [code, setCode] = useState(roomFromPath()),
     [formError, setFormError] = useState("");
+  const [watchBots, setWatchBots] = useState<Personality[]>([
+    "lucy",
+    "sam",
+    "rex",
+  ]);
+  const [watchMode, setWatchMode] = useState<Mode>("QUICK");
   const disabled = !connection.ready || connection.busy;
-  async function enter(type: "create" | "join" | "solo") {
+  async function enter(type: "create" | "join" | "solo" | "watch") {
+    if (type === "watch") {
+      await connection.enter({ type, bots: watchBots, mode: watchMode });
+      return;
+    }
     const parsed = nameSchema.safeParse(name);
     if (!parsed.success) {
       setFormError("Choose a name with 1–12 letters, numbers or spaces.");
@@ -89,6 +99,13 @@ export function Home({
               <ScanLine size={17} /> Join a room <ArrowRight size={17} />
             </button>
           </div>
+          <button
+            className="secondary"
+            disabled={disabled}
+            onClick={() => setPanel("watch")}
+          >
+            Watch bots play <Radio size={17} />
+          </button>
           <p className="note">
             2–5 players <span>•</span> No accounts <span>•</span> Zero real
             money
@@ -174,11 +191,13 @@ export function Home({
       {panel && (
         <Modal
           title={
-            panel === "solo"
-              ? "What should we call you?"
-              : panel === "create"
-                ? "Assemble your trading floor."
-                : "Your seat is waiting."
+            panel === "watch"
+              ? "Build your bot matchup."
+              : panel === "solo"
+                ? "What should we call you?"
+                : panel === "create"
+                  ? "Assemble your trading floor."
+                  : "Your seat is waiting."
           }
           onClose={() => setPanel(null)}
         >
@@ -188,18 +207,71 @@ export function Home({
               void enter(panel);
             }}
           >
-            <label>
-              Your display name
-              <input
-                autoFocus
-                value={name}
-                maxLength={12}
-                onChange={(e) => setName(e.target.value)}
-                autoComplete="nickname"
-                placeholder="Enter your name"
-                required
-              />
-            </label>
+            {panel !== "watch" && (
+              <label>
+                Your display name
+                <input
+                  autoFocus
+                  value={name}
+                  maxLength={12}
+                  onChange={(e) => setName(e.target.value)}
+                  autoComplete="nickname"
+                  placeholder="Enter your name"
+                  required
+                />
+              </label>
+            )}
+            {panel === "watch" && (
+              <>
+                <p>
+                  Choose 2–5 bots. You’ll watch from the sidelines; the bots
+                  handle every decision.
+                </p>
+                <div className="watch-picker">
+                  {(
+                    Object.entries(BOTS) as [
+                      Personality,
+                      (typeof BOTS)[Personality],
+                    ][]
+                  ).map(([id, bot]) => (
+                    <label key={id} className="watch-choice">
+                      <input
+                        type="checkbox"
+                        checked={watchBots.includes(id)}
+                        disabled={
+                          !watchBots.includes(id) && watchBots.length >= 5
+                        }
+                        onChange={() =>
+                          setWatchBots((bots) =>
+                            bots.includes(id)
+                              ? bots.filter((b) => b !== id)
+                              : [...bots, id],
+                          )
+                        }
+                      />
+                      <span>
+                        <strong>{bot.name}</strong>
+                        <small>{bot.description}</small>
+                      </span>
+                    </label>
+                  ))}
+                </div>
+                <label>
+                  Session length
+                  <select
+                    value={watchMode}
+                    onChange={(e) => setWatchMode(e.target.value as Mode)}
+                  >
+                    <option value="QUICK">Quick</option>
+                    <option value="FULL">Full</option>
+                  </select>
+                </label>
+                <p className="note">
+                  {watchBots.length} / 5 bots selected. Secrets stay hidden
+                  until each reveal.
+                </p>
+              </>
+            )}
             {panel === "join" && (
               <label>
                 Room code
@@ -220,18 +292,25 @@ export function Home({
                 {formError || connection.error}
               </p>
             )}
-            <button className="primary full" disabled={disabled}>
+            <button
+              className="primary full"
+              disabled={disabled || (panel === "watch" && watchBots.length < 2)}
+            >
               {connection.busy
                 ? "Connecting…"
-                : panel === "solo"
-                  ? "Play solo"
-                  : panel === "create"
-                    ? "Create room"
-                    : "Take my seat"}
+                : panel === "watch"
+                  ? "Start watching"
+                  : panel === "solo"
+                    ? "Play solo"
+                    : panel === "create"
+                      ? "Create room"
+                      : "Take my seat"}
               <ArrowRight size={18} />
             </button>
             <p className="note">
-              A name, a room code, and a healthy dose of suspicion.
+              {panel === "watch"
+                ? "A live bot match, with the same rules and scoring."
+                : "Your name and a healthy dose of suspicion."}
             </p>
           </form>
         </Modal>

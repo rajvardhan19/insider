@@ -1974,3 +1974,54 @@ details p {
     min-width: 44px;
   }
 }
+
+.watch-picker {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+}
+.watch-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.watch-choice input {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.watch-choice small {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.watch-game {
+  display: grid;
+  gap: 20px;
+  padding: 24px 0;
+}
+.watch-game h1 {
+  font-size: clamp(26px, 5vw, 40px);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.watch-roster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 12px;
+}
+.watch-roster .panel {
+  display: grid;
+  gap: 10px;
+}
+.watch-game > .spread {
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.watch-game .reveal-panel {
+  width: 100%;
+}

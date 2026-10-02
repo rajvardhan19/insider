@@ -79,6 +79,7 @@ export interface PlayerView {
   hostId: string;
   mode: Mode;
   solo: boolean;
+  spectating?: boolean;
   phase: Phase;
   gameId: string | null;
   round: number;

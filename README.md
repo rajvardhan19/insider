@@ -25,7 +25,7 @@ Production start serves the built client and backend together at http://localhos
 
 ## Delivery status
 
-The backend includes rooms, authenticated reconnection, the original game engine, all five bot policies, 150 news records, authoritative phase timers, quick-chat, solo startup, and private player snapshots. Both design-document games have exact replay tests. The interactive client includes solo onboarding, room controls, private tips, all stakes and Shark calls, staged reveals, scoring receipts, trust charts, awards, replay, themes, and sound. Optional live AI narration is integrated with bounded requests and template fallbacks; credentialed API and release verification remain outstanding. This is an intermediate build, not the finished game.
+The backend includes rooms, authenticated reconnection, the original game engine, all eight bot policies, 150 news records, authoritative phase timers, quick-chat, solo startup, and private player snapshots. Both design-document games have exact replay tests. The interactive client includes solo onboarding, room controls, private tips, all stakes and Shark calls, staged reveals, scoring receipts, trust charts, awards, replay, themes, and sound. Optional live AI narration is integrated with bounded requests and template fallbacks; credentialed API and release verification remain outstanding. This is an intermediate build, not the finished game.
 
 Public deployment needs a chosen hosting destination. No site has been published yet.
 
@@ -42,3 +42,11 @@ See [narration configuration and verification](docs/narration.md) for optional A
 See [local debugging and replay commands](docs/debugging.md) for forced scenarios and multi-room verification.
 
 See [deployment](docs/deployment.md), [the full release checklist](docs/release-checklist.md), and [actual playtest evidence](docs/playtest-log.md). Run `npm run check` before committing; it includes production artifact and server smoke checks.
+
+## Ways to play
+
+- **Play solo vs bots:** enter your own name, then face two randomly selected personalities.
+- **Create a room / Join a room:** enter a name and play with friends or add bots. Matches still have 2–5 seats.
+- **Watch bots play:** select 2–5 distinct bots and Quick or Full mode. Watch automatic decisions, public tips, chat, reveals, scores and awards without taking a seat. Refresh resumes your spectator session. Stop watching returns home; after the final, replay keeps the selected lineup.
+
+The roster now includes Patient Penny (cautious), Opposite Ollie (headline contrarian), and Risky Rex (aggressive) alongside the original five. Observer sessions never receive unrevealed secrets and cannot submit gameplay actions.

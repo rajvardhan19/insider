@@ -68,6 +68,31 @@ export const commandSchema = z
   .strict();
 export type Command = z.infer<typeof commandSchema>;
 export const entrySchema = z.discriminatedUnion("type", [
+  z
+    .object({
+      type: z.literal("watch"),
+      bots: z
+        .array(
+          z.enum([
+            "lucy",
+            "sam",
+            "nina",
+            "walt",
+            "sal",
+            "penny",
+            "ollie",
+            "rex",
+          ]),
+        )
+        .min(2)
+        .max(5)
+        .refine(
+          (bots) => new Set(bots).size === bots.length,
+          "Choose distinct bots.",
+        ),
+      mode: z.enum(["QUICK", "FULL"]),
+    })
+    .strict(),
   z.object({ type: z.literal("create"), name: nameSchema }).strict(),
   z
     .object({

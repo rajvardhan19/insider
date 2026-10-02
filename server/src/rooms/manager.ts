@@ -51,6 +51,7 @@ type Room = {
   cache: Map<string, { fingerprint: string; ack: Ack }>;
   game?: GameState;
   solo: boolean;
+  simulation: boolean;
   firstGame: boolean;
   timers: ReturnType<typeof setTimeout>[];
   scheduleKey?: string;
@@ -186,8 +187,13 @@ export class RoomManager {
         );
         return;
       }
+      const entrantName = entry.type === "watch" ? "Observer" : entry.name;
       let room: Room | undefined;
-      if (entry.type === "create" || entry.type === "solo") {
+      if (
+        entry.type === "create" ||
+        entry.type === "solo" ||
+        entry.type === "watch"
+      ) {
         if (this.rooms.size >= (this.options.maxRooms ?? 100)) {
           reply(fail("CAPACITY", "The exchange is full. Try again shortly."));
           return;
@@ -204,10 +210,11 @@ export class RoomManager {
           code,
           revision: 0,
           hostId: "",
-          mode: "QUICK",
+          mode: entry.type === "watch" ? entry.mode : "QUICK",
           players: [],
           cache: new Map(),
           solo: entry.type === "solo",
+          simulation: entry.type === "watch",
           firstGame: entry.type === "solo" && entry.firstGame,
           timers: [],
           lastChat: new Map(),
@@ -235,7 +242,7 @@ export class RoomManager {
       }
       if (
         room.players.some(
-          (p) => p.name.toLowerCase() === entry.name.toLowerCase(),
+          (p) => p.name.toLowerCase() === entrantName.toLowerCase(),
         )
       ) {
         reply(
@@ -246,7 +253,7 @@ export class RoomManager {
       const token = randomBytes(32).toString("hex");
       const player: Seat = {
         id: randomUUID(),
-        name: entry.name,
+        name: entrantName,
         coins: 1000,
         trust: 100,
         trustHistory: [100],
@@ -257,6 +264,23 @@ export class RoomManager {
       };
       room.players.push(player);
       if (!room.hostId) room.hostId = player.id;
+      if (entry.type === "watch") {
+        for (const bot of entry.bots)
+          room.players.push({
+            ...freshPlayer(randomUUID(), BOTS[bot].name, bot),
+            tokenHash: "",
+          });
+        room.game = startGame(
+          room.players.filter((p) => p.bot),
+          room.mode,
+          randomUUID(),
+          randomInt(0x100000000),
+          this.now(),
+          newsPool,
+          false,
+          true,
+        );
+      }
       if (room.solo) {
         const available = (Object.keys(BOTS) as Personality[]).filter(
           (b) => BOTS[b].name.toLowerCase() !== player.name.toLowerCase(),
@@ -382,6 +406,11 @@ export class RoomManager {
     if (c.roundId !== (room.game?.round ?? 0))
       return fail("STALE_ROUND", "This round is no longer active.");
     const a = c.action;
+    if (room.simulation && a.type !== "leave" && a.type !== "replay")
+      return fail(
+        "SPECTATOR_ONLY",
+        "You are watching. Only the bots can play in this simulation.",
+      );
     if (a.type === "leave") {
       if (player.socketId) this.bindings.delete(player.socketId);
       if (room.game) {
@@ -418,15 +447,16 @@ export class RoomManager {
       room.firstGame = false;
       room.lastChat.clear();
       this.clearTimers(room);
-      if (room.solo)
+      if (room.solo || room.simulation)
         room.game = startGame(
-          room.players,
+          room.simulation ? room.players.filter((p) => p.bot) : room.players,
           room.mode,
           randomUUID(),
           randomInt(0x100000000),
           this.now(),
           newsPool,
           false,
+          room.simulation,
         );
       return { ok: true };
     }

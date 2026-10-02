@@ -29,11 +29,12 @@ export function startGame(
   now: number,
   pool: News[],
   firstGame = false,
+  simulation = false,
 ): GameState {
   requireRule(players.length >= 2 && players.length <= 5, "INVALID_ROSTER");
   requireRule(
     new Set(players.map((p) => p.id)).size === players.length &&
-      players.some((p) => !p.bot),
+      (simulation ? players.every((p) => p.bot) : players.some((p) => !p.bot)),
     "INVALID_ROSTER",
   );
   requireRule(mode === "QUICK" || mode === "FULL", "INVALID_MODE");

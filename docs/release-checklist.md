@@ -24,3 +24,7 @@ Updated October 2, 2026. All items from `IMPLEMENTATION_PLAN.md` remain required
 | 51–52: submission | Project title and design established | Cover asset, final description, live URL, signed-in mission/eligibility review, final verification; user submits unless separately authorized |
 
 Release blockers include public hosting, credentialed API verification, content review, contextual hint completion, human/device testing, long soak, and submission assets. They remain in scope.
+
+## Approved additions — October 2, 2026
+
+The user requested explicit name entry, more bot personalities (not more seats), and a watch-only simulation. The roster is now eight personalities. Bot-only matches are permitted only through the separate spectator flow; normal multiplayer remains 2–5 seats with a human. Verification is recorded in checkpoints 11–12.

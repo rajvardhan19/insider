@@ -11,7 +11,7 @@ import {
 import { useConnection, readSaved, save } from "./net/connection";
 import { Home } from "./screens/Home";
 import { Lobby } from "./screens/Lobby";
-import { Game } from "./screens/Game";
+import { Game, Watch } from "./screens/Game";
 import { Modal } from "./components/Common";
 
 let audio: AudioContext | undefined;
@@ -166,6 +166,13 @@ function App() {
         />
       ) : view.phase === "LOBBY" ? (
         <Lobby view={view} connection={connection} />
+      ) : view.spectating ? (
+        <Watch
+          key={view.gameId}
+          view={view}
+          connection={connection}
+          now={now}
+        />
       ) : (
         <Game key={view.gameId} view={view} connection={connection} now={now} />
       )}

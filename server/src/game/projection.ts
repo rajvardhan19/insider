@@ -8,6 +8,7 @@ export interface ProjectableRoom {
   hostId: string;
   mode: "QUICK" | "FULL";
   solo: boolean;
+  simulation?: boolean;
   players: Player[];
   game?: GameState;
 }
@@ -29,6 +30,7 @@ export function buildPlayerView(
     hostId: room.hostId,
     mode: room.mode,
     solo: room.solo,
+    spectating: room.simulation ?? false,
     phase,
     gameId: g?.id ?? null,
     round: g?.round ?? 0,
