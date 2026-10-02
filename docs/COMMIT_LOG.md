@@ -17,3 +17,12 @@ Verified:
 - Browser inspection: home page renders and reports an active exchange connection.
 
 Limitations at this checkpoint: rooms and gameplay are not implemented; no public deployment exists. The next commit adds the validated public protocol and original rule configuration.
+
+## 02 — Public protocol and original rule constants
+
+- Public view, result, player, chat, and award contracts are separate from server state.
+- Strict runtime schemas reject malformed actions, unexpected identity fields, unsupported stakes, unknown phrases, and invalid room/name inputs.
+- All five bot identities and all 18 preset chat phrases are defined.
+- Original-v1 scoring constants, timers, and Quick/Full turn counts are preserved.
+
+Verified: `npm run check` passes, including 10 tests. No gameplay rule changes were introduced.

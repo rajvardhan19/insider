@@ -1,0 +1,30 @@
+export const RULES = {
+  version: "original-v1",
+  startingCoins: 1000,
+  startingTrust: 100,
+  normalSuccess: 50,
+  strongSuccess: 100,
+  strongFailure: -100,
+  correctCall: 100,
+  wrongCall: -150,
+  truthTrust: 15,
+  lieTrust: -20,
+  caughtTrust: -10,
+  sympathyTrust: 10,
+  minTrust: 10,
+  accuracy: 0.6,
+  sharkChance: 0.5,
+  quickMs: 20000,
+  fullMs: 30000,
+  revealMs: 8000,
+  chatMs: 2000,
+  tellShark: 0.75,
+  tellPartner: 0.1,
+  firstTell: 0.85,
+  personalityRate: 0.8,
+} as const;
+export function totalRounds(count: number, mode: "QUICK" | "FULL") {
+  return (
+    count * (count >= 4 ? 1 : count === 3 ? 2 : 3) * (mode === "FULL" ? 2 : 1)
+  );
+}
