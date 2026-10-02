@@ -26,3 +26,13 @@ Limitations at this checkpoint: rooms and gameplay are not implemented; no publi
 - Original-v1 scoring constants, timers, and Quick/Full turn counts are preserved.
 
 Verified: `npm run check` passes, including 10 tests. No gameplay rule changes were introduced.
+
+## 03 — Rooms, authenticated seats, and lobby commands
+
+- Room creation/joining, five-seat limits, distinct names, host-only settings and bot management.
+- Cryptographic resume tokens; only hashes are retained server-side and no credentials enter snapshots.
+- Same-seat reconnection replaces the old socket; old disconnects cannot invalidate the replacement.
+- Ordered synchronous lobby mutations, duplicate-command acknowledgements, conflict detection, revisions, request limits, host-transfer grace, and idle cleanup.
+- Production server bundles the shared protocol rather than trying to execute workspace TypeScript at runtime.
+
+Verified: `npm run check` passes with 18 tests, including eight socket integration cases for rooms and identity. Game start and solo remain explicitly unavailable until the engine is connected.

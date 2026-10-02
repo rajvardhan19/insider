@@ -3,9 +3,10 @@ import { createServer } from "node:http";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { Server } from "socket.io";
+import { RoomManager, type RoomOptions } from "./rooms/manager.js";
 
 export function createApp(
-  options: { origin?: string; clientDir?: string } = {},
+  options: { origin?: string; clientDir?: string; rooms?: RoomOptions } = {},
 ) {
   const app = express();
   app.disable("x-powered-by");
@@ -20,7 +21,9 @@ export function createApp(
   app.get("/health", (_req, res) =>
     res.json({ status: "ok", service: "insider" }),
   );
+  const rooms = new RoomManager(io, options.rooms);
   io.on("connection", (socket) => {
+    rooms.attach(socket);
     socket.emit("ready", { protocol: 1 });
     socket.on("clock", (reply: unknown) => {
       if (typeof reply === "function") reply({ serverNow: Date.now() });
@@ -42,6 +45,10 @@ export function createApp(
     app,
     http,
     io,
-    close: () => new Promise<void>((done) => io.close(() => done())),
+    rooms,
+    close: () => {
+      rooms.close();
+      return new Promise<void>((done) => io.close(() => done()));
+    },
   };
 }
