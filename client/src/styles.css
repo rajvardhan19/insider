@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #ecf1e8;
+  background: #101512;
+  font-synthesis: none;
+  font-weight: 400;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font: inherit;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.shell {
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: auto;
+  padding: 32px 6vw;
+  display: flex;
+  flex-direction: column;
+}
+header,
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wordmark {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.wordmark > span:first-child {
+  color: #b8ef63;
+}
+.dot {
+  color: #b8ef63;
+}
+.connection,
+.eyebrow,
+.note,
+footer {
+  font-size: 11px;
+  letter-spacing: 1.3px;
+}
+.connection {
+  color: #a4bd98;
+}
+.hero {
+  padding: 100px 0 90px;
+  flex: 1;
+}
+.eyebrow {
+  color: #b8ef63;
+  font-weight: 600;
+}
+h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(42px, 6.5vw, 84px);
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -4px;
+  margin: 25px 0;
+}
+h1 em {
+  font-style: normal;
+  color: #b8ef63;
+}
+.description {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #aab5aa;
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  margin: 35px 0 20px;
+}
+.actions button {
+  padding: 18px 22px;
+  border: 1px solid #384237;
+  background: transparent;
+  color: #f1f4ec;
+  border-radius: 8px;
+  min-width: 180px;
+  text-align: left;
+  display: flex;
+  gap: 30px;
+  justify-content: space-between;
+}
+.actions button:first-child {
+  background: #b8ef63;
+  color: #172011;
+  border-color: #b8ef63;
+}
+.actions button:disabled {
+  cursor: not-allowed;
+}
+.note {
+  color: #7f8b7e;
+  letter-spacing: 0.3px;
+}
+footer {
+  border-top: 1px solid #2c352b;
+  padding-top: 24px;
+  color: #7f8b7e;
+  font-size: 10px;
+  gap: 16px;
+}
+@media (max-width: 600px) {
+  .shell {
+    padding: 24px;
+  }
+  .connection {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+  .hero {
+    padding: 65px 0;
+  }
+  h1 {
+    letter-spacing: -2px;
+  }
+  .actions {
+    flex-direction: column;
+  }
+  .actions button {
+    width: 100%;
+  }
+  footer {
+    align-items: flex-start;
+    line-height: 1.8;
+    flex-direction: column;
+  }
+}
