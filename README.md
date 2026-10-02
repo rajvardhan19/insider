@@ -40,3 +40,5 @@ Public deployment needs a chosen hosting destination. No site has been published
 See [narration configuration and verification](docs/narration.md) for optional API setup and limits.
 
 See [local debugging and replay commands](docs/debugging.md) for forced scenarios and multi-room verification.
+
+See [deployment](docs/deployment.md), [the full release checklist](docs/release-checklist.md), and [actual playtest evidence](docs/playtest-log.md). Run `npm run check` before committing; it includes production artifact and server smoke checks.

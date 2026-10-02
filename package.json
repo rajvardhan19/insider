@@ -18,8 +18,10 @@
     "test:e2e": "playwright test",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "check": "npm run typecheck && npm run lint && npm test && npm run build",
-    "debug:game": "tsx server/src/debug/localHarness.ts"
+    "check": "npm run typecheck && npm run lint && npm test && npm run build && npm run verify:bundle && npm run smoke:production",
+    "debug:game": "tsx server/src/debug/localHarness.ts",
+    "verify:bundle": "node scripts/verify-build.mjs",
+    "smoke:production": "node scripts/smoke-production.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

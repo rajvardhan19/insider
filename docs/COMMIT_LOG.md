@@ -95,3 +95,12 @@ Verified: `npm run check` passes with 58 tests, including fake-provider success/
 - Accelerated multi-room soak verifies 15 seats, 12 matches, 60 rounds/reconnects, duplicate commands, API failures, isolation, arithmetic, bounded snapshots, and complete room cleanup.
 
 Verified: `npm run check` passes with 61 tests. Both `npm run debug:game -- --demo A` and `--demo B` match all coin/trust checkpoints. This accelerated soak does not replace real-device, human, or long-duration testing.
+
+## 10 — Production workflow and accurate trust receipts
+
+- Reveal trust deltas now reflect the applied change after the minimum-trust floor (12→10 displays −2). Scoring rules and balances are unchanged.
+- Production artifact boundary checks and a built-server smoke test cover root/direct-link HTML, health, WebSocket solo startup, and graceful shutdown.
+- Node 22 CI workflow, portable non-root Dockerfile, environment/build context exclusions, and deployment guidance.
+- Full-scope release checklist maps every plan task to actual evidence and outstanding acceptance work.
+
+Verified: `npm run check` passes with 61 tests plus bundle and built-server smoke checks. Docker daemon unavailable, so image build remains unverified; public deployment and remote CI execution are not claimed.

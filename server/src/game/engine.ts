@@ -161,12 +161,15 @@ export function resolveRound(state: GameState, now: number): GameState {
     r,
     g.players.map((p) => p.id),
   );
+  let appliedTrustDelta = 0;
   for (const p of g.players) {
     const o = outcomes.find((x) => x.playerId === p.id)!;
     p.coins += o.delta;
     if (o.guess?.stake === 300) p.allInUsed = true;
     if (p.id === r.insiderId) {
+      const before = p.trust;
       p.trust = Math.max(R.minTrust, p.trust + trustDelta);
+      appliedTrustDelta = p.trust - before;
       p.record.push(
         `${r.role === "SHARK" ? "Shark" : "Partner"} (${r.tip!.direction === r.direction ? "truth" : "lied"}${r.tip!.strong ? ", Strong" : ""})`,
       );
@@ -182,7 +185,7 @@ export function resolveRound(state: GameState, now: number): GameState {
     accurate: r.accurate,
     tip: r.tip!,
     outcomes,
-    trustDelta,
+    trustDelta: appliedTrustDelta,
     narration: "",
     revealedAt: now,
   };

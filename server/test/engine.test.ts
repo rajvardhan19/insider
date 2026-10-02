@@ -177,6 +177,7 @@ describe("pure transitions and rule boundaries", () => {
     expect(g.players[1].allInUsed).toBe(false);
     g = expire(g, g.phaseEndsAt, pool);
     expect(g.players[0].trust).toBe(10);
+    expect(g.history.at(-1)!.trustDelta).toBe(-2);
     expect(g.players[1].coins).toBe(-200);
     expect(g.players[1].allInUsed).toBe(true);
     g = expire(g, g.phaseEndsAt, pool);

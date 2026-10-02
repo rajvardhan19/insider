@@ -1,6 +1,6 @@
 # Insider — Detailed Implementation Plan
 
-Status: full-scope implementation proposal, ready to guide development. No application code has been written. All features in the original design and repository plan are required; milestones describe implementation order, not a reduced release.
+Status: full-scope implementation in progress. See `docs/COMMIT_LOG.md` for delivered checkpoints and `docs/release-checklist.md` for remaining acceptance work. All features in the original design and repository plan are required; milestones describe implementation order, not a reduced release.
 
 Prepared October 1, 2026. Target submission: October 28–29, ahead of the official-rules deadline of October 30, 2026, 11:59 p.m. Pacific. The competition landing page states October 31; use the earlier official deadline.
 
@@ -498,4 +498,4 @@ Maintain a release checklist mapped to the required feature inventory. Every fea
 
 ## 10. Immediate next implementation step
 
-Start Milestone 0, followed by rooms and the complete core loop. Implement original-v1 as the baseline, record balance proposals separately, and seek user approval before changing gameplay rules. Then complete every remaining milestone, including all content, all five bots, all modes and strategic actions, live narration and fallbacks, both themes, sound, and the full polish and verification requirements. Sequencing does not change scope.
+Continue from the verified checkpoints with content review, remaining contextual hints and recovery checks, deployment, human/device playtests, and release verification. Implement original-v1 as the baseline, record balance proposals separately, and seek user approval before changing gameplay rules. Then complete every remaining milestone, including all content, all five bots, all modes and strategic actions, live narration and fallbacks, both themes, sound, and the full polish and verification requirements. Sequencing does not change scope.
