@@ -36,3 +36,13 @@ Verified: `npm run check` passes, including 10 tests. No gameplay rule changes w
 - Production server bundles the shared protocol rather than trying to execute workspace TypeScript at runtime.
 
 Verified: `npm run check` passes with 18 tests, including eight socket integration cases for rooms and identity. Game start and solo remain explicitly unavailable until the engine is connected.
+
+## 04 — Deterministic original-v1 engine and private projections
+
+- Pure seeded round draws, turn rotation, tip/guess validation, scoring, trust, awards, and final results.
+- Original timeout behavior, debt, Strong tips, Shark calls, and once-per-game All In.
+- Separate market, bot, and cosmetic RNG state; template narration from resolved facts.
+- Allowlisted player projection exposes only authorized secrets and delays public All In consumption until reveal.
+- Exact Appendix A and B fixtures verify every round's coins/trust and final awards; privacy tests compare views across secret-only changes.
+
+Verified: `npm run check` passes with 29 tests. The engine is not yet connected to live room actions; that is the next isolated checkpoint.
