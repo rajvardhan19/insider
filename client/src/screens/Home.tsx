@@ -21,12 +21,12 @@ export function Home({
   onHelp,
 }: {
   connection: Connection;
-  onHelp: () => void;
+  onHelp: (name: string) => void;
 }) {
-  const [panel, setPanel] = useState<"create" | "join" | null>(
+  const [panel, setPanel] = useState<"create" | "join" | "solo" | null>(
       roomFromPath() ? "join" : null,
     ),
-    [name, setName] = useState(readSaved("insider:name", "Trader")),
+    [name, setName] = useState(""),
     [code, setCode] = useState(roomFromPath()),
     [formError, setFormError] = useState("");
   const disabled = !connection.ready || connection.busy;
@@ -41,7 +41,7 @@ export function Home({
     if (type === "solo") {
       if (!readSaved("insider:tutorial")) {
         setPanel(null);
-        onHelp();
+        onHelp(parsed.data);
         return;
       }
       await connection.enter({
@@ -77,7 +77,7 @@ export function Home({
           <button
             className="primary hero-cta"
             disabled={disabled}
-            onClick={() => void enter("solo")}
+            onClick={() => setPanel("solo")}
           >
             Play solo vs bots <ArrowUpRight size={22} />
           </button>
@@ -174,9 +174,11 @@ export function Home({
       {panel && (
         <Modal
           title={
-            panel === "create"
-              ? "Assemble your trading floor."
-              : "Your seat is waiting."
+            panel === "solo"
+              ? "What should we call you?"
+              : panel === "create"
+                ? "Assemble your trading floor."
+                : "Your seat is waiting."
           }
           onClose={() => setPanel(null)}
         >
@@ -194,7 +196,8 @@ export function Home({
                 maxLength={12}
                 onChange={(e) => setName(e.target.value)}
                 autoComplete="nickname"
-                placeholder="e.g. Maya"
+                placeholder="Enter your name"
+                required
               />
             </label>
             {panel === "join" && (
@@ -220,9 +223,11 @@ export function Home({
             <button className="primary full" disabled={disabled}>
               {connection.busy
                 ? "Connecting…"
-                : panel === "create"
-                  ? "Create room"
-                  : "Take my seat"}
+                : panel === "solo"
+                  ? "Play solo"
+                  : panel === "create"
+                    ? "Create room"
+                    : "Take my seat"}
               <ArrowRight size={18} />
             </button>
             <p className="note">

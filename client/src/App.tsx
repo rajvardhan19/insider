@@ -45,6 +45,7 @@ function tone(kind: "lock" | "reveal" | "win") {
 function App() {
   const connection = useConnection(),
     view = connection.view;
+  const [soloName, setSoloName] = useState("");
   const [help, setHelp] = useState<"read" | "solo" | null>(null),
     [theme, setTheme] = useState(() =>
       readSaved(
@@ -78,7 +79,7 @@ function App() {
     if (solo)
       await connection.enter({
         type: "solo",
-        name: readSaved("insider:name", "Trader"),
+        name: soloName,
         firstGame: !readSaved("insider:hasPlayed"),
       });
   }
@@ -156,7 +157,13 @@ function App() {
         </div>
       )}
       {!view ? (
-        <Home connection={connection} onHelp={() => setHelp("solo")} />
+        <Home
+          connection={connection}
+          onHelp={(name) => {
+            setSoloName(name);
+            setHelp("solo");
+          }}
+        />
       ) : view.phase === "LOBBY" ? (
         <Lobby view={view} connection={connection} />
       ) : (
