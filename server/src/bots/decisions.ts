@@ -75,6 +75,35 @@ export function decideGuess(
         reply = "Let’s make this interesting.";
       }
     }
+    if (bot === "penny") {
+      follow = ctx.trust >= 115 ? 0.8 : ctx.trust < 90 ? 0.2 : 0.5;
+      call = 0.05;
+      raise = 0.05;
+      big = 0;
+      if (trustPhrase) {
+        follow -= 0.1;
+        reply = "I’ll keep this small.";
+      }
+    }
+    if (bot === "ollie") {
+      follow = ctx.tip.direction !== ctx.sentiment ? 0.9 : 0.1;
+      call = ctx.tip.direction === ctx.sentiment ? 0.4 : 0.1;
+      raise = 0.4;
+      if (ids.has("news")) {
+        follow = ctx.tip.direction !== ctx.sentiment ? 0.95 : 0.05;
+        reply = "The headline is too obvious.";
+      }
+    }
+    if (bot === "rex") {
+      follow = ctx.tip.strong ? 0.3 : 0.65;
+      call = ctx.tip.strong ? 0.65 : 0.35;
+      raise = 0.85;
+      big = ctx.round > 2 ? 0.65 : 0;
+      if (trustPhrase) {
+        call += 0.15;
+        reply = "Let’s see those receipts.";
+      }
+    }
     if (bot === "sal") {
       follow = ctx.trust > 100 ? 0.9 : ctx.trust < 100 ? 0.1 : 0.5;
       call = ctx.trust < 90 ? 0.75 : 0.1;
@@ -111,9 +140,14 @@ export function decideTip(
     else if (bot === "nina") direction = ctx.sentiment;
     else if (bot === "sal")
       direction = r[1] < 0.8 ? ctx.direction : opposite(ctx.direction);
+    else if (bot === "penny")
+      direction = r[1] < 0.65 ? ctx.direction : opposite(ctx.direction);
+    else if (bot === "ollie") direction = opposite(ctx.sentiment);
     else if (bot === "walt") direction = r[1] < 0.5 ? "UP" : "DOWN";
     else direction = opposite(ctx.direction);
   }
+  if (bot === "penny") strong = r[2] < 0.05;
+  if (bot === "rex") strong = r[2] < 0.9;
   if (bot === "lucy") strong = r[2] < 0.1;
   if (bot === "walt") strong = r[2] < 0.8;
   if (bot === "sal" && ctx.role === "SHARK") strong = r[2] < 0.8;
@@ -134,6 +168,9 @@ const BASE = [
 export function botLines(bot: Personality, tell: boolean): string[] {
   return BASE.map((s, i) => {
     if (!tell) return bot === "sal" ? `${s} 🙂` : s;
+    if (bot === "penny") return `${s} Plenty of safety margin.`;
+    if (bot === "ollie") return `${s} It’s obvious, really.`;
+    if (bot === "rex") return `${s} 🚀`;
     if (bot === "lucy") return `${s.replaceAll(".", "!")} Trust me!!!`;
     if (bot === "sam") return `${s} Exactly ${87 + i}.${i}% convinced.`;
     if (bot === "nina") return `${s} My sources agree.`;

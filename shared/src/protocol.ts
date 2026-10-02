@@ -2,7 +2,8 @@ export type Direction = "UP" | "DOWN";
 export type Role = "PARTNER" | "SHARK";
 export type Phase = "LOBBY" | "TIP" | "GUESS" | "REVEAL" | "FINAL";
 export type Mode = "QUICK" | "FULL";
-export type Personality = "lucy" | "sam" | "nina" | "walt" | "sal";
+export type Personality =
+  "lucy" | "sam" | "nina" | "walt" | "sal" | "penny" | "ollie" | "rex";
 export type Stake = 100 | 200 | 300;
 export interface News {
   id: string;

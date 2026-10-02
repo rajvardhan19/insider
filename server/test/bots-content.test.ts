@@ -109,3 +109,33 @@ describe("complete bot and content inventory", () => {
     ).toBeGreaterThanOrEqual(4000);
   });
 });
+
+it("gives the three new personalities distinct public-information decisions", () => {
+  const ctx = {
+    tip: { direction: "UP" as const, strong: true },
+    sentiment: "UP" as const,
+    trust: 120,
+    round: 4,
+    allInUsed: false,
+    chat: [],
+  };
+  const draws = [0, 0.5, 0.3, 0.5, 0.4, 0.5];
+  expect(decideGuess("penny", ctx, draws).guess).toEqual({
+    direction: "UP",
+    stake: 100,
+    callShark: false,
+  });
+  expect(decideGuess("ollie", ctx, draws).guess).toEqual({
+    direction: "DOWN",
+    stake: 100,
+    callShark: true,
+  });
+  expect(decideGuess("rex", ctx, draws).guess).toEqual({
+    direction: "DOWN",
+    stake: 300,
+    callShark: true,
+  });
+  expect(
+    decideGuess("rex", { ...ctx, allInUsed: true }, draws).guess.stake,
+  ).toBe(200);
+});

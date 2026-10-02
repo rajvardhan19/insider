@@ -21,7 +21,16 @@ export const actionSchema = z.discriminatedUnion("type", [
   z
     .object({
       type: z.literal("addBot"),
-      bot: z.enum(["lucy", "sam", "nina", "walt", "sal"]),
+      bot: z.enum([
+        "lucy",
+        "sam",
+        "nina",
+        "walt",
+        "sal",
+        "penny",
+        "ollie",
+        "rex",
+      ]),
     })
     .strict(),
   z

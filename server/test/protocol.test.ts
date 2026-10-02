@@ -79,7 +79,7 @@ describe("untrusted public inputs", () => {
     ).toBe(false);
   });
   it("contains every planned bot and preset phrase", () => {
-    expect(Object.keys(BOTS)).toEqual(["lucy", "sam", "nina", "walt", "sal"]);
+    expect(Object.keys(BOTS).sort()).toEqual(["lucy", "nina", "ollie", "penny", "rex", "sal", "sam", "walt"]);
     expect(Object.keys(PHRASES)).toHaveLength(18);
   });
 });

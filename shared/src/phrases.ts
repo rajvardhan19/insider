@@ -3,6 +3,24 @@ export const BOTS: Record<
   Personality,
   { name: string; initial: string; tell: string; description: string }
 > = {
+  penny: {
+    name: "Patient Penny",
+    initial: "PP",
+    description: "Small bets. Trust must be earned.",
+    tell: "Talk of a safety margin often hides a Shark.",
+  },
+  ollie: {
+    name: "Opposite Ollie",
+    initial: "OO",
+    description: "Fades the headline and looks for the surprise.",
+    tell: "Calling something obvious often means he is a Shark.",
+  },
+  rex: {
+    name: "Risky Rex",
+    initial: "RR",
+    description: "Raises the stakes and challenges confident tips.",
+    tell: "A rocket emoji often accompanies his Shark tips.",
+  },
   lucy: {
     name: "Loyal Lucy",
     initial: "LL",
