@@ -1,0 +1,22 @@
+# One process owns all in-memory rooms. Keep a single instance.
+services:
+  - type: web
+    name: insider-playtest
+    runtime: node
+    plan: free
+    region: virginia
+    repo: https://github.com/rajvardhan19/insider
+    branch: feature-branch
+    autoDeployTrigger: off
+    buildCommand: npm ci --include=dev && npm run check
+    startCommand: PUBLIC_ORIGIN="$RENDER_EXTERNAL_URL" node server/dist/index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: AI_MAX_CALLS
+        value: "0"

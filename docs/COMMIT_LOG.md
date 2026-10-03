@@ -136,3 +136,10 @@ Verified: 67 tests pass plus build/bundle/production smoke checks. Deterministic
 - BANKRUPT is cosmetic and lasts through the following round; a trust fall of 30 or more triggers the presentation effect. Neither changes any rule.
 
 Verification details and human-playtest follow-up: see `playtest-log.md` and `comedy.md`.
+
+## 15 — Free Render deployment preparation
+
+- Added a single-instance free Node web-service Blueprint for `feature-branch`, with the existing full build checks and health route.
+- The launch command derives the allowed browser origin from Render's assigned HTTPS URL. Optional paid narration is disabled for the playtest.
+- Disabled automatic deploys to avoid clearing active games during development. Documented cold starts, ephemeral rooms, and post-deploy verification.
+- Account sign-in and actual public-host verification remain required; preparing this configuration does not publish the game.
