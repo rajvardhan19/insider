@@ -12,6 +12,12 @@ export const nameSchema = z
   );
 const direction = z.enum(["UP", "DOWN"]);
 export const actionSchema = z.discriminatedUnion("type", [
+  z
+    .object({
+      type: z.literal("reaction"),
+      emoji: z.enum(["tomato", "laugh", "shark"]),
+    })
+    .strict(),
   z.object({ type: z.literal("start") }).strict(),
   z.object({ type: z.literal("replay") }).strict(),
   z.object({ type: z.literal("leave") }).strict(),

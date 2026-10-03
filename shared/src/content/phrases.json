@@ -1,0 +1,94 @@
+{
+  "trust": {
+    "text": "Trust me.",
+    "audience": "insider"
+  },
+  "never": {
+    "text": "I’d never lie to you.",
+    "audience": "insider"
+  },
+  "strong": {
+    "text": "Strong means strong.",
+    "audience": "insider"
+  },
+  "news": {
+    "text": "Read the news.",
+    "audience": "insider"
+  },
+  "ignoreNews": {
+    "text": "Don’t trust the headline.",
+    "audience": "insider"
+  },
+  "would": {
+    "text": "Would I lie?",
+    "audience": "insider"
+  },
+  "doubt": {
+    "text": "I don’t buy it.",
+    "audience": "guesser"
+  },
+  "shark": {
+    "text": "Shark alert 🦈",
+    "audience": "guesser"
+  },
+  "follow": {
+    "text": "Following you.",
+    "audience": "guesser"
+  },
+  "prove": {
+    "text": "Prove it.",
+    "audience": "guesser"
+  },
+  "lied": {
+    "text": "You lied last time.",
+    "audience": "guesser"
+  },
+  "allin": {
+    "text": "All in on you.",
+    "audience": "guesser"
+  },
+  "smirk": {
+    "text": "😏",
+    "audience": "all"
+  },
+  "think": {
+    "text": "🤔",
+    "audience": "all"
+  },
+  "angel": {
+    "text": "😇",
+    "audience": "all"
+  },
+  "sharkEmoji": {
+    "text": "🦈",
+    "audience": "all"
+  },
+  "money": {
+    "text": "💸",
+    "audience": "all"
+  },
+  "laugh": {
+    "text": "😂",
+    "audience": "all"
+  },
+  "lawyer": {
+    "text": "My lawyer says no comment.",
+    "audience": "all"
+  },
+  "suit": {
+    "text": "Trust me, I’m wearing a suit.",
+    "audience": "insider"
+  },
+  "advice": {
+    "text": "This is not financial advice.",
+    "audience": "all"
+  },
+  "today": {
+    "text": "I’ve never lied. Today.",
+    "audience": "insider"
+  },
+  "sec": {
+    "text": "I’m calling the SEC.",
+    "audience": "guesser"
+  }
+}

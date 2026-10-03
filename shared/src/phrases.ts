@@ -1,3 +1,4 @@
+import phraseData from "./content/phrases.json";
 import type { Personality } from "./protocol.js";
 export const BOTS: Record<
   Personality,
@@ -52,24 +53,5 @@ export const BOTS: Record<
     description: "Watches reputations, not promises.",
   },
 };
-export const PHRASES = {
-  trust: { text: "Trust me.", audience: "insider" },
-  never: { text: "I’d never lie to you.", audience: "insider" },
-  strong: { text: "Strong means strong.", audience: "insider" },
-  news: { text: "Read the news.", audience: "insider" },
-  ignoreNews: { text: "Don’t trust the headline.", audience: "insider" },
-  would: { text: "Would I lie?", audience: "insider" },
-  doubt: { text: "I don’t buy it.", audience: "guesser" },
-  shark: { text: "Shark alert 🦈", audience: "guesser" },
-  follow: { text: "Following you.", audience: "guesser" },
-  prove: { text: "Prove it.", audience: "guesser" },
-  lied: { text: "You lied last time.", audience: "guesser" },
-  allin: { text: "All in on you.", audience: "guesser" },
-  smirk: { text: "😏", audience: "all" },
-  think: { text: "🤔", audience: "all" },
-  angel: { text: "😇", audience: "all" },
-  sharkEmoji: { text: "🦈", audience: "all" },
-  money: { text: "💸", audience: "all" },
-  laugh: { text: "😂", audience: "all" },
-} as const;
+export const PHRASES = phraseData;
 export type PhraseId = keyof typeof PHRASES;

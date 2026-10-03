@@ -4,1049 +4,1649 @@
     "company": "Sentient Toaster Co.",
     "description": "Toasters with feelings",
     "headline": "Sentient Toaster: toasters win a national breakfast award.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The toasters discovered brunch and charged twice for sleeping in. The waiting list now has its own waiting list.",
+      "DOWN": "The toasters burned the quarterly report and called it artisanal. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-01-2",
     "company": "Sentient Toaster Co.",
     "description": "Toasters with feelings",
     "headline": "Sentient Toaster: toasters unionize and refuse early shifts.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The toasters discovered brunch and charged twice for sleeping in. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The toasters burned the quarterly report and called it artisanal. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-01-3",
     "company": "Sentient Toaster Co.",
     "description": "Toasters with feelings",
     "headline": "Sentient Toaster: customers queue overnight as toasters win a national breakfast award.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The toasters discovered brunch and charged twice for sleeping in. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The toasters burned the quarterly report and called it artisanal. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-01-4",
     "company": "Sentient Toaster Co.",
     "description": "Toasters with feelings",
     "headline": "Sentient Toaster: investors demand answers after toasters unionize and refuse early shifts.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The toasters discovered brunch and charged twice for sleeping in. The accountants framed the receipt.",
+      "DOWN": "The toasters burned the quarterly report and called it artisanal. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-01-5",
     "company": "Sentient Toaster Co.",
     "description": "Toasters with feelings",
     "headline": "Sentient Toaster: new orders surge after toasters win a national breakfast award.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The toasters discovered brunch and charged twice for sleeping in. The order book needed a bigger book.",
+      "DOWN": "The toasters burned the quarterly report and called it artisanal. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-02-1",
     "company": "Banana Yacht Co.",
     "description": "Luxury yachts shaped like fruit",
     "headline": "Banana Yacht: new hull design passes its first ocean trial.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The banana yachts sold out after introducing a slip-resistant peel. The waiting list now has its own waiting list.",
+      "DOWN": "The fleet ripened before anyone learned to steer it. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-02-2",
     "company": "Banana Yacht Co.",
     "description": "Luxury yachts shaped like fruit",
     "headline": "Banana Yacht: fleet attracts an unmanageable flock of hungry gulls.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The banana yachts sold out after introducing a slip-resistant peel. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The fleet ripened before anyone learned to steer it. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-02-3",
     "company": "Banana Yacht Co.",
     "description": "Luxury yachts shaped like fruit",
     "headline": "Banana Yacht: customers queue overnight as new hull design passes its first ocean trial.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The banana yachts sold out after introducing a slip-resistant peel. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The fleet ripened before anyone learned to steer it. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-02-4",
     "company": "Banana Yacht Co.",
     "description": "Luxury yachts shaped like fruit",
     "headline": "Banana Yacht: investors demand answers after fleet attracts an unmanageable flock of hungry gulls.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The banana yachts sold out after introducing a slip-resistant peel. The accountants framed the receipt.",
+      "DOWN": "The fleet ripened before anyone learned to steer it. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-02-5",
     "company": "Banana Yacht Co.",
     "description": "Luxury yachts shaped like fruit",
     "headline": "Banana Yacht: refund requests climb after fleet attracts an unmanageable flock of hungry gulls.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The banana yachts sold out after introducing a slip-resistant peel. The order book needed a bigger book.",
+      "DOWN": "The fleet ripened before anyone learned to steer it. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-03-1",
     "company": "Haunted Wi Fi Co.",
     "description": "Internet powered by ghosts",
     "headline": "Haunted Wi Fi: ghost engineers double connection speeds.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The ghosts stopped haunting the router and started a premium streaming service. The waiting list now has its own waiting list.",
+      "DOWN": "The ghosts ghosted the connection. Customer support joined them. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-03-2",
     "company": "Haunted Wi Fi Co.",
     "description": "Internet powered by ghosts",
     "headline": "Haunted Wi Fi: ghosts walk off the job during a nationwide outage.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The ghosts stopped haunting the router and started a premium streaming service. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The ghosts ghosted the connection. Customer support joined them. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-03-3",
     "company": "Haunted Wi Fi Co.",
     "description": "Internet powered by ghosts",
     "headline": "Haunted Wi Fi: customers queue overnight as ghost engineers double connection speeds.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The ghosts stopped haunting the router and started a premium streaming service. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The ghosts ghosted the connection. Customer support joined them. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-03-4",
     "company": "Haunted Wi Fi Co.",
     "description": "Internet powered by ghosts",
     "headline": "Haunted Wi Fi: investors demand answers after ghosts walk off the job during a nationwide outage.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The ghosts stopped haunting the router and started a premium streaming service. The accountants framed the receipt.",
+      "DOWN": "The ghosts ghosted the connection. Customer support joined them. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-03-5",
     "company": "Haunted Wi Fi Co.",
     "description": "Internet powered by ghosts",
     "headline": "Haunted Wi Fi: new orders surge after ghost engineers double connection speeds.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The ghosts stopped haunting the router and started a premium streaming service. The order book needed a bigger book.",
+      "DOWN": "The ghosts ghosted the connection. Customer support joined them. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-04-1",
     "company": "Moonlight Socks Co.",
     "description": "Socks for the night shift",
     "headline": "Moonlight Socks: glow-in-the-dark line sells out before sunset.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The socks found their missing partners and opened a very profitable reunion service. The waiting list now has its own waiting list.",
+      "DOWN": "Every left sock filed for independence. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-04-2",
     "company": "Moonlight Socks Co.",
     "description": "Socks for the night shift",
     "headline": "Moonlight Socks: socks become invisible under office lighting.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The socks found their missing partners and opened a very profitable reunion service. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "Every left sock filed for independence. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-04-3",
     "company": "Moonlight Socks Co.",
     "description": "Socks for the night shift",
     "headline": "Moonlight Socks: customers queue overnight as glow-in-the-dark line sells out before sunset.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The socks found their missing partners and opened a very profitable reunion service. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "Every left sock filed for independence. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-04-4",
     "company": "Moonlight Socks Co.",
     "description": "Socks for the night shift",
     "headline": "Moonlight Socks: investors demand answers after socks become invisible under office lighting.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The socks found their missing partners and opened a very profitable reunion service. The accountants framed the receipt.",
+      "DOWN": "Every left sock filed for independence. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-04-5",
     "company": "Moonlight Socks Co.",
     "description": "Socks for the night shift",
     "headline": "Moonlight Socks: refund requests climb after socks become invisible under office lighting.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The socks found their missing partners and opened a very profitable reunion service. The order book needed a bigger book.",
+      "DOWN": "Every left sock filed for independence. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-05-1",
     "company": "Galactic Pickle Co.",
     "description": "Space-ready snacks",
     "headline": "Galactic Pickle: orbital diners place a record pickle order.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The pickles became the first snack to charge extra for zero-gravity crunch. The waiting list now has its own waiting list.",
+      "DOWN": "The launch was delayed after someone ate the navigation pickle. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-05-2",
     "company": "Galactic Pickle Co.",
     "description": "Space-ready snacks",
     "headline": "Galactic Pickle: vacuum jars open themselves during a launch.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The pickles became the first snack to charge extra for zero-gravity crunch. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The launch was delayed after someone ate the navigation pickle. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-05-3",
     "company": "Galactic Pickle Co.",
     "description": "Space-ready snacks",
     "headline": "Galactic Pickle: customers queue overnight as orbital diners place a record pickle order.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The pickles became the first snack to charge extra for zero-gravity crunch. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The launch was delayed after someone ate the navigation pickle. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-05-4",
     "company": "Galactic Pickle Co.",
     "description": "Space-ready snacks",
     "headline": "Galactic Pickle: investors demand answers after vacuum jars open themselves during a launch.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The pickles became the first snack to charge extra for zero-gravity crunch. The accountants framed the receipt.",
+      "DOWN": "The launch was delayed after someone ate the navigation pickle. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-05-5",
     "company": "Galactic Pickle Co.",
     "description": "Space-ready snacks",
     "headline": "Galactic Pickle: new orders surge after orbital diners place a record pickle order.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The pickles became the first snack to charge extra for zero-gravity crunch. The order book needed a bigger book.",
+      "DOWN": "The launch was delayed after someone ate the navigation pickle. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-06-1",
     "company": "Cloud Nine Mattress Co.",
     "description": "Beds you never want to leave",
     "headline": "Cloud Nine Mattress: hotel chain orders its cloud-soft mattresses.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "Customers loved the mattresses so much they subscribed in their sleep. The waiting list now has its own waiting list.",
+      "DOWN": "The entire sales team slept through the sale. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-06-2",
     "company": "Cloud Nine Mattress Co.",
     "description": "Beds you never want to leave",
     "headline": "Cloud Nine Mattress: recall begins after customers refuse to wake up.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "Customers loved the mattresses so much they subscribed in their sleep. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The entire sales team slept through the sale. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-06-3",
     "company": "Cloud Nine Mattress Co.",
     "description": "Beds you never want to leave",
     "headline": "Cloud Nine Mattress: customers queue overnight as hotel chain orders its cloud-soft mattresses.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "Customers loved the mattresses so much they subscribed in their sleep. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The entire sales team slept through the sale. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-06-4",
     "company": "Cloud Nine Mattress Co.",
     "description": "Beds you never want to leave",
     "headline": "Cloud Nine Mattress: investors demand answers after recall begins after customers refuse to wake up.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "Customers loved the mattresses so much they subscribed in their sleep. The accountants framed the receipt.",
+      "DOWN": "The entire sales team slept through the sale. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-06-5",
     "company": "Cloud Nine Mattress Co.",
     "description": "Beds you never want to leave",
     "headline": "Cloud Nine Mattress: refund requests climb after recall begins after customers refuse to wake up.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "Customers loved the mattresses so much they subscribed in their sleep. The order book needed a bigger book.",
+      "DOWN": "The entire sales team slept through the sale. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-07-1",
     "company": "Turbo Turtle Co.",
     "description": "Delivery at a thoughtful pace",
     "headline": "Turbo Turtle: express turtles beat their delivery record.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The turtles arrived late enough to qualify as vintage delivery. The waiting list now has its own waiting list.",
+      "DOWN": "The express lane was still negotiating with a leaf. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-07-2",
     "company": "Turbo Turtle Co.",
     "description": "Delivery at a thoughtful pace",
     "headline": "Turbo Turtle: couriers hibernate with the holiday parcels.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The turtles arrived late enough to qualify as vintage delivery. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The express lane was still negotiating with a leaf. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-07-3",
     "company": "Turbo Turtle Co.",
     "description": "Delivery at a thoughtful pace",
     "headline": "Turbo Turtle: customers queue overnight as express turtles beat their delivery record.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The turtles arrived late enough to qualify as vintage delivery. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The express lane was still negotiating with a leaf. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-07-4",
     "company": "Turbo Turtle Co.",
     "description": "Delivery at a thoughtful pace",
     "headline": "Turbo Turtle: investors demand answers after couriers hibernate with the holiday parcels.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The turtles arrived late enough to qualify as vintage delivery. The accountants framed the receipt.",
+      "DOWN": "The express lane was still negotiating with a leaf. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-07-5",
     "company": "Turbo Turtle Co.",
     "description": "Delivery at a thoughtful pace",
     "headline": "Turbo Turtle: new orders surge after express turtles beat their delivery record.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The turtles arrived late enough to qualify as vintage delivery. The order book needed a bigger book.",
+      "DOWN": "The express lane was still negotiating with a leaf. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-08-1",
     "company": "Disco Llama Co.",
     "description": "Dance-floor animals for hire",
     "headline": "Disco Llama: festival books its entire dancing herd.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The llamas invented a dance move that required four subscription plans. The waiting list now has its own waiting list.",
+      "DOWN": "The llamas ate the guest list and billed it as catering. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-08-2",
     "company": "Disco Llama Co.",
     "description": "Dance-floor animals for hire",
     "headline": "Disco Llama: llamas refuse to dance at a celebrity wedding.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The llamas invented a dance move that required four subscription plans. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The llamas ate the guest list and billed it as catering. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-08-3",
     "company": "Disco Llama Co.",
     "description": "Dance-floor animals for hire",
     "headline": "Disco Llama: customers queue overnight as festival books its entire dancing herd.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The llamas invented a dance move that required four subscription plans. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The llamas ate the guest list and billed it as catering. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-08-4",
     "company": "Disco Llama Co.",
     "description": "Dance-floor animals for hire",
     "headline": "Disco Llama: investors demand answers after llamas refuse to dance at a celebrity wedding.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The llamas invented a dance move that required four subscription plans. The accountants framed the receipt.",
+      "DOWN": "The llamas ate the guest list and billed it as catering. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-08-5",
     "company": "Disco Llama Co.",
     "description": "Dance-floor animals for hire",
     "headline": "Disco Llama: refund requests climb after llamas refuse to dance at a celebrity wedding.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The llamas invented a dance move that required four subscription plans. The order book needed a bigger book.",
+      "DOWN": "The llamas ate the guest list and billed it as catering. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-09-1",
     "company": "Polar Bear Cooling Co.",
     "description": "Arctic air for everyday rooms",
     "headline": "Polar Bear Cooling: wins the fictional Coolest Company award.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The cooling crew bottled a chilly stare and sold it by the litre. The waiting list now has its own waiting list.",
+      "DOWN": "The cold air requested a beach holiday. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-09-2",
     "company": "Polar Bear Cooling Co.",
     "description": "Arctic air for everyday rooms",
     "headline": "Polar Bear Cooling: staff take an unscheduled migration break.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The cooling crew bottled a chilly stare and sold it by the litre. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The cold air requested a beach holiday. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-09-3",
     "company": "Polar Bear Cooling Co.",
     "description": "Arctic air for everyday rooms",
     "headline": "Polar Bear Cooling: customers queue overnight as wins the fictional Coolest Company award.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The cooling crew bottled a chilly stare and sold it by the litre. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The cold air requested a beach holiday. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-09-4",
     "company": "Polar Bear Cooling Co.",
     "description": "Arctic air for everyday rooms",
     "headline": "Polar Bear Cooling: investors demand answers after staff take an unscheduled migration break.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The cooling crew bottled a chilly stare and sold it by the litre. The accountants framed the receipt.",
+      "DOWN": "The cold air requested a beach holiday. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-09-5",
     "company": "Polar Bear Cooling Co.",
     "description": "Arctic air for everyday rooms",
     "headline": "Polar Bear Cooling: new orders surge after wins the fictional Coolest Company award.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The cooling crew bottled a chilly stare and sold it by the litre. The order book needed a bigger book.",
+      "DOWN": "The cold air requested a beach holiday. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-10-1",
     "company": "Pocket Volcano Co.",
     "description": "Portable mountains of warmth",
     "headline": "Pocket Volcano: new insulated case passes safety testing.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The volcano fitted in a pocket and the heating bills went extinct. The waiting list now has its own waiting list.",
+      "DOWN": "The demo melted the receipt printer. Refunds became theoretical. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-10-2",
     "company": "Pocket Volcano Co.",
     "description": "Portable mountains of warmth",
     "headline": "Pocket Volcano: lava leaks trigger an urgent product recall.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The volcano fitted in a pocket and the heating bills went extinct. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The demo melted the receipt printer. Refunds became theoretical. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-10-3",
     "company": "Pocket Volcano Co.",
     "description": "Portable mountains of warmth",
     "headline": "Pocket Volcano: customers queue overnight as new insulated case passes safety testing.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The volcano fitted in a pocket and the heating bills went extinct. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The demo melted the receipt printer. Refunds became theoretical. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-10-4",
     "company": "Pocket Volcano Co.",
     "description": "Portable mountains of warmth",
     "headline": "Pocket Volcano: investors demand answers after lava leaks trigger an urgent product recall.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The volcano fitted in a pocket and the heating bills went extinct. The accountants framed the receipt.",
+      "DOWN": "The demo melted the receipt printer. Refunds became theoretical. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-10-5",
     "company": "Pocket Volcano Co.",
     "description": "Portable mountains of warmth",
     "headline": "Pocket Volcano: refund requests climb after lava leaks trigger an urgent product recall.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The volcano fitted in a pocket and the heating bills went extinct. The order book needed a bigger book.",
+      "DOWN": "The demo melted the receipt printer. Refunds became theoretical. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-11-1",
     "company": "Umbrella Octopus Co.",
     "description": "Eight-armed rain protection",
     "headline": "Umbrella Octopus: storm season drives record umbrella sales.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "Eight arms sold eight umbrellas to the same very dry customer. The waiting list now has its own waiting list.",
+      "DOWN": "All eight arms pointed in different directions during the rain. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-11-2",
     "company": "Umbrella Octopus Co.",
     "description": "Eight-armed rain protection",
     "headline": "Umbrella Octopus: tentacles tangle during the annual demonstration.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "Eight arms sold eight umbrellas to the same very dry customer. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "All eight arms pointed in different directions during the rain. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-11-3",
     "company": "Umbrella Octopus Co.",
     "description": "Eight-armed rain protection",
     "headline": "Umbrella Octopus: customers queue overnight as storm season drives record umbrella sales.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "Eight arms sold eight umbrellas to the same very dry customer. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "All eight arms pointed in different directions during the rain. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-11-4",
     "company": "Umbrella Octopus Co.",
     "description": "Eight-armed rain protection",
     "headline": "Umbrella Octopus: investors demand answers after tentacles tangle during the annual demonstration.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "Eight arms sold eight umbrellas to the same very dry customer. The accountants framed the receipt.",
+      "DOWN": "All eight arms pointed in different directions during the rain. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-11-5",
     "company": "Umbrella Octopus Co.",
     "description": "Eight-armed rain protection",
     "headline": "Umbrella Octopus: new orders surge after storm season drives record umbrella sales.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "Eight arms sold eight umbrellas to the same very dry customer. The order book needed a bigger book.",
+      "DOWN": "All eight arms pointed in different directions during the rain. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-12-1",
     "company": "Velvet Cactus Co.",
     "description": "Surprisingly soft houseplants",
     "headline": "Velvet Cactus: new thornless variety wins gardeners over.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The cactus won a hugging contest. Nobody asked how it entered. The waiting list now has its own waiting list.",
+      "DOWN": "The velvet cover came off. Customer loyalty became a prickly subject. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-12-2",
     "company": "Velvet Cactus Co.",
     "description": "Surprisingly soft houseplants",
     "headline": "Velvet Cactus: premium plants grow sharp spines overnight.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The cactus won a hugging contest. Nobody asked how it entered. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The velvet cover came off. Customer loyalty became a prickly subject. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-12-3",
     "company": "Velvet Cactus Co.",
     "description": "Surprisingly soft houseplants",
     "headline": "Velvet Cactus: customers queue overnight as new thornless variety wins gardeners over.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The cactus won a hugging contest. Nobody asked how it entered. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The velvet cover came off. Customer loyalty became a prickly subject. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-12-4",
     "company": "Velvet Cactus Co.",
     "description": "Surprisingly soft houseplants",
     "headline": "Velvet Cactus: investors demand answers after premium plants grow sharp spines overnight.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The cactus won a hugging contest. Nobody asked how it entered. The accountants framed the receipt.",
+      "DOWN": "The velvet cover came off. Customer loyalty became a prickly subject. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-12-5",
     "company": "Velvet Cactus Co.",
     "description": "Surprisingly soft houseplants",
     "headline": "Velvet Cactus: refund requests climb after premium plants grow sharp spines overnight.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The cactus won a hugging contest. Nobody asked how it entered. The order book needed a bigger book.",
+      "DOWN": "The velvet cover came off. Customer loyalty became a prickly subject. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-13-1",
     "company": "Cloud Courier Co.",
     "description": "Packages delivered by weather",
     "headline": "Cloud Courier: wind partnership doubles delivery coverage.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The clouds delivered every parcel with complimentary dramatic lighting. The waiting list now has its own waiting list.",
+      "DOWN": "A light drizzle turned into a heavy return policy. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-13-2",
     "company": "Cloud Courier Co.",
     "description": "Packages delivered by weather",
     "headline": "Cloud Courier: packages arrive as hail at the wrong addresses.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The clouds delivered every parcel with complimentary dramatic lighting. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "A light drizzle turned into a heavy return policy. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-13-3",
     "company": "Cloud Courier Co.",
     "description": "Packages delivered by weather",
     "headline": "Cloud Courier: customers queue overnight as wind partnership doubles delivery coverage.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The clouds delivered every parcel with complimentary dramatic lighting. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "A light drizzle turned into a heavy return policy. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-13-4",
     "company": "Cloud Courier Co.",
     "description": "Packages delivered by weather",
     "headline": "Cloud Courier: investors demand answers after packages arrive as hail at the wrong addresses.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The clouds delivered every parcel with complimentary dramatic lighting. The accountants framed the receipt.",
+      "DOWN": "A light drizzle turned into a heavy return policy. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-13-5",
     "company": "Cloud Courier Co.",
     "description": "Packages delivered by weather",
     "headline": "Cloud Courier: new orders surge after wind partnership doubles delivery coverage.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The clouds delivered every parcel with complimentary dramatic lighting. The order book needed a bigger book.",
+      "DOWN": "A light drizzle turned into a heavy return policy. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-14-1",
     "company": "Sleepy Rocket Co.",
     "description": "Gentle trips to distant moons",
     "headline": "Sleepy Rocket: quiet launch technology wins a major contract.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The rocket took a nap in orbit and sold the silence as luxury travel. The waiting list now has its own waiting list.",
+      "DOWN": "The countdown reached three and asked for five more minutes. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-14-2",
     "company": "Sleepy Rocket Co.",
     "description": "Gentle trips to distant moons",
     "headline": "Sleepy Rocket: engines enter sleep mode during countdown.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The rocket took a nap in orbit and sold the silence as luxury travel. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The countdown reached three and asked for five more minutes. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-14-3",
     "company": "Sleepy Rocket Co.",
     "description": "Gentle trips to distant moons",
     "headline": "Sleepy Rocket: customers queue overnight as quiet launch technology wins a major contract.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The rocket took a nap in orbit and sold the silence as luxury travel. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The countdown reached three and asked for five more minutes. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-14-4",
     "company": "Sleepy Rocket Co.",
     "description": "Gentle trips to distant moons",
     "headline": "Sleepy Rocket: investors demand answers after engines enter sleep mode during countdown.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The rocket took a nap in orbit and sold the silence as luxury travel. The accountants framed the receipt.",
+      "DOWN": "The countdown reached three and asked for five more minutes. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-14-5",
     "company": "Sleepy Rocket Co.",
     "description": "Gentle trips to distant moons",
     "headline": "Sleepy Rocket: refund requests climb after engines enter sleep mode during countdown.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The rocket took a nap in orbit and sold the silence as luxury travel. The order book needed a bigger book.",
+      "DOWN": "The countdown reached three and asked for five more minutes. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-15-1",
     "company": "Polite Raccoon Co.",
     "description": "Very courteous cleanup crews",
     "headline": "Polite Raccoon: city signs a year-long cleanup contract.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The raccoons said please and customers handed over the entire recycling bin. The waiting list now has its own waiting list.",
+      "DOWN": "The crew sorted the profits into the compost. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-15-2",
     "company": "Polite Raccoon Co.",
     "description": "Very courteous cleanup crews",
     "headline": "Polite Raccoon: crews sort valuables into the rubbish bins.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The raccoons said please and customers handed over the entire recycling bin. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The crew sorted the profits into the compost. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-15-3",
     "company": "Polite Raccoon Co.",
     "description": "Very courteous cleanup crews",
     "headline": "Polite Raccoon: customers queue overnight as city signs a year-long cleanup contract.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The raccoons said please and customers handed over the entire recycling bin. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The crew sorted the profits into the compost. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-15-4",
     "company": "Polite Raccoon Co.",
     "description": "Very courteous cleanup crews",
     "headline": "Polite Raccoon: investors demand answers after crews sort valuables into the rubbish bins.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The raccoons said please and customers handed over the entire recycling bin. The accountants framed the receipt.",
+      "DOWN": "The crew sorted the profits into the compost. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-15-5",
     "company": "Polite Raccoon Co.",
     "description": "Very courteous cleanup crews",
     "headline": "Polite Raccoon: new orders surge after city signs a year-long cleanup contract.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The raccoons said please and customers handed over the entire recycling bin. The order book needed a bigger book.",
+      "DOWN": "The crew sorted the profits into the compost. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-16-1",
     "company": "Invisible Inkworks Co.",
     "description": "Office supplies with secrets",
     "headline": "Invisible Inkworks: schools order its new revealable notebooks.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The invisible ink sold out. The empty shelves looked exactly the same. The waiting list now has its own waiting list.",
+      "DOWN": "The invoices vanished before anyone could pay them. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-16-2",
     "company": "Invisible Inkworks Co.",
     "description": "Office supplies with secrets",
     "headline": "Invisible Inkworks: permanent ink turns permanently invisible.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The invisible ink sold out. The empty shelves looked exactly the same. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The invoices vanished before anyone could pay them. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-16-3",
     "company": "Invisible Inkworks Co.",
     "description": "Office supplies with secrets",
     "headline": "Invisible Inkworks: customers queue overnight as schools order its new revealable notebooks.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The invisible ink sold out. The empty shelves looked exactly the same. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The invoices vanished before anyone could pay them. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-16-4",
     "company": "Invisible Inkworks Co.",
     "description": "Office supplies with secrets",
     "headline": "Invisible Inkworks: investors demand answers after permanent ink turns permanently invisible.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The invisible ink sold out. The empty shelves looked exactly the same. The accountants framed the receipt.",
+      "DOWN": "The invoices vanished before anyone could pay them. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-16-5",
     "company": "Invisible Inkworks Co.",
     "description": "Office supplies with secrets",
     "headline": "Invisible Inkworks: refund requests climb after permanent ink turns permanently invisible.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The invisible ink sold out. The empty shelves looked exactly the same. The order book needed a bigger book.",
+      "DOWN": "The invoices vanished before anyone could pay them. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-17-1",
     "company": "Marshmallow Steel Co.",
     "description": "Structural engineering with bounce",
     "headline": "Marshmallow Steel: new bridge passes its bounce-resistance test.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The marshmallow girders bounced through inspection with delicious margins. The waiting list now has its own waiting list.",
+      "DOWN": "The building inspector brought a mug of hot chocolate. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-17-2",
     "company": "Marshmallow Steel Co.",
     "description": "Structural engineering with bounce",
     "headline": "Marshmallow Steel: warm weather melts the warehouse inventory.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The marshmallow girders bounced through inspection with delicious margins. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The building inspector brought a mug of hot chocolate. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-17-3",
     "company": "Marshmallow Steel Co.",
     "description": "Structural engineering with bounce",
     "headline": "Marshmallow Steel: customers queue overnight as new bridge passes its bounce-resistance test.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The marshmallow girders bounced through inspection with delicious margins. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The building inspector brought a mug of hot chocolate. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-17-4",
     "company": "Marshmallow Steel Co.",
     "description": "Structural engineering with bounce",
     "headline": "Marshmallow Steel: investors demand answers after warm weather melts the warehouse inventory.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The marshmallow girders bounced through inspection with delicious margins. The accountants framed the receipt.",
+      "DOWN": "The building inspector brought a mug of hot chocolate. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-17-5",
     "company": "Marshmallow Steel Co.",
     "description": "Structural engineering with bounce",
     "headline": "Marshmallow Steel: new orders surge after new bridge passes its bounce-resistance test.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The marshmallow girders bounced through inspection with delicious margins. The order book needed a bigger book.",
+      "DOWN": "The building inspector brought a mug of hot chocolate. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-18-1",
     "company": "Tiny Thunder Co.",
     "description": "Desktop weather systems",
     "headline": "Tiny Thunder: miniature rain kits sell out to gardeners.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The tiny thunderstorm sold desk-sized drama at stadium prices. The waiting list now has its own waiting list.",
+      "DOWN": "The forecast was a single apologetic squeak. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-18-2",
     "company": "Tiny Thunder Co.",
     "description": "Desktop weather systems",
     "headline": "Tiny Thunder: storms escape their desktop containment jars.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The tiny thunderstorm sold desk-sized drama at stadium prices. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The forecast was a single apologetic squeak. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-18-3",
     "company": "Tiny Thunder Co.",
     "description": "Desktop weather systems",
     "headline": "Tiny Thunder: customers queue overnight as miniature rain kits sell out to gardeners.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The tiny thunderstorm sold desk-sized drama at stadium prices. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The forecast was a single apologetic squeak. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-18-4",
     "company": "Tiny Thunder Co.",
     "description": "Desktop weather systems",
     "headline": "Tiny Thunder: investors demand answers after storms escape their desktop containment jars.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The tiny thunderstorm sold desk-sized drama at stadium prices. The accountants framed the receipt.",
+      "DOWN": "The forecast was a single apologetic squeak. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-18-5",
     "company": "Tiny Thunder Co.",
     "description": "Desktop weather systems",
     "headline": "Tiny Thunder: refund requests climb after storms escape their desktop containment jars.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The tiny thunderstorm sold desk-sized drama at stadium prices. The order book needed a bigger book.",
+      "DOWN": "The forecast was a single apologetic squeak. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-19-1",
     "company": "Gossip Fern Co.",
     "description": "Houseplants that know everything",
     "headline": "Gossip Fern: new whisper filters become a bestseller.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The ferns leaked a watering schedule and became the hottest gossip subscription. The waiting list now has its own waiting list.",
+      "DOWN": "The plants repeated the same rumour until everyone muted the greenhouse. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-19-2",
     "company": "Gossip Fern Co.",
     "description": "Houseplants that know everything",
-    "headline": "Gossip Fern: ferns reveal customers\u2019 birthday surprises.",
-    "sentiment": "DOWN"
+    "headline": "Gossip Fern: ferns reveal customers’ birthday surprises.",
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The ferns leaked a watering schedule and became the hottest gossip subscription. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The plants repeated the same rumour until everyone muted the greenhouse. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-19-3",
     "company": "Gossip Fern Co.",
     "description": "Houseplants that know everything",
     "headline": "Gossip Fern: customers queue overnight as new whisper filters become a bestseller.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The ferns leaked a watering schedule and became the hottest gossip subscription. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The plants repeated the same rumour until everyone muted the greenhouse. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-19-4",
     "company": "Gossip Fern Co.",
     "description": "Houseplants that know everything",
-    "headline": "Gossip Fern: investors demand answers after ferns reveal customers\u2019 birthday surprises.",
-    "sentiment": "DOWN"
+    "headline": "Gossip Fern: investors demand answers after ferns reveal customers’ birthday surprises.",
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The ferns leaked a watering schedule and became the hottest gossip subscription. The accountants framed the receipt.",
+      "DOWN": "The plants repeated the same rumour until everyone muted the greenhouse. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-19-5",
     "company": "Gossip Fern Co.",
     "description": "Houseplants that know everything",
     "headline": "Gossip Fern: new orders surge after new whisper filters become a bestseller.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The ferns leaked a watering schedule and became the hottest gossip subscription. The order book needed a bigger book.",
+      "DOWN": "The plants repeated the same rumour until everyone muted the greenhouse. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-20-1",
     "company": "Quantum Laundry Co.",
     "description": "Clothes in several places at once",
     "headline": "Quantum Laundry: matching-sock breakthrough delights customers.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The laundry was clean in two universes and charged both of them. The waiting list now has its own waiting list.",
+      "DOWN": "The missing socks were declared a separate dimension with its own accountant. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-20-2",
     "company": "Quantum Laundry Co.",
     "description": "Clothes in several places at once",
     "headline": "Quantum Laundry: wash cycle sends trousers into another dimension.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The laundry was clean in two universes and charged both of them. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The missing socks were declared a separate dimension with its own accountant. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-20-3",
     "company": "Quantum Laundry Co.",
     "description": "Clothes in several places at once",
     "headline": "Quantum Laundry: customers queue overnight as matching-sock breakthrough delights customers.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The laundry was clean in two universes and charged both of them. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The missing socks were declared a separate dimension with its own accountant. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-20-4",
     "company": "Quantum Laundry Co.",
     "description": "Clothes in several places at once",
     "headline": "Quantum Laundry: investors demand answers after wash cycle sends trousers into another dimension.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The laundry was clean in two universes and charged both of them. The accountants framed the receipt.",
+      "DOWN": "The missing socks were declared a separate dimension with its own accountant. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-20-5",
     "company": "Quantum Laundry Co.",
     "description": "Clothes in several places at once",
     "headline": "Quantum Laundry: refund requests climb after wash cycle sends trousers into another dimension.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The laundry was clean in two universes and charged both of them. The order book needed a bigger book.",
+      "DOWN": "The missing socks were declared a separate dimension with its own accountant. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-21-1",
     "company": "Pigeon Prestige Co.",
     "description": "Formalwear for city birds",
     "headline": "Pigeon Prestige: fashion week orders a flock of tiny tuxedos.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The pigeons wore tiny suits and immediately raised their consulting fees. The waiting list now has its own waiting list.",
+      "DOWN": "The pigeons spent the tailoring budget on breadcrumbs. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-21-2",
     "company": "Pigeon Prestige Co.",
     "description": "Formalwear for city birds",
     "headline": "Pigeon Prestige: birds reject the new feather-free collection.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The pigeons wore tiny suits and immediately raised their consulting fees. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The pigeons spent the tailoring budget on breadcrumbs. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-21-3",
     "company": "Pigeon Prestige Co.",
     "description": "Formalwear for city birds",
     "headline": "Pigeon Prestige: customers queue overnight as fashion week orders a flock of tiny tuxedos.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The pigeons wore tiny suits and immediately raised their consulting fees. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The pigeons spent the tailoring budget on breadcrumbs. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-21-4",
     "company": "Pigeon Prestige Co.",
     "description": "Formalwear for city birds",
     "headline": "Pigeon Prestige: investors demand answers after birds reject the new feather-free collection.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The pigeons wore tiny suits and immediately raised their consulting fees. The accountants framed the receipt.",
+      "DOWN": "The pigeons spent the tailoring budget on breadcrumbs. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-21-5",
     "company": "Pigeon Prestige Co.",
     "description": "Formalwear for city birds",
     "headline": "Pigeon Prestige: new orders surge after fashion week orders a flock of tiny tuxedos.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The pigeons wore tiny suits and immediately raised their consulting fees. The order book needed a bigger book.",
+      "DOWN": "The pigeons spent the tailoring budget on breadcrumbs. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-22-1",
     "company": "Golden Compost Co.",
     "description": "Premium leftovers",
     "headline": "Golden Compost: garden clubs sign a major supply deal.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The leftovers became luxury soil. Yesterday’s lunch finally got promoted. The waiting list now has its own waiting list.",
+      "DOWN": "The premium compost was just yesterday’s lunch wearing a ribbon. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-22-2",
     "company": "Golden Compost Co.",
     "description": "Premium leftovers",
     "headline": "Golden Compost: luxury packaging costs exceed compost revenue.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The leftovers became luxury soil. Yesterday’s lunch finally got promoted. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The premium compost was just yesterday’s lunch wearing a ribbon. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-22-3",
     "company": "Golden Compost Co.",
     "description": "Premium leftovers",
     "headline": "Golden Compost: customers queue overnight as garden clubs sign a major supply deal.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The leftovers became luxury soil. Yesterday’s lunch finally got promoted. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The premium compost was just yesterday’s lunch wearing a ribbon. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-22-4",
     "company": "Golden Compost Co.",
     "description": "Premium leftovers",
     "headline": "Golden Compost: investors demand answers after luxury packaging costs exceed compost revenue.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The leftovers became luxury soil. Yesterday’s lunch finally got promoted. The accountants framed the receipt.",
+      "DOWN": "The premium compost was just yesterday’s lunch wearing a ribbon. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-22-5",
     "company": "Golden Compost Co.",
     "description": "Premium leftovers",
     "headline": "Golden Compost: refund requests climb after luxury packaging costs exceed compost revenue.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The leftovers became luxury soil. Yesterday’s lunch finally got promoted. The order book needed a bigger book.",
+      "DOWN": "The premium compost was just yesterday’s lunch wearing a ribbon. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-23-1",
     "company": "Reverse Alarm Co.",
     "description": "Clocks that negotiate wake-up time",
     "headline": "Reverse Alarm: gentle alarm earns glowing customer reviews.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The alarm negotiated a later start and sold everyone a happier morning. The waiting list now has its own waiting list.",
+      "DOWN": "The clock hit snooze on its own product launch. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-23-2",
     "company": "Reverse Alarm Co.",
     "description": "Clocks that negotiate wake-up time",
     "headline": "Reverse Alarm: clocks collectively request another five hours.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The alarm negotiated a later start and sold everyone a happier morning. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The clock hit snooze on its own product launch. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-23-3",
     "company": "Reverse Alarm Co.",
     "description": "Clocks that negotiate wake-up time",
     "headline": "Reverse Alarm: customers queue overnight as gentle alarm earns glowing customer reviews.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The alarm negotiated a later start and sold everyone a happier morning. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The clock hit snooze on its own product launch. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-23-4",
     "company": "Reverse Alarm Co.",
     "description": "Clocks that negotiate wake-up time",
     "headline": "Reverse Alarm: investors demand answers after clocks collectively request another five hours.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The alarm negotiated a later start and sold everyone a happier morning. The accountants framed the receipt.",
+      "DOWN": "The clock hit snooze on its own product launch. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-23-5",
     "company": "Reverse Alarm Co.",
     "description": "Clocks that negotiate wake-up time",
     "headline": "Reverse Alarm: new orders surge after gentle alarm earns glowing customer reviews.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The alarm negotiated a later start and sold everyone a happier morning. The order book needed a bigger book.",
+      "DOWN": "The clock hit snooze on its own product launch. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-24-1",
     "company": "Bubble Estate Co.",
     "description": "Homes inside giant bubbles",
     "headline": "Bubble Estate: first floating neighborhood sells out.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The bubble homes sold a magnificent view with optional gravity. The waiting list now has its own waiting list.",
+      "DOWN": "An open house met an open safety pin. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-24-2",
     "company": "Bubble Estate Co.",
     "description": "Homes inside giant bubbles",
     "headline": "Bubble Estate: unexpected pin shortage becomes a pin surplus.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The bubble homes sold a magnificent view with optional gravity. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "An open house met an open safety pin. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-24-3",
     "company": "Bubble Estate Co.",
     "description": "Homes inside giant bubbles",
     "headline": "Bubble Estate: customers queue overnight as first floating neighborhood sells out.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The bubble homes sold a magnificent view with optional gravity. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "An open house met an open safety pin. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-24-4",
     "company": "Bubble Estate Co.",
     "description": "Homes inside giant bubbles",
     "headline": "Bubble Estate: investors demand answers after unexpected pin shortage becomes a pin surplus.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The bubble homes sold a magnificent view with optional gravity. The accountants framed the receipt.",
+      "DOWN": "An open house met an open safety pin. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-24-5",
     "company": "Bubble Estate Co.",
     "description": "Homes inside giant bubbles",
     "headline": "Bubble Estate: refund requests climb after unexpected pin shortage becomes a pin surplus.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The bubble homes sold a magnificent view with optional gravity. The order book needed a bigger book.",
+      "DOWN": "An open house met an open safety pin. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-25-1",
     "company": "Tap Dancing Crab Co.",
     "description": "Entertainment with extra legs",
     "headline": "Tap Dancing Crab: theater signs the troupe for a full season.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The crabs sold eight front-row tickets to their own shoes. The waiting list now has its own waiting list.",
+      "DOWN": "The tap routine attracted a plumbing bill. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-25-2",
     "company": "Tap Dancing Crab Co.",
     "description": "Entertainment with extra legs",
     "headline": "Tap Dancing Crab: crabs move sideways off the opening-night stage.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The crabs sold eight front-row tickets to their own shoes. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The tap routine attracted a plumbing bill. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-25-3",
     "company": "Tap Dancing Crab Co.",
     "description": "Entertainment with extra legs",
     "headline": "Tap Dancing Crab: customers queue overnight as theater signs the troupe for a full season.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The crabs sold eight front-row tickets to their own shoes. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The tap routine attracted a plumbing bill. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-25-4",
     "company": "Tap Dancing Crab Co.",
     "description": "Entertainment with extra legs",
     "headline": "Tap Dancing Crab: investors demand answers after crabs move sideways off the opening-night stage.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The crabs sold eight front-row tickets to their own shoes. The accountants framed the receipt.",
+      "DOWN": "The tap routine attracted a plumbing bill. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-25-5",
     "company": "Tap Dancing Crab Co.",
     "description": "Entertainment with extra legs",
     "headline": "Tap Dancing Crab: new orders surge after theater signs the troupe for a full season.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The crabs sold eight front-row tickets to their own shoes. The order book needed a bigger book.",
+      "DOWN": "The tap routine attracted a plumbing bill. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-26-1",
     "company": "Hologram Bakery Co.",
     "description": "Bread you can almost taste",
     "headline": "Hologram Bakery: adds real pastry delivery to virtual displays.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The hologram bakery sold calorie-free croissants with very real margins. The waiting list now has its own waiting list.",
+      "DOWN": "A customer tried to butter the projector. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-26-2",
     "company": "Hologram Bakery Co.",
     "description": "Bread you can almost taste",
     "headline": "Hologram Bakery: customers discover their sandwiches are just light.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The hologram bakery sold calorie-free croissants with very real margins. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "A customer tried to butter the projector. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-26-3",
     "company": "Hologram Bakery Co.",
     "description": "Bread you can almost taste",
     "headline": "Hologram Bakery: customers queue overnight as adds real pastry delivery to virtual displays.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The hologram bakery sold calorie-free croissants with very real margins. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "A customer tried to butter the projector. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-26-4",
     "company": "Hologram Bakery Co.",
     "description": "Bread you can almost taste",
     "headline": "Hologram Bakery: investors demand answers after customers discover their sandwiches are just light.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The hologram bakery sold calorie-free croissants with very real margins. The accountants framed the receipt.",
+      "DOWN": "A customer tried to butter the projector. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-26-5",
     "company": "Hologram Bakery Co.",
     "description": "Bread you can almost taste",
     "headline": "Hologram Bakery: refund requests climb after customers discover their sandwiches are just light.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The hologram bakery sold calorie-free croissants with very real margins. The order book needed a bigger book.",
+      "DOWN": "A customer tried to butter the projector. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-27-1",
     "company": "Penguin Parcel Co.",
     "description": "Cold-chain delivery specialists",
     "headline": "Penguin Parcel: frozen dessert company signs an exclusive deal.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The penguins delivered the ice cream before even one dramatic drip. The waiting list now has its own waiting list.",
+      "DOWN": "The penguins mistook the loading bay for a waterslide. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-27-2",
     "company": "Penguin Parcel Co.",
     "description": "Cold-chain delivery specialists",
     "headline": "Penguin Parcel: drivers stop every route for a group slide.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The penguins delivered the ice cream before even one dramatic drip. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The penguins mistook the loading bay for a waterslide. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-27-3",
     "company": "Penguin Parcel Co.",
     "description": "Cold-chain delivery specialists",
     "headline": "Penguin Parcel: customers queue overnight as frozen dessert company signs an exclusive deal.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The penguins delivered the ice cream before even one dramatic drip. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The penguins mistook the loading bay for a waterslide. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-27-4",
     "company": "Penguin Parcel Co.",
     "description": "Cold-chain delivery specialists",
     "headline": "Penguin Parcel: investors demand answers after drivers stop every route for a group slide.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The penguins delivered the ice cream before even one dramatic drip. The accountants framed the receipt.",
+      "DOWN": "The penguins mistook the loading bay for a waterslide. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-27-5",
     "company": "Penguin Parcel Co.",
     "description": "Cold-chain delivery specialists",
     "headline": "Penguin Parcel: new orders surge after frozen dessert company signs an exclusive deal.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The penguins delivered the ice cream before even one dramatic drip. The order book needed a bigger book.",
+      "DOWN": "The penguins mistook the loading bay for a waterslide. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-28-1",
     "company": "Secret Door Co.",
     "description": "Doors to more interesting rooms",
     "headline": "Secret Door: homebuilders order its expandable doorframes.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The secret door opened onto another gift shop. Sales walked right in. The waiting list now has its own waiting list.",
+      "DOWN": "Every door opened into the same broom cupboard. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-28-2",
     "company": "Secret Door Co.",
     "description": "Doors to more interesting rooms",
     "headline": "Secret Door: doors open into the same broom cupboard.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The secret door opened onto another gift shop. Sales walked right in. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "Every door opened into the same broom cupboard. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-28-3",
     "company": "Secret Door Co.",
     "description": "Doors to more interesting rooms",
     "headline": "Secret Door: customers queue overnight as homebuilders order its expandable doorframes.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The secret door opened onto another gift shop. Sales walked right in. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "Every door opened into the same broom cupboard. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-28-4",
     "company": "Secret Door Co.",
     "description": "Doors to more interesting rooms",
     "headline": "Secret Door: investors demand answers after doors open into the same broom cupboard.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The secret door opened onto another gift shop. Sales walked right in. The accountants framed the receipt.",
+      "DOWN": "Every door opened into the same broom cupboard. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-28-5",
     "company": "Secret Door Co.",
     "description": "Doors to more interesting rooms",
     "headline": "Secret Door: refund requests climb after doors open into the same broom cupboard.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The secret door opened onto another gift shop. Sales walked right in. The order book needed a bigger book.",
+      "DOWN": "Every door opened into the same broom cupboard. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-29-1",
     "company": "Orbit Orchard Co.",
     "description": "Fruit grown above the clouds",
     "headline": "Orbit Orchard: first zero-gravity peach harvest breaks records.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The orbital peaches floated straight into a premium fruit subscription. The waiting list now has its own waiting list.",
+      "DOWN": "The apples refused to fall, bringing the harvest to a complete standstill. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-29-2",
     "company": "Orbit Orchard Co.",
     "description": "Fruit grown above the clouds",
     "headline": "Orbit Orchard: apples drift away before harvest crews arrive.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The orbital peaches floated straight into a premium fruit subscription. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The apples refused to fall, bringing the harvest to a complete standstill. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-29-3",
     "company": "Orbit Orchard Co.",
     "description": "Fruit grown above the clouds",
     "headline": "Orbit Orchard: customers queue overnight as first zero-gravity peach harvest breaks records.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The orbital peaches floated straight into a premium fruit subscription. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The apples refused to fall, bringing the harvest to a complete standstill. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-29-4",
     "company": "Orbit Orchard Co.",
     "description": "Fruit grown above the clouds",
     "headline": "Orbit Orchard: investors demand answers after apples drift away before harvest crews arrive.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The orbital peaches floated straight into a premium fruit subscription. The accountants framed the receipt.",
+      "DOWN": "The apples refused to fall, bringing the harvest to a complete standstill. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-29-5",
     "company": "Orbit Orchard Co.",
     "description": "Fruit grown above the clouds",
     "headline": "Orbit Orchard: new orders surge after first zero-gravity peach harvest breaks records.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The orbital peaches floated straight into a premium fruit subscription. The order book needed a bigger book.",
+      "DOWN": "The apples refused to fall, bringing the harvest to a complete standstill. The expansion plan now fits on a sticky note."
+    }
   },
   {
     "id": "news-30-1",
     "company": "Moon Cheese Co.",
     "description": "Dairy with astronomical ambition",
     "headline": "Moon Cheese: new crater-aged cheese wins a tasting contest.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The moon cheese aged beautifully in a crater with excellent ventilation. The waiting list now has its own waiting list.",
+      "DOWN": "The moon sample was rock. The cheese board demanded a second opinion. The apology came with a loyalty stamp."
+    }
   },
   {
     "id": "news-30-2",
     "company": "Moon Cheese Co.",
     "description": "Dairy with astronomical ambition",
     "headline": "Moon Cheese: inspectors find that the moon sample is just rock.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The moon cheese aged beautifully in a crater with excellent ventilation. The emergency meeting turned into a ribbon-cutting ceremony.",
+      "DOWN": "The moon sample was rock. The cheese board demanded a second opinion. The emergency meeting needed a second emergency meeting."
+    }
   },
   {
     "id": "news-30-3",
     "company": "Moon Cheese Co.",
     "description": "Dairy with astronomical ambition",
     "headline": "Moon Cheese: customers queue overnight as new crater-aged cheese wins a tasting contest.",
-    "sentiment": "UP"
+    "sentiment": "UP",
+    "punchlines": {
+      "UP": "The moon cheese aged beautifully in a crater with excellent ventilation. An overnight queue formed. Even the queue charged admission.",
+      "DOWN": "The moon sample was rock. The cheese board demanded a second opinion. The waiting list became a complaints list."
+    }
   },
   {
     "id": "news-30-4",
     "company": "Moon Cheese Co.",
     "description": "Dairy with astronomical ambition",
     "headline": "Moon Cheese: investors demand answers after inspectors find that the moon sample is just rock.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The moon cheese aged beautifully in a crater with excellent ventilation. The accountants framed the receipt.",
+      "DOWN": "The moon sample was rock. The cheese board demanded a second opinion. The accountants quietly unplugged the calculator."
+    }
   },
   {
     "id": "news-30-5",
     "company": "Moon Cheese Co.",
     "description": "Dairy with astronomical ambition",
     "headline": "Moon Cheese: refund requests climb after inspectors find that the moon sample is just rock.",
-    "sentiment": "DOWN"
+    "sentiment": "DOWN",
+    "punchlines": {
+      "UP": "The moon cheese aged beautifully in a crater with excellent ventilation. The order book needed a bigger book.",
+      "DOWN": "The moon sample was rock. The cheese board demanded a second opinion. The expansion plan now fits on a sticky note."
+    }
   }
 ]

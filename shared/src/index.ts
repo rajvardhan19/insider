@@ -4,3 +4,5 @@ export * from "./phrases.js";
 export * from "./schemas.js";
 
 export const NARRATION_VISIBLE_MS = 2800;
+export * from "./comedy.js";
+export * from "./commentary.js";

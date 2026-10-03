@@ -11,6 +11,7 @@ export interface News {
   description: string;
   headline: string;
   sentiment: Direction;
+  punchlines: Record<Direction, string>;
 }
 export interface Tip {
   direction: Direction;
@@ -99,8 +100,30 @@ export interface PlayerView {
   winners: string[];
   closingReport?: string;
   analystNote: boolean;
+  commentary?: CommentaryLine[];
+  reactions?: Reaction[];
 }
 
 export type Ack =
   | { ok: true; code?: string; token?: string }
   | { ok: false; code: string; message: string };
+
+export type CommentaryPriority = "high" | "medium" | "low";
+export interface CommentaryLine {
+  trigger: string;
+  id: string;
+  gameId: string;
+  round: number;
+  phase: Phase;
+  priority: CommentaryPriority;
+  at: number;
+  expiresAt: number;
+  turns: { speaker: "Brad Bull" | "Barb Bear"; text: string }[];
+}
+export interface Reaction {
+  id: string;
+  playerId: string;
+  emoji: "tomato" | "laugh" | "shark";
+  at: number;
+  round: number;
+}

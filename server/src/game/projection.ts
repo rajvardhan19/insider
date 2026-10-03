@@ -9,6 +9,8 @@ export interface ProjectableRoom {
   mode: "QUICK" | "FULL";
   solo: boolean;
   simulation?: boolean;
+  commentary?: { published: import("@insider/shared").CommentaryLine[] };
+  reactions?: import("@insider/shared").Reaction[];
   players: Player[];
   game?: GameState;
 }
@@ -22,6 +24,12 @@ export function buildPlayerView(
     phase = g?.phase ?? "LOBBY";
   const view: PlayerView = {
     protocol: 1,
+    commentary: structuredClone(room.commentary?.published ?? []),
+    reactions: structuredClone(
+      (room.reactions ?? []).filter(
+        (r) => r.round === g?.round && now - r.at < 2500 && phase === "REVEAL",
+      ),
+    ),
     roomId: room.id,
     code: room.code,
     revision: room.revision,
@@ -73,4 +81,44 @@ export function buildPlayerView(
     if (phase === "FINAL") view.closingReport = g.closingReport;
   }
   return view;
+}
+
+/** The sole doorway to the commentary engine. Never pass a GameState to it. */
+export function buildCommentaryFrame(
+  room: ProjectableRoom,
+  now: number,
+): import("@insider/shared").CommentaryFrame | null {
+  const v = buildPlayerView(room, "__public_commentary__", now);
+  if (!v.gameId || !v.insiderId || !v.news) return null;
+  return {
+    gameId: v.gameId,
+    round: v.round,
+    phase: v.phase,
+    phaseStartedAt: v.phaseStartedAt,
+    phaseEndsAt: v.phaseEndsAt,
+    insiderId: v.insiderId,
+    company: v.news.company,
+    tip: v.tip
+      ? { direction: v.tip.direction, strong: v.tip.strong }
+      : undefined,
+    players: v.players.map((p) => ({
+      id: p.id,
+      name: p.name,
+      trust: p.trust,
+      connected: p.connected,
+      submitted: p.submitted,
+    })),
+    chat: v.chat.map((c) => ({
+      id: c.id,
+      playerId: c.playerId,
+      text: c.text,
+      phraseId: c.phraseId,
+      at: c.at,
+      round: c.round,
+    })),
+    history: v.history.filter(
+      (r) => r.round < v.round || v.phase === "REVEAL" || v.phase === "FINAL",
+    ),
+    closingReport: v.closingReport,
+  };
 }

@@ -89,7 +89,7 @@ describe("untrusted public inputs", () => {
       "sam",
       "walt",
     ]);
-    expect(Object.keys(PHRASES)).toHaveLength(18);
+    expect(Object.keys(PHRASES)).toHaveLength(23);
   });
 });
 

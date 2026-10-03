@@ -442,3 +442,57 @@ it("prepares Closing Bell before FINAL and ignores an old-game completion after 
   expect(views.get(host)!.history).toEqual([]);
   expect(views.get(host)!.closingReport).toBeUndefined();
 });
+
+it("syncs reveal reactions to both players, rate-limits them, and never changes scores", async () => {
+  const { host, code } = await room(),
+    guest = await connect();
+  await enter(guest, { type: "join", code, name: "Leo" });
+  await command(host, { type: "start" });
+  await until(() => views.get(guest)?.phase === "TIP");
+  expect(
+    await command(host, { type: "reaction", emoji: "tomato" }),
+  ).toMatchObject({ ok: false, code: "WRONG_PHASE" });
+  await command(host, { type: "tip", direction: "UP", strong: true });
+  await until(() => views.get(guest)?.phase === "GUESS");
+  expect(
+    await command(guest, { type: "chat", phraseId: "suit" }),
+  ).toMatchObject({ ok: false, code: "UNAUTHORIZED" });
+  expect(await command(host, { type: "chat", phraseId: "sec" })).toMatchObject({
+    ok: false,
+    code: "UNAUTHORIZED",
+  });
+  await command(guest, {
+    type: "guess",
+    direction: "UP",
+    stake: 300,
+    callShark: true,
+  });
+  await until(() => views.get(host)?.phase === "REVEAL");
+  const before = views.get(host)!;
+  const id = randomUUID();
+  expect(
+    await command(host, { type: "reaction", emoji: "tomato" }, id),
+  ).toMatchObject({ ok: true });
+  expect(
+    await command(host, { type: "reaction", emoji: "tomato" }, id),
+  ).toMatchObject({ ok: true });
+  await until(() => views.get(guest)?.reactions?.length === 1);
+  expect(views.get(host)!.reactions).toEqual(views.get(guest)!.reactions);
+  expect(
+    await command(host, { type: "reaction", emoji: "shark" }),
+  ).toMatchObject({ ok: false, code: "RATE_LIMITED" });
+  expect(
+    await command(guest, { type: "reaction", emoji: "laugh" }),
+  ).toMatchObject({ ok: true });
+  await until(() => views.get(host)?.reactions?.length === 2);
+  expect(views.get(host)!.players).toEqual(before.players);
+  expect(views.get(host)!.phaseEndsAt).toBe(before.phaseEndsAt);
+  now += 1500;
+  expect(
+    await command(host, { type: "reaction", emoji: "shark" }),
+  ).toMatchObject({ ok: true });
+  now = before.phaseEndsAt;
+  app.rooms.sweep();
+  await until(() => views.get(host)?.phase === "TIP");
+  expect(views.get(host)!.reactions).toEqual([]);
+});

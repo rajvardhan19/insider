@@ -1,0 +1,109 @@
+{
+  "ratings": [
+    {
+      "min": 140,
+      "label": "AAA: Saint"
+    },
+    {
+      "min": 110,
+      "label": "A: Probably Fine"
+    },
+    {
+      "min": 90,
+      "label": "B: Unrated Mystery"
+    },
+    {
+      "min": 60,
+      "label": "C: Junk Bond"
+    },
+    {
+      "min": 0,
+      "label": "Known Fraud"
+    }
+  ],
+  "awards": {
+    "detective": "The Whistleblower",
+    "bluff": "The Pinocchio Prize",
+    "trusted": "Suspiciously Honest",
+    "fooled": "Golden Gullible"
+  },
+  "reactions": {
+    "tomato": "🍅",
+    "laugh": "😂",
+    "shark": "🦈"
+  },
+  "microcopy": {
+    "lock": [
+      "Lock in my terrible decision",
+      "Send it to my future therapist",
+      "Put my confidence on record"
+    ],
+    "locking": [
+      "Filing the paperwork…",
+      "Faxing the future…",
+      "Stamping your certainty…"
+    ],
+    "wait": [
+      "{name} is consulting their horoscope…",
+      "{name} is asking a very confident houseplant…",
+      "{name} is rehearsing the word “trust”…"
+    ],
+    "emptyLobby": [
+      "Waiting for investors. Or victims.",
+      "An empty chair has excellent credit.",
+      "The next questionable decision needs company."
+    ],
+    "emptyChat": [
+      "The floor is quiet. Suspiciously quiet.",
+      "Even the office fern has no comment.",
+      "Everyone is saving their best excuse."
+    ],
+    "noRecord": [
+      "A spotless record. Mostly because it is empty.",
+      "No receipts yet. Enjoy this brief innocence.",
+      "Reputation still in its original packaging."
+    ],
+    "timeout": [
+      "{name} fell asleep at the trading desk.",
+      "{name} was out getting an extremely important biscuit.",
+      "{name} left the decision in their other briefcase."
+    ],
+    "bigBet": ["Bet the house", "Mortgage my confidence", "Go full dramatic"],
+    "tip": [
+      "Publish my questionable advice",
+      "Release the office rumour",
+      "Make this everyone’s problem"
+    ],
+    "fooled": [
+      "{name} fooled {count} {people}!",
+      "{count} investors bought {name}’s plot twist.",
+      "{name} sold {count} very expensive surprises."
+    ],
+    "partner": [
+      "{name} brought useful information. Unsettling.",
+      "{name} helped {count} {people} get it right!",
+      "An honest day at {name}’s extremely suspicious desk."
+    ],
+    "uncaught": [
+      "The Shark had teeth. The table had questions.",
+      "A Shark was present. The receipts have been filed.",
+      "The market was fictional. The side-eye was not."
+    ],
+    "bankrupt": [
+      "BANKRUPT",
+      "Lost All In · a dramatic badge, not elimination."
+    ],
+    "math": ["See the math", "The receipts department"],
+    "crash": [
+      "Credit rating: taking the stairs down.",
+      "Trust just discovered gravity.",
+      "The ticker has requested a comfort blanket."
+    ]
+  },
+  "messages": {
+    "reactionPhase": "Save the tomatoes for the reveal.",
+    "reactionLimit": "One dramatic gesture at a time.",
+    "closingFallback": "The receipts are complete.",
+    "unknownTrader": "A trader"
+  }
+}

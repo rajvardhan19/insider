@@ -24,8 +24,8 @@ export function decideGuess(
 ): { guess: Guess; reply?: string } {
   const personality = r[0] < R.personalityRate,
     ids = new Set(ctx.chat.map((c) => c.phraseId)),
-    trustPhrase = ["trust", "never", "would", "strong"].some((id) =>
-      ids.has(id),
+    trustPhrase = ["trust", "never", "would", "strong", "suit", "today"].some(
+      (id) => ids.has(id),
     );
   let follow = 0.5,
     call = 0.1,

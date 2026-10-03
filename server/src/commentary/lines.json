@@ -1,0 +1,1698 @@
+[
+  {
+    "id": "round-1",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Round {round}! A fresh chance to be confidently correct."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "A fresh chance to update the excuses spreadsheet."
+      }
+    ]
+  },
+  {
+    "id": "round-2",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "A fresh chance to update the excuses spreadsheet."
+      }
+    ]
+  },
+  {
+    "id": "round-3",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "The bell rings and every portfolio has potential!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "So does an unattended sandwich. Let us observe."
+      }
+    ]
+  },
+  {
+    "id": "round-4",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "So does an unattended sandwich. Let us observe."
+      }
+    ]
+  },
+  {
+    "id": "round-5",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Welcome back to the finest fictional market in this room!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The competition was a broken vending machine."
+      }
+    ]
+  },
+  {
+    "id": "round-6",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The competition was a broken vending machine."
+      }
+    ]
+  },
+  {
+    "id": "round-7",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "New round, clean slate, immaculate vibes!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The receipts from the last round are still warm."
+      }
+    ]
+  },
+  {
+    "id": "round-8",
+    "trigger": "round",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The receipts from the last round are still warm."
+      }
+    ]
+  },
+  {
+    "id": "deciding-1",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} is taking their time. That is craftsmanship!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "{name} is consulting a horoscope with quarterly targets."
+      }
+    ]
+  },
+  {
+    "id": "deciding-2",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "{name} is consulting a horoscope with quarterly targets."
+      }
+    ]
+  },
+  {
+    "id": "deciding-3",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "I can practically hear {name} doing research!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "That might be the biscuit tin."
+      }
+    ]
+  },
+  {
+    "id": "deciding-4",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "That might be the biscuit tin."
+      }
+    ]
+  },
+  {
+    "id": "deciding-5",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A thoughtful silence from {name}. Very professional."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The office fern has been placed on hold."
+      }
+    ]
+  },
+  {
+    "id": "deciding-6",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The office fern has been placed on hold."
+      }
+    ]
+  },
+  {
+    "id": "deciding-7",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has the composure of a seasoned expert!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Or someone who forgot why they opened the calculator."
+      }
+    ]
+  },
+  {
+    "id": "deciding-8",
+    "trigger": "deciding",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Or someone who forgot why they opened the calculator."
+      }
+    ]
+  },
+  {
+    "id": "tip-1",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} says {tip}. Clear, concise, practically a business plan!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "A business plan written on a napkin is still a napkin."
+      }
+    ]
+  },
+  {
+    "id": "tip-2",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "A business plan written on a napkin is still a napkin."
+      }
+    ]
+  },
+  {
+    "id": "tip-3",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A tip from {name}! I love a person with a direction."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "So does a revolving door."
+      }
+    ]
+  },
+  {
+    "id": "tip-4",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "So does a revolving door."
+      }
+    ]
+  },
+  {
+    "id": "tip-5",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{tip} is on the record. Confidence has entered the building!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "It has not signed the visitor book."
+      }
+    ]
+  },
+  {
+    "id": "tip-6",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "It has not signed the visitor book."
+      }
+    ]
+  },
+  {
+    "id": "tip-7",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has spoken! Let the thoughtful decisions begin."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The thoughtful decisions have asked for annual leave."
+      }
+    ]
+  },
+  {
+    "id": "tip-8",
+    "trigger": "tip",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The thoughtful decisions have asked for annual leave."
+      }
+    ]
+  },
+  {
+    "id": "strong-1",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A STRONG tip from {name}! That is confidence with a tie!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The tie is not collateral."
+      }
+    ]
+  },
+  {
+    "id": "strong-2",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The tie is not collateral."
+      }
+    ]
+  },
+  {
+    "id": "strong-3",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has underlined {tip} in permanent marker!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Excellent. The evidence will be legible."
+      }
+    ]
+  },
+  {
+    "id": "strong-4",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Excellent. The evidence will be legible."
+      }
+    ]
+  },
+  {
+    "id": "strong-5",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "STRONG! Even the punctuation believes {name}."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The punctuation has never balanced a budget."
+      }
+    ]
+  },
+  {
+    "id": "strong-6",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The punctuation has never balanced a budget."
+      }
+    ]
+  },
+  {
+    "id": "strong-7",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "I admire {name} putting extra conviction on the line!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The line would like to speak to its manager."
+      }
+    ]
+  },
+  {
+    "id": "strong-8",
+    "trigger": "strong",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The line would like to speak to its manager."
+      }
+    ]
+  },
+  {
+    "id": "chat-1",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has joined the discussion. Teamwork!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The legal department has started taking notes."
+      }
+    ]
+  },
+  {
+    "id": "chat-2",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The legal department has started taking notes."
+      }
+    ]
+  },
+  {
+    "id": "chat-3",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A message from {name}! Communication builds trust."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "So do receipts. One is easier to manufacture."
+      }
+    ]
+  },
+  {
+    "id": "chat-4",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "So do receipts. One is easier to manufacture."
+      }
+    ]
+  },
+  {
+    "id": "chat-5",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "The trading floor is buzzing with valuable insights!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Someone just used an emoji as supporting evidence."
+      }
+    ]
+  },
+  {
+    "id": "chat-6",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Someone just used an emoji as supporting evidence."
+      }
+    ]
+  },
+  {
+    "id": "chat-7",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} is making their voice heard. Inspiring!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The office plant has requested a mute button."
+      }
+    ]
+  },
+  {
+    "id": "chat-8",
+    "trigger": "chat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The office plant has requested a mute button."
+      }
+    ]
+  },
+  {
+    "id": "fast-1",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} locked in fast! Decisiveness pays dividends!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "So does reading the question. In theory."
+      }
+    ]
+  },
+  {
+    "id": "fast-2",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "So does reading the question. In theory."
+      }
+    ]
+  },
+  {
+    "id": "fast-3",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Look at that speed from {name}! A market athlete!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Their second thought is still in the car park."
+      }
+    ]
+  },
+  {
+    "id": "fast-4",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Their second thought is still in the car park."
+      }
+    ]
+  },
+  {
+    "id": "fast-5",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} wasted no time. Efficient capital allocation!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The allocation was to the department of sudden ideas."
+      }
+    ]
+  },
+  {
+    "id": "fast-6",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The allocation was to the department of sudden ideas."
+      }
+    ]
+  },
+  {
+    "id": "fast-7",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A lightning read from {name}! I love the conviction."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Let us hope the receipt is weatherproof."
+      }
+    ]
+  },
+  {
+    "id": "fast-8",
+    "trigger": "fast",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Let us hope the receipt is weatherproof."
+      }
+    ]
+  },
+  {
+    "id": "timeout-1",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} is taking a strategic pause!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "{name} fell asleep at the trading desk."
+      }
+    ]
+  },
+  {
+    "id": "timeout-2",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "{name} fell asleep at the trading desk."
+      }
+    ]
+  },
+  {
+    "id": "timeout-3",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A quiet moment from {name}. Perhaps deep analysis!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Perhaps a very demanding biscuit."
+      }
+    ]
+  },
+  {
+    "id": "timeout-4",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Perhaps a very demanding biscuit."
+      }
+    ]
+  },
+  {
+    "id": "timeout-5",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} let the clock handle the paperwork!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The clock has no professional qualifications."
+      }
+    ]
+  },
+  {
+    "id": "timeout-6",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The clock has no professional qualifications."
+      }
+    ]
+  },
+  {
+    "id": "timeout-7",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "No rush from {name}. Long-term thinking!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "This round was rather explicitly short-term."
+      }
+    ]
+  },
+  {
+    "id": "timeout-8",
+    "trigger": "timeout",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "This round was rather explicitly short-term."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-1",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} is back! The market missed that energy!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Their receipts were here the entire time."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-2",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Their receipts were here the entire time."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-3",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A triumphant return for {name}!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The connection took a brief tea break."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-4",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The connection took a brief tea break."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-5",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} returns with a fresh perspective!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "And exactly the same accepted decisions."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-6",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "And exactly the same accepted decisions."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-7",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "The floor welcomes {name} back with open arms!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The ledger welcomes them back with open tabs."
+      }
+    ]
+  },
+  {
+    "id": "reconnect-8",
+    "trigger": "reconnect",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The ledger welcomes them back with open tabs."
+      }
+    ]
+  },
+  {
+    "id": "grudge-1",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} and {victim} meet again! A chance to rebuild trust!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Last time {victim} lost {loss} coins to that particular plot twist."
+      }
+    ]
+  },
+  {
+    "id": "grudge-2",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Last time {victim} lost {loss} coins to that particular plot twist."
+      }
+    ]
+  },
+  {
+    "id": "grudge-3",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "I believe {victim} can forgive {name}!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The calculator has an excellent memory."
+      }
+    ]
+  },
+  {
+    "id": "grudge-4",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The calculator has an excellent memory."
+      }
+    ]
+  },
+  {
+    "id": "grudge-5",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has another chance to impress {victim}!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The last impression came with a {loss}-coin receipt."
+      }
+    ]
+  },
+  {
+    "id": "grudge-6",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The last impression came with a {loss}-coin receipt."
+      }
+    ]
+  },
+  {
+    "id": "grudge-7",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "History brings people together. How lovely!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "{victim} has bookmarked the page about {name}."
+      }
+    ]
+  },
+  {
+    "id": "grudge-8",
+    "trigger": "grudge",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "{victim} has bookmarked the page about {name}."
+      }
+    ]
+  },
+  {
+    "id": "rating-1",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} is now rated {rating}! A new chapter!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The credit department used its serious stamp."
+      }
+    ]
+  },
+  {
+    "id": "rating-2",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The credit department used its serious stamp."
+      }
+    ]
+  },
+  {
+    "id": "rating-3",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A rating update for {name}! The ticker is alive!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Alive and willing to leave a review."
+      }
+    ]
+  },
+  {
+    "id": "rating-4",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Alive and willing to leave a review."
+      }
+    ]
+  },
+  {
+    "id": "rating-5",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{rating}! I see room for a motivational poster."
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The poster has requested payment in advance."
+      }
+    ]
+  },
+  {
+    "id": "rating-6",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The poster has requested payment in advance."
+      }
+    ]
+  },
+  {
+    "id": "rating-7",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has caught the attention of the ratings desk!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The desk is a chair with a clipboard. It is very thorough."
+      }
+    ]
+  },
+  {
+    "id": "rating-8",
+    "trigger": "rating",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The desk is a chair with a clipboard. It is very thorough."
+      }
+    ]
+  },
+  {
+    "id": "reveal-1",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Breaking News! {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The receipts have completed their dramatic entrance."
+      }
+    ]
+  },
+  {
+    "id": "reveal-2",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The receipts have completed their dramatic entrance."
+      }
+    ]
+  },
+  {
+    "id": "reveal-3",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "The market has spoken: {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Confidence and correctness have filed separate expense reports."
+      }
+    ]
+  },
+  {
+    "id": "reveal-4",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Confidence and correctness have filed separate expense reports."
+      }
+    ]
+  },
+  {
+    "id": "reveal-5",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Here is what the floor learned: {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "A learning opportunity with an unusually specific invoice."
+      }
+    ]
+  },
+  {
+    "id": "reveal-6",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "A learning opportunity with an unusually specific invoice."
+      }
+    ]
+  },
+  {
+    "id": "reveal-7",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "The truth is finally public! {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The rumour department is quietly updating its stationery."
+      }
+    ]
+  },
+  {
+    "id": "reveal-8",
+    "trigger": "reveal",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The rumour department is quietly updating its stationery."
+      }
+    ]
+  },
+  {
+    "id": "end-1",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "The Closing Bell! {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Please collect your reputation from lost property."
+      }
+    ]
+  },
+  {
+    "id": "end-2",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Please collect your reputation from lost property."
+      }
+    ]
+  },
+  {
+    "id": "end-3",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "What a session! {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The coins were fictional. The screenshots may be permanent."
+      }
+    ]
+  },
+  {
+    "id": "end-4",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The coins were fictional. The screenshots may be permanent."
+      }
+    ]
+  },
+  {
+    "id": "end-5",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Our final report is in: {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The office fern declined to comment on the rematch."
+      }
+    ]
+  },
+  {
+    "id": "end-6",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The office fern declined to comment on the rematch."
+      }
+    ]
+  },
+  {
+    "id": "end-7",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "One last bulletin from the floor: {report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The exchange closes. The group chat remains a risk."
+      }
+    ]
+  },
+  {
+    "id": "end-8",
+    "trigger": "end",
+    "priority": "high",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{report}"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The exchange closes. The group chat remains a risk."
+      }
+    ]
+  },
+  {
+    "id": "truth-1",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has told the truth {streak} Insider turns in a row!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "A suspicious amount of honesty. I have made a folder."
+      }
+    ]
+  },
+  {
+    "id": "truth-2",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "A suspicious amount of honesty. I have made a folder."
+      }
+    ]
+  },
+  {
+    "id": "truth-3",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Another truthful streak from {name}! Trust is blooming!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The greenhouse still requires receipts."
+      }
+    ]
+  },
+  {
+    "id": "truth-4",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The greenhouse still requires receipts."
+      }
+    ]
+  },
+  {
+    "id": "truth-5",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} is building a reputation one truthful tip at a time!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The next role is still a fresh draw. Frame the past, not the future."
+      }
+    ]
+  },
+  {
+    "id": "truth-6",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The next role is still a fresh draw. Frame the past, not the future."
+      }
+    ]
+  },
+  {
+    "id": "truth-7",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{streak} honest tips from {name}! Someone call the stationery department!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "We need a certificate and a very small asterisk."
+      }
+    ]
+  },
+  {
+    "id": "truth-8",
+    "trigger": "truth",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "We need a certificate and a very small asterisk."
+      }
+    ]
+  },
+  {
+    "id": "lie-1",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} has kept the plot interesting for {streak} Insider turns!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "That is a generous description of a public lie streak."
+      }
+    ]
+  },
+  {
+    "id": "lie-2",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "That is a generous description of a public lie streak."
+      }
+    ]
+  },
+  {
+    "id": "lie-3",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} knows how to surprise an audience!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The audience would like fewer invoices."
+      }
+    ]
+  },
+  {
+    "id": "lie-4",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The audience would like fewer invoices."
+      }
+    ]
+  },
+  {
+    "id": "lie-5",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{streak} misleading tips in a row. Remarkable consistency!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The ethics committee has moved the meeting closer."
+      }
+    ]
+  },
+  {
+    "id": "lie-6",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The ethics committee has moved the meeting closer."
+      }
+    ]
+  },
+  {
+    "id": "lie-7",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} is a storyteller with commitment!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Unfortunately the ledger is nonfiction."
+      }
+    ]
+  },
+  {
+    "id": "lie-8",
+    "trigger": "lie",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Unfortunately the ledger is nonfiction."
+      }
+    ]
+  },
+  {
+    "id": "allin-1",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} went All In. A bold chapter!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The 300-coin pick lost. The badge is theatrical; the player stays."
+      }
+    ]
+  },
+  {
+    "id": "allin-2",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The 300-coin pick lost. The badge is theatrical; the player stays."
+      }
+    ]
+  },
+  {
+    "id": "allin-3",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "A dramatic bet from {name}! That is ambition!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The ambition has left a small smoking briefcase."
+      }
+    ]
+  },
+  {
+    "id": "allin-4",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The ambition has left a small smoking briefcase."
+      }
+    ]
+  },
+  {
+    "id": "allin-5",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{name} put the whole spotlight on that big bet!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The spotlight survived. The stake did not."
+      }
+    ]
+  },
+  {
+    "id": "allin-6",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The spotlight survived. The stake did not."
+      }
+    ]
+  },
+  {
+    "id": "allin-7",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "An unforgettable market moment for {name}!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Their All In receipt is now suitable for framing."
+      }
+    ]
+  },
+  {
+    "id": "allin-8",
+    "trigger": "allin",
+    "priority": "medium",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Their All In receipt is now suitable for framing."
+      }
+    ]
+  },
+  {
+    "id": "repeat-1",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{company} is back in the headlines! A familiar friend!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The last press release is still being cross-examined."
+      }
+    ]
+  },
+  {
+    "id": "repeat-2",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The last press release is still being cross-examined."
+      }
+    ]
+  },
+  {
+    "id": "repeat-3",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "Another visit from {company}! A developing story!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The plot has acquired a recurring character."
+      }
+    ]
+  },
+  {
+    "id": "repeat-4",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The plot has acquired a recurring character."
+      }
+    ]
+  },
+  {
+    "id": "repeat-5",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "{company} returns! I love a comeback!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "The filing cabinet has prepared a sequel folder."
+      }
+    ]
+  },
+  {
+    "id": "repeat-6",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "The filing cabinet has prepared a sequel folder."
+      }
+    ]
+  },
+  {
+    "id": "repeat-7",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Brad Bull",
+        "text": "We know this company! {company} brings name recognition!"
+      },
+      {
+        "speaker": "Barb Bear",
+        "text": "Recognition is not a recommendation. Ask the office fern."
+      }
+    ]
+  },
+  {
+    "id": "repeat-8",
+    "trigger": "repeat",
+    "priority": "low",
+    "turns": [
+      {
+        "speaker": "Barb Bear",
+        "text": "Recognition is not a recommendation. Ask the office fern."
+      }
+    ]
+  }
+]

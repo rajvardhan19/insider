@@ -21,6 +21,10 @@ const pool: News[] = Array.from({ length: 32 }, (_, i) => ({
   description: "Test fixture",
   headline: "Sales increase.",
   sentiment: "UP",
+  punchlines: {
+    UP: "The test fern got promoted.",
+    DOWN: "The test fern called in wilted.",
+  },
 }));
 function game(names = ["Maya", "Leo", "Priya", "Dev"]) {
   return startGame(
@@ -68,10 +72,10 @@ describe("exact original-v1 document replays", () => {
     expect(
       Object.fromEntries(awards(g).map((a) => [a.title, a.playerIds])),
     ).toEqual({
-      "Best Detective": ["Maya"],
-      "Biggest Bluff": ["Priya"],
-      "Most Trusted": ["Priya"],
-      "Most Fooled": ["Leo"],
+      "The Whistleblower": ["Maya"],
+      "The Pinocchio Prize": ["Priya"],
+      "Suspiciously Honest": ["Priya"],
+      "Golden Gullible": ["Leo"],
     });
     expect(g.players.map((p) => p.record)).toEqual([
       ["Partner (truth)"],
@@ -86,10 +90,10 @@ describe("exact original-v1 document replays", () => {
     expect(
       Object.fromEntries(awards(g).map((a) => [a.title, a.playerIds])),
     ).toEqual({
-      "Best Detective": ["Alex"],
-      "Biggest Bluff": ["Alex"],
-      "Most Trusted": ["Alex"],
-      "Most Fooled": ["Lucy"],
+      "The Whistleblower": ["Alex"],
+      "The Pinocchio Prize": ["Alex"],
+      "Suspiciously Honest": ["Alex"],
+      "Golden Gullible": ["Lucy"],
     });
     expect(g.players[0].record).toEqual(["Partner (truth)", "Shark (lied)"]);
   });

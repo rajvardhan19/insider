@@ -1,3 +1,4 @@
+import { COMEDY } from "@insider/shared";
 import type { Award } from "@insider/shared";
 import type { GameState } from "./state.js";
 import { correctCalls, standings } from "./scoring.js";
@@ -21,18 +22,18 @@ export function awards(g: GameState): Award[] {
     });
   }
   best(
-    "Best Detective",
+    COMEDY.awards.detective,
     "Most correct Shark calls",
     g.players.map((p) => ({ id: p.id, n: correctCalls(g.history, p.id) })),
   );
   best(
-    "Most Trusted",
+    COMEDY.awards.trusted,
     "Highest closing trust price",
     g.players.map((p) => ({ id: p.id, n: p.trust })),
     false,
   );
   best(
-    "Most Fooled",
+    COMEDY.awards.fooled,
     "Most wrong picks against Sharks",
     g.players.map((p) => {
       const outcomes = g.history
@@ -62,7 +63,7 @@ export function awards(g: GameState): Award[] {
     rounds.sort((a, b) => b.n - a.n || b.t - a.t);
     return rounds.slice(0, 1);
   });
-  best("Biggest Bluff", "Largest profitable Shark round", bluffs);
+  best(COMEDY.awards.bluff, "Largest profitable Shark round", bluffs);
   return result;
 }
 export function winners(g: GameState) {

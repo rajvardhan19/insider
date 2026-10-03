@@ -2,6 +2,7 @@ import { createHash, randomBytes, randomInt, randomUUID } from "node:crypto";
 import type { Server, Socket } from "socket.io";
 import {
   BOTS,
+  COMEDY,
   commandSchema,
   entrySchema,
   type Ack,
@@ -13,7 +14,12 @@ import {
   PHRASES,
 } from "@insider/shared";
 
-import { buildPlayerView } from "../game/projection.js";
+import {
+  advanceCommentary,
+  emptyCommentary,
+  type CommentaryState,
+} from "../commentary/engine.js";
+import { buildPlayerView, buildCommentaryFrame } from "../game/projection.js";
 import {
   expire,
   freshPlayer,
@@ -52,6 +58,9 @@ type Room = {
   game?: GameState;
   solo: boolean;
   simulation: boolean;
+  commentary: CommentaryState;
+  reactions: import("@insider/shared").Reaction[];
+  lastReaction: Map<string, number>;
   firstGame: boolean;
   timers: ReturnType<typeof setTimeout>[];
   scheduleKey?: string;
@@ -215,6 +224,9 @@ export class RoomManager {
           cache: new Map(),
           solo: entry.type === "solo",
           simulation: entry.type === "watch",
+          commentary: emptyCommentary(),
+          reactions: [],
+          lastReaction: new Map(),
           firstGame: entry.type === "solo" && entry.firstGame,
           timers: [],
           lastChat: new Map(),
@@ -406,11 +418,34 @@ export class RoomManager {
     if (c.roundId !== (room.game?.round ?? 0))
       return fail("STALE_ROUND", "This round is no longer active.");
     const a = c.action;
-    if (room.simulation && a.type !== "leave" && a.type !== "replay")
+    if (
+      room.simulation &&
+      a.type !== "leave" &&
+      a.type !== "replay" &&
+      a.type !== "reaction"
+    )
       return fail(
         "SPECTATOR_ONLY",
         "You are watching. Only the bots can play in this simulation.",
       );
+    if (a.type === "reaction") {
+      if (room.game?.phase !== "REVEAL")
+        return fail("WRONG_PHASE", COMEDY.messages.reactionPhase);
+      if (this.now() - (room.lastReaction.get(player.id) ?? -Infinity) < 1500)
+        return fail("RATE_LIMITED", COMEDY.messages.reactionLimit);
+      room.lastReaction.set(player.id, this.now());
+      room.reactions = room.reactions
+        .filter((r) => this.now() - r.at < 2500)
+        .slice(-23);
+      room.reactions.push({
+        id: randomUUID(),
+        playerId: player.id,
+        emoji: a.emoji,
+        at: this.now(),
+        round: room.game.round,
+      });
+      return { ok: true };
+    }
     if (a.type === "leave") {
       if (player.socketId) this.bindings.delete(player.socketId);
       if (room.game) {
@@ -446,6 +481,9 @@ export class RoomManager {
       room.game = undefined;
       room.firstGame = false;
       room.lastChat.clear();
+      room.lastReaction.clear();
+      room.reactions = [];
+      room.commentary = emptyCommentary();
       this.clearTimers(room);
       if (room.solo || room.simulation)
         room.game = startGame(
@@ -551,6 +589,11 @@ export class RoomManager {
     this.io.sockets.sockets.get(player.socketId)?.emit("state", view);
   }
   private broadcast(room: Room) {
+    if (room.emptySince === undefined) {
+      const frame = buildCommentaryFrame(room, this.now());
+      if (frame)
+        room.commentary = advanceCommentary(room.commentary, frame, this.now());
+    }
     for (const p of room.players) this.send(room, p);
   }
   private addChat(
@@ -789,7 +832,16 @@ export class RoomManager {
         this.rooms.delete(room.code);
         continue;
       }
-      if (room.emptySince === undefined) this.advance(room);
+      if (room.emptySince === undefined) {
+        this.advance(room);
+        if (
+          room.commentary.queue.length &&
+          now - room.commentary.lastAt >= 2500
+        ) {
+          room.revision++;
+          this.broadcast(room);
+        }
+      }
       const host = room.players.find((p) => p.id === room.hostId);
       if (
         host &&
