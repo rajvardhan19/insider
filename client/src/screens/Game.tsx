@@ -16,14 +16,22 @@ import {
 import {
   BOTS,
   NARRATION_VISIBLE_MS,
+  copy,
   PHRASES,
   type Direction,
   type PlayerView,
   type Stake,
 } from "@insider/shared";
-import { Avatar, Modal, Sparkline, number, signed } from "../components/Common";
+import { Modal, Sparkline, number, signed } from "../components/Common";
 import { save, type Connection } from "../net/connection";
 import { secondsRemaining } from "../net/clock";
+
+import {
+  Credit,
+  GameAvatar,
+  CrashTicker,
+  Reactions,
+} from "../components/Comedy";
 
 type GameProps = { view: PlayerView; connection: Connection; now: number };
 export function Game({ view, connection, now }: GameProps) {
@@ -40,7 +48,7 @@ export function Game({ view, connection, now }: GameProps) {
     ),
     disabled = !connection.ready || connection.busy;
   if (view.phase === "FINAL")
-    return <Final view={view} connection={connection} />;
+    return <Final view={view} connection={connection} now={now} />;
   return (
     <section className={`game-area phase-${view.phase.toLowerCase()}`}>
       <div className="round-bar">
@@ -89,7 +97,7 @@ export function Game({ view, connection, now }: GameProps) {
               className={`player-tile ${p.id === view.insiderId ? "is-insider" : ""}`}
             >
               <div className="avatar-wrap">
-                <Avatar player={p} index={i} small />
+                <GameAvatar view={view} player={p} index={i} now={now} small />
                 {bubble && <span className="chat-bubble">{bubble.text}</span>}
                 {p.submitted && (
                   <span className="locked-badge" aria-label="Locked in">
@@ -98,6 +106,7 @@ export function Game({ view, connection, now }: GameProps) {
                 )}
               </div>
               <strong>{p.id === view.me ? "You" : p.name}</strong>
+              <Credit trust={p.trust} />
               <small>
                 {!p.connected
                   ? "Reconnecting"
@@ -141,7 +150,7 @@ export function Game({ view, connection, now }: GameProps) {
               <Eye size={30} />
             </div>
             <span className="eyebrow">INFORMATION IS POWER</span>
-            <h2>{insider.name} knows something.</h2>
+            <h2>{copy("wait", view.round, { name: insider.name })}</h2>
             <p>
               They know where the stock goes.
               <br />
@@ -188,7 +197,9 @@ export function Game({ view, connection, now }: GameProps) {
             connection={connection}
           />
         ))}
-      {view.phase === "REVEAL" && <Reveal view={view} now={now} />}
+      {view.phase === "REVEAL" && (
+        <Reveal view={view} now={now} connection={connection} />
+      )}
       <div className="game-bottom">
         <span className="note">
           {view.phase === "REVEAL"
@@ -217,7 +228,9 @@ export function Game({ view, connection, now }: GameProps) {
           </button>
         </div>
       )}
-      {drawer && <Scoreboard view={view} onClose={() => setDrawer(false)} />}
+      {drawer && (
+        <Scoreboard view={view} now={now} onClose={() => setDrawer(false)} />
+      )}
       {chat && (
         <Modal title="Work the room." onClose={() => setChat(false)}>
           <p className="note">
@@ -367,7 +380,7 @@ function TipPanel({ view, connection }: Omit<GameProps, "now">) {
           direction && void connection.act({ type: "tip", direction, strong })
         }
       >
-        {connection.busy ? "Submitting…" : "Put your tip on the record"}
+        {connection.busy ? "Submitting…" : copy("tip", view.round)}
         <ArrowUpRight size={18} />
       </button>
       {showTable && (
@@ -459,7 +472,7 @@ function GuessPanel({ view, connection }: Omit<GameProps, "now">) {
                       ? "Raise"
                       : me.allInUsed
                         ? "Used"
-                        : "All In"}
+                        : copy("bigBet", view.round)}
                 </span>
                 <strong>{s}</strong>
                 {s === 300 && <small>once / game</small>}
@@ -491,7 +504,9 @@ function GuessPanel({ view, connection }: Omit<GameProps, "now">) {
               })
             }
           >
-            {connection.busy ? "Locking in…" : "Lock in my read"}
+            {connection.busy
+              ? copy("locking", view.round)
+              : copy("lock", view.round)}
             <LockKeyhole size={16} />
           </button>
         </>
@@ -499,92 +514,75 @@ function GuessPanel({ view, connection }: Omit<GameProps, "now">) {
     </div>
   );
 }
-function Reveal({ view, now }: { view: PlayerView; now: number }) {
+function Reveal({ view, now, connection }: GameProps) {
+  const [math, setMath] = useState(false);
   const r = view.result!,
-    insider = view.players.find((p) => p.id === r.insiderId)!,
-    elapsed = now - r.revealedAt,
-    truth = r.tip.direction === r.direction;
+    insider = view.players.find((p) => p.id === r.insiderId)!;
+  const elapsed = now - r.revealedAt;
+  const fooled = r.outcomes.filter((o) => o.guess && !o.correct).length;
+  const helped = r.outcomes.filter((o) => o.guess && o.correct).length;
+  const moment =
+    r.role === "PARTNER"
+      ? copy("partner", r.round, { name: insider.name, count: helped })
+      : fooled
+        ? copy("fooled", r.round, { name: insider.name, count: fooled })
+        : copy("uncaught", r.round);
   return (
-    <div className="reveal-panel">
-      <div className="market-reveal">
-        <span className="micro">{r.news.company}</span>
-        <h2 className={r.direction === "UP" ? "positive" : "negative"}>
-          {r.direction === "UP" ? (
-            <ArrowUpRight size={36} />
-          ) : (
-            <ArrowDownRight size={36} />
-          )}{" "}
-          MARKET {r.direction}
-        </h2>
-        <svg
-          className={`market-chart ${r.direction === "UP" ? "positive" : "negative"}`}
-          viewBox="0 0 320 42"
-          role="img"
-          aria-label={`The stock moved ${r.direction.toLowerCase()}`}
-        >
-          <path d="M0 35H320M0 8H320" opacity=".15" stroke="currentColor" />
-          <path
-            className="market-move"
-            d={
-              r.direction === "UP"
-                ? "M0 34L34 30L58 33L92 20L127 27L161 13L190 21L220 9L260 15L292 5L320 2"
-                : "M0 4L34 11L58 6L92 20L127 15L161 29L190 21L220 34L260 29L292 38L320 40"
-            }
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <span className="note">
-          The headline was {r.accurate ? "accurate" : "misleading"}.
-        </span>
-      </div>
+    <div className="reveal-panel comedy-reveal">
+      <span className="micro">WHAT ACTUALLY HAPPENED · {r.news.company}</span>
+      <h2 className="punchline">{r.news.punchlines[r.direction]}</h2>
+      <p className="market-outcome">
+        {r.direction === "UP" ? "↗ MARKET UP" : "↘ MARKET DOWN"}
+      </p>
       <div
-        className={`role-reveal reveal-step ${elapsed >= 800 ? "visible" : ""}`}
+        className={`reveal-step ${elapsed >= 800 ? "visible" : ""}`}
+        aria-hidden={elapsed < 800}
       >
-        <span>{insider.name} was a</span>
-        <strong className={r.role === "SHARK" ? "negative" : "positive"}>
-          {r.role === "SHARK" ? "🦈 SHARK" : "◇ PARTNER"}
-        </strong>
-        <span>
-          {truth ? "The tip was true." : "The tip was a lie."} Trust{" "}
-          {signed(r.trustDelta)}
-        </span>
+        <h3 className="big-moment">{moment}</h3>
+        <p>
+          {insider.name} was {r.role === "SHARK" ? "a Shark 🦈" : "a Partner ◇"}
+          .
+        </p>
+        <CrashTicker view={view} now={now} />
       </div>
-      <div
-        className={`round-results reveal-step ${elapsed >= 1700 ? "visible" : ""}`}
-      >
-        {r.outcomes.map((o) => {
-          const player = view.players.find((p) => p.id === o.playerId)!;
-          return (
-            <div
-              className={`result-row ${o.playerId === view.me ? "you" : ""}`}
-              key={o.playerId}
-            >
-              <strong>{o.playerId === view.me ? "You" : player.name}</strong>
-              <span>
-                {o.playerId === r.insiderId
-                  ? "Insider"
-                  : o.satOut
-                    ? "Sat out"
-                    : `${o.guess!.direction} · ${o.guess!.stake}${o.guess!.callShark ? " · 🦈" : ""}`}
-              </span>
-              <b className={o.delta >= 0 ? "positive" : "negative"}>
-                {signed(o.delta)}
-              </b>
+      <div className="reveal-totals reveal-step visible">
+        {view.players.map((p, i) => (
+          <div key={p.id} className="reveal-total">
+            <GameAvatar view={view} player={p} index={i} now={now} small />
+            <div>
+              <strong>{p.id === view.me ? "You" : p.name}</strong>
+              <Credit trust={p.trust} />
             </div>
-          );
-        })}
+            <b>
+              {number(p.coins)} <small>coins</small>
+            </b>
+          </div>
+        ))}
+        {r.outcomes
+          .filter((o) => o.satOut)
+          .map((o, i) => (
+            <p className="note" key={o.playerId}>
+              {copy("timeout", r.round + i, {
+                name: view.players.find((p) => p.id === o.playerId)!.name,
+              })}
+            </p>
+          ))}
       </div>
       <div
         className={`breaking reveal-step ${elapsed >= NARRATION_VISIBLE_MS ? "visible" : ""}`}
       >
-        <span>BREAKING</span>
+        <span>BARB BEAR · BREAKING NEWS</span>
         {elapsed >= NARRATION_VISIBLE_MS && (
           <PublishedNarration text={r.narration} />
         )}
       </div>
+      <Reactions connection={connection} />
+      <button className="text-button" onClick={() => setMath(true)}>
+        {copy("math", 0)}
+      </button>
+      {math && (
+        <Scoreboard view={view} now={now} onClose={() => setMath(false)} math />
+      )}
     </div>
   );
 }
@@ -595,10 +593,14 @@ function PublishedNarration({ text }: { text: string }) {
 }
 function Scoreboard({
   view,
+  now,
   onClose,
+  math = false,
 }: {
   view: PlayerView;
   onClose: () => void;
+  math?: boolean;
+  now: number;
 }) {
   return (
     <Modal title="The trust exchange." onClose={onClose} wide>
@@ -613,10 +615,17 @@ function Scoreboard({
             <div className="score-entry" key={p.id}>
               <div className="spread">
                 <div className="inline">
-                  <Avatar player={p} index={i} small />
+                  <GameAvatar
+                    view={view}
+                    player={p}
+                    index={i}
+                    now={now}
+                    small
+                  />
                   <strong>
                     {p.name}
                     {p.id === view.me ? " (you)" : ""}
+                    <Credit trust={p.trust} />
                   </strong>
                 </div>
                 <strong>
@@ -638,7 +647,7 @@ function Scoreboard({
               <p className="note">
                 {p.record.length
                   ? p.record.join(" → ")
-                  : "No Insider history yet."}
+                  : copy("noRecord", view.round)}
               </p>
             </div>
           ))}
@@ -655,10 +664,10 @@ function Scoreboard({
             </p>
           ))
         ) : (
-          <p className="note">The floor is quiet.</p>
+          <p className="note">{copy("emptyChat", view.round)}</p>
         )}
       </details>
-      <details>
+      <details open={math}>
         <summary>Round receipts</summary>
         {view.history.map((r) => (
           <div key={r.round} className="receipt">
@@ -682,7 +691,7 @@ function Scoreboard({
     </Modal>
   );
 }
-function Final({ view, connection }: Omit<GameProps, "now">) {
+function Final({ view, connection, now }: GameProps) {
   const [drawer, setDrawer] = useState(false);
   useEffect(() => {
     if (!view.spectating) save("insider:hasPlayed", "true");
@@ -716,6 +725,7 @@ function Final({ view, connection }: Omit<GameProps, "now">) {
             {view.winners.length > 1 ? "share the floor." : "takes the market."}
           </em>
         </h1>
+        <p className="micro">BRAD BULL · CLOSING BELL REPORT</p>
         <p>{view.closingReport}</p>
       </div>
       <div className="final-grid">
@@ -728,10 +738,11 @@ function Final({ view, connection }: Omit<GameProps, "now">) {
                   ? "01"
                   : String(i + 1).padStart(2, "0")}
               </span>
-              <Avatar player={p} index={i} small />
+              <GameAvatar view={view} player={p} index={i} now={now} small />
               <strong>
                 {p.name}
                 {p.id === view.me ? " (you)" : ""}
+                <Credit trust={p.trust} />
               </strong>
               <b>
                 {number(p.coins)}
@@ -763,6 +774,7 @@ function Final({ view, connection }: Omit<GameProps, "now">) {
           <div className="panel" key={p.id}>
             <div className="spread">
               <strong>{p.name}</strong>
+              <Credit trust={p.trust} />
               <span className={p.trust >= 100 ? "positive" : "negative"}>
                 {p.trust}
               </span>
@@ -810,7 +822,9 @@ function Final({ view, connection }: Omit<GameProps, "now">) {
           Back home
         </button>
       </div>
-      {drawer && <Scoreboard view={view} onClose={() => setDrawer(false)} />}
+      {drawer && (
+        <Scoreboard view={view} now={now} onClose={() => setDrawer(false)} />
+      )}
     </section>
   );
 }
@@ -818,7 +832,7 @@ function Final({ view, connection }: Omit<GameProps, "now">) {
 export function Watch({ view, connection, now }: GameProps) {
   const [drawer, setDrawer] = useState(false);
   if (view.phase === "FINAL")
-    return <Final view={view} connection={connection} />;
+    return <Final view={view} connection={connection} now={now} />;
   const insider = view.players.find((p) => p.id === view.insiderId)!;
   return (
     <section className="watch-game">
@@ -840,26 +854,29 @@ export function Watch({ view, connection, now }: GameProps) {
             : "The reveal"}{" "}
         · {secondsRemaining(view.phaseStartedAt, view.phaseEndsAt, now)}s
       </p>
-      <div className="watch-roster">
-        {view.players.map((p, i) => (
-          <div className="panel" key={p.id}>
-            <Avatar player={p} index={i} />
-            <strong>{p.name}</strong>
-            <span>
-              {number(p.coins)} coins · Trust {p.trust}
-            </span>
-            <small>
-              {p.id === view.insiderId
-                ? "INSIDER"
-                : p.submitted
-                  ? "Read locked in"
-                  : "Watching the market"}
-            </small>
-          </div>
-        ))}
-      </div>
+      {view.phase !== "REVEAL" && (
+        <div className="watch-roster">
+          {view.players.map((p, i) => (
+            <div className="panel" key={p.id}>
+              <GameAvatar view={view} player={p} index={i} now={now} />
+              <strong>{p.name}</strong>
+              <Credit trust={p.trust} />
+              <span>
+                {number(p.coins)} coins · Trust {p.trust}
+              </span>
+              <small>
+                {p.id === view.insiderId
+                  ? "INSIDER"
+                  : p.submitted
+                    ? "Read locked in"
+                    : "Watching the market"}
+              </small>
+            </div>
+          ))}
+        </div>
+      )}
       {view.phase === "REVEAL" ? (
-        <Reveal view={view} now={now} />
+        <Reveal view={view} now={now} connection={connection} />
       ) : (
         <div className="panel">
           <p className="eyebrow">
@@ -869,7 +886,7 @@ export function Watch({ view, connection, now }: GameProps) {
           <h2>{view.news!.headline}</h2>
           <p>
             {view.phase === "TIP"
-              ? `${insider.name} is preparing a tip. Their role and market direction are private.`
+              ? copy("wait", view.round, { name: insider.name })
               : `${insider.name} says ${view.tip!.direction === "UP" ? "BUY" : "SELL"}${view.tip!.strong ? " — Strong tip" : ""}. ${view.players.filter((p) => p.submitted).length} of ${view.players.length - 1} reads locked in.`}
           </p>
         </div>
@@ -888,7 +905,7 @@ export function Watch({ view, connection, now }: GameProps) {
             </p>
           ))}
         {!view.chat.some((c) => c.round === view.round) && (
-          <p className="note">The bots are sizing each other up.</p>
+          <p className="note">{copy("emptyChat", view.round)}</p>
         )}
       </div>
       <button
@@ -898,7 +915,9 @@ export function Watch({ view, connection, now }: GameProps) {
       >
         Stop watching
       </button>
-      {drawer && <Scoreboard view={view} onClose={() => setDrawer(false)} />}
+      {drawer && (
+        <Scoreboard view={view} now={now} onClose={() => setDrawer(false)} />
+      )}
     </section>
   );
 }

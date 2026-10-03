@@ -32,9 +32,11 @@ export function Avatar({
 export function Sparkline({
   values,
   label,
+  crash = false,
 }: {
   values: number[];
   label: string;
+  crash?: boolean;
 }) {
   const min = Math.min(50, ...values) - 10,
     max = Math.max(120, ...values) + 10,
@@ -44,7 +46,7 @@ export function Sparkline({
     .join(" ");
   return (
     <svg
-      className="sparkline"
+      className={`sparkline ${crash ? "ticker-dropping" : ""}`}
       viewBox="0 0 184 64"
       role="img"
       aria-label={`${label}: ${values.join(", ")}`}

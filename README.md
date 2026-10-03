@@ -50,3 +50,7 @@ See [deployment](docs/deployment.md), [the full release checklist](docs/release-
 - **Watch bots play:** select 2–5 distinct bots and Quick or Full mode. Watch automatic decisions, public tips, chat, reveals, scores and awards without taking a seat. Refresh resumes your spectator session. Stop watching returns home; after the final, replay keeps the selected lineup.
 
 The roster now includes Patient Penny (cautious), Opposite Ollie (headline contrarian), and Risky Rex (aggressive) alongside the original five. Observer sessions never receive unrevealed secrets and cannot submit gameplay actions.
+
+### Comedy and commentary
+
+Reveals now lead with fictional news punchlines and big moments. Open **See the math** for the complete scoring breakdown. Settings offers **OFF**, **BIG MOMENTS**, **NORMAL**, and **CHATTY** commentary, remembered per browser. Brad Bull and Barb Bear only receive public information; turning captions off still leaves the reveal news report visible. Reactions and dramatic badges are cosmetic. See [comedy behavior and content](docs/comedy.md).

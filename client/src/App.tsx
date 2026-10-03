@@ -1,4 +1,4 @@
-import { Component, useEffect, useState, type ReactNode } from "react";
+import { Component, useEffect, useState, useRef, type ReactNode } from "react";
 import {
   ArrowRight,
   BookOpen,
@@ -7,6 +7,7 @@ import {
   Volume2,
   VolumeX,
   RefreshCw,
+  Settings,
 } from "lucide-react";
 import { useConnection, readSaved, save } from "./net/connection";
 import { Home } from "./screens/Home";
@@ -14,6 +15,8 @@ import { Lobby } from "./screens/Lobby";
 import { Game, Watch } from "./screens/Game";
 import { Modal } from "./components/Common";
 
+import { COMMENTARY_LEVELS, type CommentaryLevel } from "@insider/shared";
+import { CaptionBar, ReactionSky } from "./components/Comedy";
 let audio: AudioContext | undefined;
 function unlockAudio() {
   try {
@@ -23,8 +26,26 @@ function unlockAudio() {
     /* Sound is optional. */
   }
 }
-function tone(kind: "lock" | "reveal" | "win") {
+function tone(kind: "lock" | "reveal" | "win" | "crash") {
   if (!audio || audio.state !== "running") return;
+  if (kind === "crash") {
+    [294, 277, 262, 196].forEach((pitch, i) => {
+      const osc = audio!.createOscillator(),
+        gain = audio!.createGain(),
+        at = audio!.currentTime + i * 0.25;
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(pitch, at);
+      osc.frequency.exponentialRampToValueAtTime(pitch * 0.8, at + 0.3);
+      gain.gain.setValueAtTime(0.0001, at);
+      gain.gain.exponentialRampToValueAtTime(0.06, at + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, at + 0.32);
+      osc.connect(gain);
+      gain.connect(audio!.destination);
+      osc.start(at);
+      osc.stop(at + 0.34);
+    });
+    return;
+  }
   const pitches =
     kind === "win" ? [523, 659, 784] : kind === "reveal" ? [330, 494] : [660];
   pitches.forEach((pitch, i) => {
@@ -45,6 +66,20 @@ function tone(kind: "lock" | "reveal" | "win") {
 function App() {
   const connection = useConnection(),
     view = connection.view;
+  const [settings, setSettings] = useState(false);
+  const [commentaryLevel, setCommentaryLevel] = useState<CommentaryLevel>(
+    () => {
+      const saved = readSaved("insider:commentary", "NORMAL");
+      return COMMENTARY_LEVELS.includes(saved as CommentaryLevel)
+        ? (saved as CommentaryLevel)
+        : "NORMAL";
+    },
+  );
+  useEffect(
+    () => save("insider:commentary", commentaryLevel),
+    [commentaryLevel],
+  );
+  const lastSound = useRef("");
   const [soloName, setSoloName] = useState("");
   const [help, setHelp] = useState<"read" | "solo" | null>(null),
     [theme, setTheme] = useState(() =>
@@ -65,10 +100,17 @@ function App() {
   }, [theme]);
   useEffect(() => save("insider:muted", String(muted)), [muted]);
   useEffect(() => {
-    if (!muted) {
-      if (view?.phase === "FINAL") tone("win");
-      else if (view?.phase === "REVEAL") tone("reveal");
-      else if (view?.ownGuess) tone("lock");
+    const key = `${view?.gameId}:${view?.round}:${view?.phase}:${Boolean(view?.ownGuess)}`;
+    if (lastSound.current === key) return;
+    lastSound.current = key;
+    if (!muted && view) {
+      if (view.phase === "FINAL") tone("win");
+      else if (
+        view.phase === "REVEAL" &&
+        Date.now() + connection.offset - view.phaseStartedAt < 2000
+      )
+        tone(view.result && view.result.trustDelta <= -30 ? "crash" : "reveal");
+      else if (view.ownGuess) tone("lock");
     }
   }, [view?.phase, Boolean(view?.ownGuess), view?.round, view?.gameId, muted]);
   const now = tick + connection.offset;
@@ -104,6 +146,13 @@ function App() {
           IN<span>S</span>IDER<span className="dot">.</span>
         </button>
         <div className="header-actions">
+          <button
+            className="icon-button"
+            onClick={() => setSettings(true)}
+            aria-label="Settings"
+          >
+            <Settings size={18} />
+          </button>
           <span
             className={`connection ${connection.connected ? "" : "negative"}`}
           >
@@ -176,6 +225,62 @@ function App() {
       ) : (
         <Game key={view.gameId} view={view} connection={connection} now={now} />
       )}
+      {view?.gameId && (
+        <>
+          <CaptionBar
+            key={view.gameId}
+            view={view}
+            now={now}
+            level={commentaryLevel}
+          />
+          <ReactionSky view={view} now={now} />
+        </>
+      )}
+      {settings && (
+        <Modal
+          title="Your trading preferences"
+          onClose={() => setSettings(false)}
+        >
+          <label className="toggle-row">
+            <input
+              type="checkbox"
+              checked={commentaryLevel !== "OFF"}
+              onChange={(e) =>
+                setCommentaryLevel(e.target.checked ? "NORMAL" : "OFF")
+              }
+            />{" "}
+            Commentary on/off
+          </label>
+          <fieldset className="commentary-settings">
+            <legend>Commentary level</legend>
+            {COMMENTARY_LEVELS.map((level) => (
+              <label key={level}>
+                <input
+                  type="radio"
+                  name="commentary-level"
+                  value={level}
+                  checked={commentaryLevel === level}
+                  onChange={() => setCommentaryLevel(level)}
+                />
+                {level}
+              </label>
+            ))}
+          </fieldset>
+          <p className="note">
+            Big Moments: major events. Normal: major events and occasional
+            banter, at most every 5 seconds. Chatty: all banter, every 2–3
+            seconds. Off: the reveal punchline and news reports still appear.
+          </p>
+          <label className="toggle-row">
+            <input
+              type="checkbox"
+              checked={muted}
+              onChange={(e) => setMuted(e.target.checked)}
+            />{" "}
+            Mute sounds
+          </label>
+        </Modal>
+      )}
       <footer>
         <span>FICTIONAL STOCKS. REAL SUSPICIONS.</span>
         <span>
@@ -230,6 +335,30 @@ function App() {
                 closing bell wins.
               </p>
             </div>
+          </div>
+          <div className="tutorial-comedy">
+            <h3>The drama is cosmetic. The receipts are real.</h3>
+            <p>
+              Reveals lead with what actually happened. Tap “See the math” for
+              every coin change. Throw 🍅, 😂 or 🦈 during reveals; everyone
+              sees your reaction, with a short cooldown.
+            </p>
+            <p>
+              A revealed Shark grows fins. Losing a 300-coin All In earns a
+              dramatic BANKRUPT badge through the next round. It does not mean
+              zero coins, change your balance, or eliminate you. Large trust
+              falls get a sad trombone; mute it in Settings.
+            </p>
+            <p>
+              Credit ratings describe past trust: AAA: Saint (140+), A: Probably
+              Fine (110–139), B: Unrated Mystery (90–109), C: Junk Bond (60–89),
+              Known Fraud (below 60). They never reveal this round’s motive.
+            </p>
+            <p>
+              Brad Bull and Barb Bear comment only on public events. Choose Off,
+              Big Moments, Normal or Chatty in Settings at any time. Your
+              preference stays in this browser.
+            </p>
           </div>
           <details>
             <summary>The fine print: Insider payouts & trust</summary>

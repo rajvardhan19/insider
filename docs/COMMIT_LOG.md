@@ -120,3 +120,19 @@ Verified: name-entry checkpoint passed 61 tests; expanded-roster checkpoint pass
 - Watching a final does not mark the observer as having completed their first solo game.
 
 Verified: 67 tests pass plus build/bundle/production smoke checks. Deterministic runtime verification finishes a five-bot match using real bot policies, confirms all guesses were submitted, reconnects the observer, tests privacy/authorization, replays with reset balances, and cleans up abandoned simulations. Local browser checks verify the blank name prompt, eight-bot picker, four-bot startup, automatic progression, spectator refresh recovery, and scoreboard. The browser simulation reached FINAL, replayed with reset balances, and returned home; custom-name lobby creation and adding a new personality also passed.
+
+## 13 — Public comedy pipeline and reveal reactions
+
+- Added two outcome-specific punchlines to all 150 news entries, 128 Brad Bull / Barb Bear templates, data-driven microcopy, five new quick-chat phrases, credit ratings, and comedic award labels.
+- Added a public-only commentary projection, callback memory, priority queue, stale-event expiry, and browser-level filtering/throttling. Hidden current-round roles, directions, accuracy, and selections never enter the commentary module.
+- Added authenticated reveal reactions with command idempotency, a 1.5-second per-seat cooldown, and synchronized snapshots. Cosmetic events do not touch the engine or deadlines.
+- Original numeric scoring and replay assertions remain unchanged. New trust-style chat phrases use the existing non-stacking trust modifier.
+
+## 14 — Punchline-first reveals and player controls
+
+- Reveals lead with the outcome joke, big moments, and new totals; detailed scoring is behind See the math.
+- Added Shark avatars, lost-All-In explosions and temporary BANKRUPT badges, animated trust crashes, mute-aware sad trombone, and flying emoji reactions. Reduced-motion styles provide static alternatives.
+- Added browser-saved OFF / BIG MOMENTS / NORMAL / CHATTY preferences, live captions in solo and watch modes, credit labels, refreshed tutorial, and screenshots.
+- BANKRUPT is cosmetic and lasts through the following round; a trust fall of 30 or more triggers the presentation effect. Neither changes any rule.
+
+Verification details and human-playtest follow-up: see `playtest-log.md` and `comedy.md`.

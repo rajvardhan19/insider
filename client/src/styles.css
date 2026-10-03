@@ -516,7 +516,7 @@ footer .text-button {
   font-size: 12px;
   margin: 16px 0;
 }
-.modal input:not([type="checkbox"]) {
+.modal input:not([type="checkbox"]):not([type="radio"]) {
   width: 100%;
   margin-top: 8px;
   background: var(--bg);
@@ -1985,7 +1985,7 @@ details p {
   align-items: center;
   gap: 12px;
   padding: 10px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 10px;
   cursor: pointer;
 }
@@ -2024,4 +2024,234 @@ details p {
 }
 .watch-game .reveal-panel {
   width: 100%;
+}
+
+/* Comedy is presentation only. Totals and receipts remain authoritative. */
+.credit-rating {
+  display: block;
+  font-size: 10px;
+  line-height: 1.35;
+  color: var(--muted);
+  margin: 3px 0;
+}
+.comedy-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.shark-avatar {
+  font-size: 28px;
+  background: #bbe0e3;
+}
+.shark-morph {
+  display: inline-flex;
+  animation: shark-morph 0.8s ease-out both;
+}
+@keyframes shark-morph {
+  0% {
+    transform: scale(0.5) rotateY(180deg);
+    filter: blur(5px);
+  }
+  65% {
+    transform: scale(1.3) rotateY(0);
+  }
+  100% {
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+.allin-explosion {
+  position: absolute;
+  font-size: 54px;
+  pointer-events: none;
+  animation: allin-burst 1.35s ease-out both;
+  z-index: 3;
+}
+@keyframes allin-burst {
+  0% {
+    transform: scale(0.1) rotate(-25deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.7) rotate(15deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.2) rotate(-10deg);
+  }
+}
+.bankrupt-badge {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-7deg);
+  padding: 2px 5px;
+  border: 1px solid #ff826e;
+  border-radius: 3px;
+  color: #ff826e;
+  background: var(--bg);
+  font-size: 8px;
+  font-weight: 800;
+  white-space: nowrap;
+  z-index: 4;
+}
+.comedy-reveal {
+  padding: 20px;
+  text-align: left;
+}
+.comedy-reveal .punchline {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(23px, 3.4vw, 36px);
+  letter-spacing: -0.035em;
+  line-height: 1.16;
+  margin: 12px 0;
+}
+.market-outcome {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+}
+.big-moment {
+  margin: 14px 0 5px;
+  font-size: 20px;
+}
+.reveal-totals {
+  display: grid;
+  gap: 12px;
+  padding: 16px 0;
+}
+.reveal-total {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+}
+.reveal-total > b {
+  font-size: 22px;
+}
+.reveal-total b small {
+  font-size: 11px;
+  font-weight: 400;
+}
+.reaction-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+.reaction-buttons button {
+  font-size: 26px;
+  min-width: 60px;
+  min-height: 48px;
+}
+.reaction-sky {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+}
+.flying-reaction {
+  position: absolute;
+  left: -70px;
+  font-size: 46px;
+  animation: reaction-flight 2.5s linear both;
+}
+@keyframes reaction-flight {
+  0% {
+    transform: translateX(0) rotate(-20deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw + 140px)) rotate(70deg);
+    opacity: 0;
+  }
+}
+.trust-crash {
+  padding: 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, #ff826e 8%, transparent);
+  color: var(--red);
+}
+.trust-crash .sparkline {
+  height: 55px;
+  max-width: 250px;
+}
+.ticker-dropping polyline {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: ticker-drop 1.6s ease-in both;
+}
+@keyframes ticker-drop {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.caption-bar {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.caption-bar p {
+  margin: 3px 0;
+}
+.caption-bar strong {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--green);
+}
+.commentary-settings {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+}
+.commentary-settings label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+}
+.commentary-settings input {
+  width: 20px;
+  height: 20px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shark-morph {
+    animation: none !important;
+    transform: none;
+  }
+  .allin-explosion {
+    animation: none !important;
+    font-size: 24px;
+    top: -10px;
+    right: -10px;
+  }
+  .ticker-dropping polyline {
+    animation: none !important;
+    stroke-dashoffset: 0;
+  }
+  .flying-reaction {
+    animation: none !important;
+    left: auto;
+    right: 20px;
+    opacity: 1;
+    font-size: 32px;
+  }
 }

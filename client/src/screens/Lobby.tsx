@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, Check, Copy, Plus, Users, X } from "lucide-react";
-import { BOTS, type Personality, type PlayerView } from "@insider/shared";
+import { Credit } from "../components/Comedy";
+import { BOTS, copy, type Personality, type PlayerView } from "@insider/shared";
 import { Avatar, Modal } from "../components/Common";
 import type { Connection } from "../net/connection";
 
@@ -15,7 +16,7 @@ export function Lobby({
     [copied, setCopied] = useState(false);
   const host = view.me === view.hostId,
     disabled = !connection.ready || connection.busy;
-  async function copy() {
+  async function copyLink() {
     try {
       await navigator.clipboard.writeText(`${location.origin}/r/${view.code}`);
       setCopied(true);
@@ -56,6 +57,7 @@ export function Lobby({
                     {p.name}
                     {p.id === view.me ? " (you)" : ""}
                   </strong>
+                  <Credit trust={p.trust} />
                   <small>
                     {p.bot
                       ? "Bot · " + BOTS[p.bot].description
@@ -91,7 +93,9 @@ export function Lobby({
                 onClick={() => setBots(true)}
               >
                 <Plus size={18} />{" "}
-                {host ? "Add a bot to the table" : "Waiting for more players"}
+                {host
+                  ? "Add a bot to the table"
+                  : copy("emptyLobby", view.revision)}
               </button>
             )}
           </div>
@@ -100,7 +104,7 @@ export function Lobby({
           <div className="panel invite">
             <span className="micro">YOUR PRIVATE ROOM</span>
             <strong className="room-code">{view.code}</strong>
-            <button className="secondary full" onClick={() => void copy()}>
+            <button className="secondary full" onClick={() => void copyLink()}>
               {copied ? <Check size={17} /> : <Copy size={17} />}{" "}
               {copied ? "Link copied" : "Copy invite link"}
             </button>
@@ -129,7 +133,9 @@ export function Lobby({
               disabled={!host || disabled || view.players.length < 2}
               onClick={() => void connection.act({ type: "start" })}
             >
-              {host ? "Ring the opening bell" : "Waiting for the host"}
+              {host
+                ? "Ring the opening bell"
+                : copy("emptyLobby", view.revision)}
               <ArrowRight size={18} />
             </button>
           </div>
