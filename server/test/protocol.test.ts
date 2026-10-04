@@ -107,7 +107,7 @@ describe("original-v1 rules", () => {
       expect(quick % players).toBe(0);
     },
   );
-  it("preserves the original scoring, signals, and timer settings", () => {
+  it("preserves original scoring and signals with discussion timers", () => {
     expect(RULES).toMatchObject({
       version: "original-v1",
       startingCoins: 1000,
@@ -118,8 +118,8 @@ describe("original-v1 rules", () => {
       wrongCall: -150,
       accuracy: 0.6,
       sharkChance: 0.5,
-      quickMs: 20000,
-      fullMs: 30000,
+      tipMs: 60000,
+      guessMs: 120000,
       revealMs: 8000,
     });
   });

@@ -149,3 +149,9 @@ Verification details and human-playtest follow-up: see `playtest-log.md` and `co
 - Deployed `fe1c033` from `feature-branch` to https://insider-playtest.onrender.com on free Render compute; auto-deploy remains Off.
 - Added a reusable public smoke check for two-player joining, role privacy, a complete round, synced reactions, and reconnect. It passed against the live deployment and removed its test seats.
 - Verified browser bot play and live captions on the public URL, saved a screenshot, and recorded operational details. This commit contains verification tooling/documentation; no application behavior changed and no redeploy is needed.
+
+## 17 — Longer discussion and Insider decision windows
+
+- Insider signal selection now allows 60 seconds; discussion/guessing allows 120 seconds in Quick and Full games. Round counts and scoring remain unchanged.
+- Existing early completion remains: posting the tip starts discussion, and the last locked guess starts reveal. Tutorial explains the new limits.
+- Added deadline-boundary checks for both modes and updated the bot simulation's virtual-time allowance.

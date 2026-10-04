@@ -109,7 +109,7 @@ it("runs a real bot-only match, protects secrets from the observer, reconnects a
       replacement.entry({ type: "rejoin", code: ack.code, token: ack.token }),
     ).toMatchObject({ ok: true });
     expect(replacement.view.me).toBe(viewer.view.me);
-    await vi.advanceTimersByTimeAsync(300000);
+    await vi.advanceTimersByTimeAsync(5 * (60000 + 120000 + 8000));
     expect(replacement.view.phase).toBe("FINAL");
     expect(replacement.view.history).toHaveLength(5);
     expect(

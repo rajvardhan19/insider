@@ -266,3 +266,28 @@ describe("secret-preserving projections", () => {
     expect(view(g, "Maya").secrets).toBeUndefined();
   });
 });
+
+it.each(["QUICK", "FULL"] as const)(
+  "gives %s games 60s for tips and 120s for discussion/guesses",
+  (mode) => {
+    let g = startGame(
+      [freshPlayer("a", "Alex"), freshPlayer("b", "Blair")],
+      mode,
+      "timers",
+      31,
+      1000,
+      pool,
+    );
+    expect(g.phaseEndsAt - g.phaseStartedAt).toBe(60000);
+    expect(expire(g, 60999, pool).phase).toBe("TIP");
+    g = submitTip(
+      g,
+      g.current.insiderId,
+      { direction: "UP", strong: false },
+      60999,
+    );
+    expect(g.phaseEndsAt - g.phaseStartedAt).toBe(120000);
+    expect(expire(g, g.phaseEndsAt - 1, pool).phase).toBe("GUESS");
+    expect(expire(g, g.phaseEndsAt, pool).phase).toBe("REVEAL");
+  },
+);

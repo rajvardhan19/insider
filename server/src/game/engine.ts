@@ -98,7 +98,7 @@ export function startRound(
   };
   g.phase = "TIP";
   g.phaseStartedAt = now;
-  g.phaseEndsAt = now + (g.mode === "QUICK" ? R.quickMs : R.fullMs);
+  g.phaseEndsAt = now + R.tipMs;
   return { ...g, current };
 }
 export function opposite(d: "UP" | "DOWN") {
@@ -122,7 +122,7 @@ export function submitTip(
   g.current.tip = { direction: tip.direction, strong: tip.strong };
   g.phase = "GUESS";
   g.phaseStartedAt = now;
-  g.phaseEndsAt = now + (g.mode === "QUICK" ? R.quickMs : R.fullMs);
+  g.phaseEndsAt = now + R.guessMs;
   return g;
 }
 export function submitGuess(

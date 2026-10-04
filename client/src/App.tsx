@@ -339,6 +339,12 @@ function App() {
           <div className="tutorial-comedy">
             <h3>The drama is cosmetic. The receipts are real.</h3>
             <p>
+              The Insider has up to 60 seconds to choose BUY or SELL. Then
+              everyone has up to 120 seconds to discuss and lock in a guess. The
+              reveal starts once everyone locks in. These timers apply in Quick
+              and Full games.
+            </p>
+            <p>
               Reveals lead with what actually happened. Tap “See the math” for
               every coin change. Throw 🍅, 😂 or 🦈 during reveals; everyone
               sees your reaction, with a short cooldown.
