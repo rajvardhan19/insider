@@ -70,3 +70,7 @@ node scripts/smoke-public.mjs https://insider-playtest.onrender.com
 ```
 
 This creates two temporary test seats and removes them on success. Run between playtests. Real-device/mobile-data testing remains for the human session. Share the homepage, create a room, and share its room link/code with friends. A free-host wake-up may need around a minute; use Reconnect if the initial connection times out.
+
+### Timer update — October 4, 2026
+
+Live application commit: `029abd4`. Insider decisions allow 60 seconds and discussion/guessing allows 120 seconds in both modes. Public smoke verifies those server timestamps. Verification-only commits after this application commit do not require redeployment.

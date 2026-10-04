@@ -38,3 +38,9 @@ Try a multiplayer game with mixed commentary levels, then a solo and bot-watch m
 - Public integration check passed: health over HTTPS, room deep link, two-player WebSockets, hidden role isolation, tip/guess/reveal, cross-player emoji reaction, and token-based reconnect. Test seats removed.
 - Browser recovered after Reconnect, started a bot simulation, reached a punchline reveal with live commentary, then returned to the homepage. Saved `screenshots/public-playtest.jpg`.
 - Human fun/clarity testing and actual phone/mobile-data access remain unverified.
+
+## October 4, 2026 — discussion timer deployment
+
+- Deployed `029abd4`: Insider TIP deadline 60,000 ms; discussion/GUESS deadline 120,000 ms in both modes. Early submission behavior is unchanged.
+- All 94 tests and production checks pass. Public smoke passed with explicit assertions for the live 60/120-second deadlines, along with multiplayer, reactions, and reconnect.
+- Public tutorial verified and screenshot saved as `screenshots/discussion-timers.jpg`.

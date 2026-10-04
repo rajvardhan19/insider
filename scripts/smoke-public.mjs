@@ -37,14 +37,12 @@ async function enter(s, input) {
 }
 async function act(s, action) {
   const v = views.get(s);
-  const ack = await s
-    .timeout(10000)
-    .emitWithAck("command", {
-      commandId: randomUUID(),
-      gameId: v.gameId,
-      roundId: v.round,
-      action,
-    });
+  const ack = await s.timeout(10000).emitWithAck("command", {
+    commandId: randomUUID(),
+    gameId: v.gameId,
+    roundId: v.round,
+    action,
+  });
   assert.equal(ack.ok, true, ack.message);
 }
 const watchdog = setTimeout(() => {
@@ -75,6 +73,10 @@ try {
   assert.match(await page.text(), /<div id="root"><\/div>/);
   await act(host, { type: "start" });
   await until(() => views.get(guest)?.phase === "TIP");
+  assert.equal(
+    views.get(guest).phaseEndsAt - views.get(guest).phaseStartedAt,
+    60000,
+  );
   const insider =
     views.get(host).insiderId === views.get(host).me ? host : guest;
   const guesser = insider === host ? guest : host;
@@ -85,6 +87,10 @@ try {
     strong: false,
   });
   await until(() => views.get(guesser)?.phase === "GUESS");
+  assert.equal(
+    views.get(guesser).phaseEndsAt - views.get(guesser).phaseStartedAt,
+    120000,
+  );
   await act(guesser, {
     type: "guess",
     direction: "UP",
