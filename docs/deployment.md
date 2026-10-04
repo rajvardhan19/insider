@@ -54,3 +54,19 @@ Render's free service sleeps after 15 minutes without inbound HTTP/WebSocket tra
 After deployment, verify the actual HTTPS URL, `/health`, direct room links, two-player joining, reactions, and reconnect before sharing it. The Blueprint is deployment preparation; a live URL is only confirmed after those checks. If you add a custom domain later, update the start command's `PUBLIC_ORIGIN` to that domain.
 
 References: [Render free services](https://render.com/docs/free), [WebSockets](https://render.com/docs/websocket), [Blueprint specification](https://render.com/docs/blueprint-spec), [platform environment variables](https://render.com/docs/environment-variables).
+
+## Live friends playtest
+
+Public game: **https://insider-playtest.onrender.com**
+
+Deployed from `feature-branch` commit `fe1c033` on October 3, 2026, using Render's free Node service in Virginia. The dashboard service is `srv-db0obvnavr4c738kri7g`. It was created from the public repository with settings matching `render.yaml`; it is not a linked Blueprint. Auto-deploy is Off. Updating the YAML alone does not change this existing service: update its dashboard settings if needed.
+
+Public verification completed: HTTPS health, direct room-link HTML, two distinct WebSocket players, private role projection, tip/guess/reveal, synchronized emoji reaction, and authenticated reconnect. Temporary smoke-test seats were removed. Browser verification on October 4 reached a public bot-game reveal with live captions and returned home.
+
+Repeat the public integration check with:
+
+```sh
+node scripts/smoke-public.mjs https://insider-playtest.onrender.com
+```
+
+This creates two temporary test seats and removes them on success. Run between playtests. Real-device/mobile-data testing remains for the human session. Share the homepage, create a room, and share its room link/code with friends. A free-host wake-up may need around a minute; use Reconnect if the initial connection times out.

@@ -31,3 +31,10 @@ Do not infer understanding, fun, strategic balance, or willingness to replay fro
 ### Suggested human playtest
 
 Try a multiplayer game with mixed commentary levels, then a solo and bot-watch match. Include Strong tips, a lost All In, a trust crash, emoji reactions from two players, a reconnect, mute/unmute, and switching caption levels mid-round. Confirm the badge clears after the following round and the math remains understandable behind its disclosure. Record jokes that feel repetitive, captions arriving too late, and effects that obscure decisions. No scoring or timing rule changes were made for this update.
+
+## October 4, 2026 — public deployment verification
+
+- Render reported the `fe1c033` deployment live at https://insider-playtest.onrender.com; free compute, Virginia, automatic deploys Off.
+- Public integration check passed: health over HTTPS, room deep link, two-player WebSockets, hidden role isolation, tip/guess/reveal, cross-player emoji reaction, and token-based reconnect. Test seats removed.
+- Browser recovered after Reconnect, started a bot simulation, reached a punchline reveal with live commentary, then returned to the homepage. Saved `screenshots/public-playtest.jpg`.
+- Human fun/clarity testing and actual phone/mobile-data access remain unverified.
