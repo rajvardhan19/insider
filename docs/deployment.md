@@ -77,7 +77,7 @@ Live application commit: `029abd4`. Insider decisions allow 60 seconds and discu
 
 ### Larger groups update — October 5, 2026
 
-Live application commit: `f9529ff`. Rooms support 20 seats, hosts select 1–20 Insider turns per player, and bot watch supports all eight personalities. Quick/Full presets remain available; custom games preserve equal turns. Existing 60/120-second phase timers remain unchanged.
+Live application commit: `09f5a6c`. Rooms support 20 seats, hosts select 1–6 Insider turns per player, and bot watch supports all eight personalities. Quick/Full presets remain available; custom games preserve equal turns. Existing 60/120-second phase timers remain unchanged.
 
 The public twenty-client check passed against this deployment:
 

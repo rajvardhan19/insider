@@ -53,3 +53,8 @@ Try a multiplayer game with mixed commentary levels, then a solo and bot-watch m
 - These are synthetic checks; a real 20-person playtest on the free server is still needed to assess responsiveness and discussion pacing.
 
 Public follow-up: Render deployed `f9529ff` successfully. The 20-client public smoke passed with custom turns and unchanged phase timers, then removed its test seats. Browser confirmed the live custom choice and that adding a bot updated five turns each to ten total rounds. Saved `public-custom-rounds.jpg`.
+
+## October 5, 2026 — six-turn selector
+
+- Deployed `09f5a6c` after all 99 tests, typecheck, lint, build, bundle checks, and production smoke passed.
+- Live lobby options verified as “1 turn each” through “6 turns each,” without round totals in the options. Removed the temporary test seat afterward. Screenshot: `screenshots/six-turn-limit.jpg`.
