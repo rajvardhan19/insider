@@ -301,7 +301,7 @@ export function Home({
                       (_, i) => i + 1,
                     ).map((n) => (
                       <option value={n} key={n}>
-                        {n} turns each
+                        {n} {n === 1 ? "turn" : "turns"} each
                       </option>
                     ))}
                   </select>

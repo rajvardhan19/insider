@@ -1,6 +1,6 @@
 import type { Mode } from "./protocol.js";
 export const MAX_PLAYERS = 20;
-export const MAX_INSIDER_TURNS = 20;
+export const MAX_INSIDER_TURNS = 6;
 export const MAX_ROUNDS = MAX_PLAYERS * MAX_INSIDER_TURNS;
 export function sessionRounds(
   count: number,

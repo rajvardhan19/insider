@@ -509,15 +509,15 @@ it("shares custom turns, protects host settings, and keeps twenty players in a s
     await enter(s, { type: "join", name: `Player ${i}`, code });
   }
   expect(
-    await command(guests[0], { type: "rounds", insiderTurns: 8 }),
+    await command(guests[0], { type: "rounds", insiderTurns: 6 }),
   ).toMatchObject({ ok: false, code: "NOT_HOST" });
   expect(
-    await command(host, { type: "rounds", insiderTurns: 8 }),
+    await command(host, { type: "rounds", insiderTurns: 6 }),
   ).toMatchObject({ ok: true });
-  await until(() => views.get(guests[18])?.insiderTurns === 8);
+  await until(() => views.get(guests[18])?.insiderTurns === 6);
   await command(host, { type: "start" });
   await until(() => views.get(guests[18])?.phase === "TIP");
-  expect(views.get(host)?.totalRounds).toBe(160);
+  expect(views.get(host)?.totalRounds).toBe(120);
   expect(
     await command(host, { type: "rounds", insiderTurns: 1 }),
   ).toMatchObject({ ok: false, code: "WRONG_PHASE" });

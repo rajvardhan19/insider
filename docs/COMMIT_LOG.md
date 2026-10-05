@@ -164,3 +164,8 @@ Verification details and human-playtest follow-up: see `playtest-log.md` and `co
 - The news deck recycles only after exhausting all entries. Timers, payouts, and equal Insider rotation remain unchanged.
 - Large player rosters wrap into readable tiles. Updated entry copy and tutorial.
 - Verification: 99 tests passed including 20-client synchronized reveal, admission boundaries, custom settings, reconnect/replay, eight-bot simulation, and a complete 400-round engine run. Browser checked a 20-seat/60-round lobby and persisted selection after refresh; 375px game layout has no horizontal overflow.
+
+## October 5, 2026 — simpler turn selection
+
+- Custom turn options read “1 turn each” through “6 turns each,” without total rounds inside each option. The lobby still shows the total below the selector.
+- The shared limit is six turns per player/bot, enforced by the protocol and engine; up to 20 players and 120 rounds. Quick/Full presets and scoring stay unchanged.

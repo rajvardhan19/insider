@@ -151,8 +151,7 @@ export function Lobby({
               {Array.from({ length: MAX_INSIDER_TURNS }, (_, i) => i + 1).map(
                 (n) => (
                   <option key={n} value={n}>
-                    {n} {n === 1 ? "turn" : "turns"} each ·{" "}
-                    {view.players.length * n} rounds
+                    {n} {n === 1 ? "turn" : "turns"} each
                   </option>
                 ),
               )}

@@ -125,8 +125,8 @@ describe("original-v1 rules", () => {
   });
 });
 
-it("validates custom turns and commands throughout a 400-round game", () => {
-  for (const n of [1, 20])
+it("validates custom turns and commands throughout a 120-round game", () => {
+  for (const n of [1, 6])
     expect(
       commandSchema.safeParse({
         commandId: "rounds-test",
@@ -135,7 +135,7 @@ it("validates custom turns and commands throughout a 400-round game", () => {
         action: { type: "rounds", insiderTurns: n },
       }).success,
     ).toBe(true);
-  for (const n of [0, 21, 1.5, "2"])
+  for (const n of [0, 7, 20, 1.5, "2"])
     expect(
       commandSchema.safeParse({
         commandId: "rounds-test",
@@ -148,9 +148,9 @@ it("validates custom turns and commands throughout a 400-round game", () => {
     commandSchema.safeParse({
       commandId: "rounds-test",
       gameId: "game",
-      roundId: 400,
+      roundId: 120,
       action: { type: "leave" },
     }).success,
   ).toBe(true);
-  expect(totalRounds(20, "QUICK", 20)).toBe(400);
+  expect(totalRounds(20, "QUICK", 6)).toBe(120);
 });

@@ -46,7 +46,7 @@ See [deployment](docs/deployment.md), [the full release checklist](docs/release-
 ## Ways to play
 
 - **Play solo vs bots:** enter your own name, then face two randomly selected personalities.
-- **Create a room / Join a room:** enter a name and play with friends or add bots. Matches support 2–20 seats. The host can keep Quick/Full presets or choose 1–20 Insider turns per player; the lobby shows the resulting total rounds.
+- **Create a room / Join a room:** enter a name and play with friends or add bots. Matches support 2–20 seats. The host can keep Quick/Full presets or choose 1–6 Insider turns per player; the lobby shows the resulting total rounds.
 - **Watch bots play:** select 2–8 distinct bots and a preset or custom Insider-turn count. Watch automatic decisions, public tips, chat, reveals, scores and awards without taking a seat. Refresh resumes your spectator session. Stop watching returns home; after the final, replay keeps the selected lineup.
 
 The roster now includes Patient Penny (cautious), Opposite Ollie (headline contrarian), and Risky Rex (aggressive) alongside the original five. Observer sessions never receive unrevealed secrets and cannot submit gameplay actions.

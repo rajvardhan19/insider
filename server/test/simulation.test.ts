@@ -56,7 +56,7 @@ it("validates distinct 2–8 bot simulations", () => {
       type: "watch",
       bots: ["penny", "ollie", "rex", "sam", "sal", "lucy", "nina", "walt"],
       mode: "QUICK",
-      insiderTurns: 20,
+      insiderTurns: 6,
     }).success,
   ).toBe(true);
   for (const bots of [

@@ -292,7 +292,7 @@ it.each(["QUICK", "FULL"] as const)(
   },
 );
 
-it("finishes 400 rounds with twenty equal Insider rotations and recycled news", () => {
+it("finishes 120 rounds with six equal Insider rotations and recycled news", () => {
   let g = startGame(
     Array.from({ length: 20 }, (_, i) => freshPlayer(`p${i}`, `Player ${i}`)),
     "QUICK",
@@ -302,21 +302,21 @@ it("finishes 400 rounds with twenty equal Insider rotations and recycled news", 
     pool,
     false,
     false,
-    20,
+    6,
   );
-  expect(g.totalRounds).toBe(400);
+  expect(g.totalRounds).toBe(120);
   while (g.phase !== "FINAL") g = expire(g, g.phaseEndsAt, pool);
-  expect(g.history).toHaveLength(400);
+  expect(g.history).toHaveLength(120);
   for (const p of g.players)
-    expect(g.history.filter((r) => r.insiderId === p.id)).toHaveLength(20);
-  for (let i = 0; i < 400; i += pool.length)
+    expect(g.history.filter((r) => r.insiderId === p.id)).toHaveLength(6);
+  for (let i = 0; i < 120; i += pool.length)
     expect(
       new Set(g.history.slice(i, i + pool.length).map((r) => r.news.id)).size,
-    ).toBe(Math.min(pool.length, 400 - i));
+    ).toBe(Math.min(pool.length, 120 - i));
 }, 60000);
 it("rejects unsupported custom lengths and oversized rosters at the engine boundary", () => {
   const players = [freshPlayer("a", "Alex"), freshPlayer("b", "Bex")];
-  for (const turns of [0, 21, 1.5, NaN])
+  for (const turns of [0, 7, 20, 1.5, NaN])
     expect(() =>
       startGame(players, "QUICK", "x", 1, 0, pool, false, false, turns),
     ).toThrow("invalid rounds");
