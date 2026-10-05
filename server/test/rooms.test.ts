@@ -208,16 +208,19 @@ describe("rooms and authenticated seats", () => {
     expect(snapshot).not.toContain("tokenHash");
     expect(snapshot).not.toContain("socketId");
   });
-  it("rejects a sixth seat and duplicate names", async () => {
+  it("accepts twenty seats and rejects the twenty-first and duplicate names", async () => {
     const { host, code } = await room(),
       guest = await connect();
     expect(
       await enter(guest, { type: "join", name: "maya", code }),
     ).toMatchObject({ ok: false, code: "NAME_TAKEN" });
-    for (const bot of ["lucy", "sam", "nina", "walt"] as const)
-      expect(await command(host, { type: "addBot", bot })).toMatchObject({
-        ok: true,
-      });
+    for (let i = 1; i < 20; i++) {
+      const seat = await connect();
+      expect(
+        await enter(seat, { type: "join", name: `Trader ${i}`, code }),
+      ).toMatchObject({ ok: true });
+    }
+    await until(() => views.get(host)?.players.length === 20);
     expect(
       await enter(guest, { type: "join", name: "Leo", code }),
     ).toMatchObject({ ok: false, code: "ROOM_FULL" });
@@ -495,4 +498,61 @@ it("syncs reveal reactions to both players, rate-limits them, and never changes 
   app.rooms.sweep();
   await until(() => views.get(host)?.phase === "TIP");
   expect(views.get(host)!.reactions).toEqual([]);
+});
+
+it("shares custom turns, protects host settings, and keeps twenty players in a synchronized round", async () => {
+  const { host, code } = await room();
+  const guests: Socket[] = [];
+  for (let i = 1; i < 20; i++) {
+    const s = await connect();
+    guests.push(s);
+    await enter(s, { type: "join", name: `Player ${i}`, code });
+  }
+  expect(
+    await command(guests[0], { type: "rounds", insiderTurns: 8 }),
+  ).toMatchObject({ ok: false, code: "NOT_HOST" });
+  expect(
+    await command(host, { type: "rounds", insiderTurns: 8 }),
+  ).toMatchObject({ ok: true });
+  await until(() => views.get(guests[18])?.insiderTurns === 8);
+  await command(host, { type: "start" });
+  await until(() => views.get(guests[18])?.phase === "TIP");
+  expect(views.get(host)?.totalRounds).toBe(160);
+  expect(
+    await command(host, { type: "rounds", insiderTurns: 1 }),
+  ).toMatchObject({ ok: false, code: "WRONG_PHASE" });
+  await command(host, { type: "tip", direction: "UP", strong: false });
+  await until(() => views.get(guests[18])?.phase === "GUESS");
+  for (const g of guests)
+    await command(g, {
+      type: "guess",
+      direction: "UP",
+      stake: 100,
+      callShark: false,
+    });
+  await until(() => guests.every((g) => views.get(g)?.phase === "REVEAL"));
+  const result = views.get(host)!.result;
+  expect(result?.outcomes).toHaveLength(20);
+  for (const g of guests) expect(views.get(g)!.result).toEqual(result);
+});
+it("preserves custom turns through reconnect and replay, and presets clear the override", async () => {
+  const { host, code, token } = await room();
+  const guest = await connect();
+  await enter(guest, { type: "join", name: "Bex", code });
+  await command(host, { type: "rounds", insiderTurns: 1 });
+  const replacement = await connect();
+  await enter(replacement, { type: "rejoin", code, token });
+  expect(views.get(replacement)?.insiderTurns).toBe(1);
+  await command(replacement, { type: "start" });
+  for (let i = 0; i < 6; i++) {
+    const v = views.get(replacement)!;
+    now = v.phaseEndsAt;
+    app.rooms.sweep();
+    await until(() => views.get(replacement)!.phase !== v.phase);
+  }
+  expect(views.get(replacement)?.phase).toBe("FINAL");
+  await command(replacement, { type: "replay" });
+  expect(views.get(replacement)?.insiderTurns).toBe(1);
+  await command(replacement, { type: "mode", mode: "FULL" });
+  expect(views.get(replacement)?.insiderTurns).toBeUndefined();
 });

@@ -79,6 +79,7 @@ export interface PlayerView {
   me: string;
   hostId: string;
   mode: Mode;
+  insiderTurns?: number;
   solo: boolean;
   spectating?: boolean;
   phase: Phase;

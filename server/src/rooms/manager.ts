@@ -2,6 +2,7 @@ import { createHash, randomBytes, randomInt, randomUUID } from "node:crypto";
 import type { Server, Socket } from "socket.io";
 import {
   BOTS,
+  MAX_PLAYERS,
   COMEDY,
   commandSchema,
   entrySchema,
@@ -52,6 +53,7 @@ type Room = {
   revision: number;
   hostId: string;
   mode: Mode;
+  insiderTurns?: number;
   players: Seat[];
   emptySince?: number;
   cache: Map<string, { fingerprint: string; ack: Ack }>;
@@ -220,6 +222,7 @@ export class RoomManager {
           revision: 0,
           hostId: "",
           mode: entry.type === "watch" ? entry.mode : "QUICK",
+          insiderTurns: entry.type === "watch" ? entry.insiderTurns : undefined,
           players: [],
           cache: new Map(),
           solo: entry.type === "solo",
@@ -248,8 +251,10 @@ export class RoomManager {
         );
         return;
       }
-      if (room.players.length >= 5) {
-        reply(fail("ROOM_FULL", "This room already has five players."));
+      if (room.players.length >= MAX_PLAYERS) {
+        reply(
+          fail("ROOM_FULL", `This room already has ${MAX_PLAYERS} players.`),
+        );
         return;
       }
       if (
@@ -291,6 +296,7 @@ export class RoomManager {
           newsPool,
           false,
           true,
+          room.insiderTurns,
         );
       }
       if (room.solo) {
@@ -464,7 +470,9 @@ export class RoomManager {
       return { ok: true };
     }
     if (
-      ["mode", "addBot", "removeBot", "start", "replay"].includes(a.type) &&
+      ["mode", "rounds", "addBot", "removeBot", "start", "replay"].includes(
+        a.type,
+      ) &&
       player.id !== room.hostId
     )
       return fail("NOT_HOST", "Only the host can do that.");
@@ -495,6 +503,7 @@ export class RoomManager {
           newsPool,
           false,
           room.simulation,
+          room.insiderTurns,
         );
       return { ok: true };
     }
@@ -510,6 +519,8 @@ export class RoomManager {
         this.now(),
         newsPool,
         room.firstGame,
+        false,
+        room.insiderTurns,
       );
       return { ok: true };
     }
@@ -542,13 +553,21 @@ export class RoomManager {
     }
     if (room.game)
       return fail("WRONG_PHASE", "Roster and mode are locked during a game.");
+    if (a.type === "rounds") {
+      room.insiderTurns = a.insiderTurns;
+      return { ok: true };
+    }
     if (a.type === "mode") {
+      room.insiderTurns = undefined;
       room.mode = a.mode;
       return { ok: true };
     }
     if (a.type === "addBot") {
-      if (room.players.length >= 5)
-        return fail("ROOM_FULL", "This room already has five players.");
+      if (room.players.length >= MAX_PLAYERS)
+        return fail(
+          "ROOM_FULL",
+          `This room already has ${MAX_PLAYERS} players.`,
+        );
       if (room.players.some((p) => p.bot === a.bot))
         return fail("BOT_EXISTS", "This bot already has a seat.");
       if (

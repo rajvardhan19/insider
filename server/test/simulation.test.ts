@@ -43,7 +43,7 @@ class LocalSocket extends EventEmitter {
   }
 }
 afterEach(() => vi.useRealTimers());
-it("validates distinct 2–5 bot simulations", () => {
+it("validates distinct 2–8 bot simulations", () => {
   expect(
     entrySchema.safeParse({
       type: "watch",
@@ -51,11 +51,19 @@ it("validates distinct 2–5 bot simulations", () => {
       mode: "QUICK",
     }).success,
   ).toBe(true);
+  expect(
+    entrySchema.safeParse({
+      type: "watch",
+      bots: ["penny", "ollie", "rex", "sam", "sal", "lucy", "nina", "walt"],
+      mode: "QUICK",
+      insiderTurns: 20,
+    }).success,
+  ).toBe(true);
   for (const bots of [
     ["rex"],
     ["rex", "rex"],
     ["unknown", "rex"],
-    ["penny", "ollie", "rex", "sam", "sal", "lucy"],
+    ["penny", "ollie", "rex", "sam", "sal", "lucy", "nina", "walt", "rex"],
   ])
     expect(
       entrySchema.safeParse({ type: "watch", bots, mode: "QUICK" }).success,
@@ -77,12 +85,15 @@ it("runs a real bot-only match, protects secrets from the observer, reconnects a
     const viewer = connect("watcher");
     const ack = viewer.entry({
       type: "watch",
-      bots: ["penny", "ollie", "rex", "sam", "lucy"],
+      bots: ["penny", "ollie", "rex", "sam", "lucy", "nina", "walt", "sal"],
+      insiderTurns: 1,
       mode: "QUICK",
     });
     if (!ack.ok) throw new Error(ack.message);
     expect(viewer.view.spectating).toBe(true);
-    expect(viewer.view.players).toHaveLength(5);
+    expect(viewer.view.players).toHaveLength(8);
+    expect(viewer.view.totalRounds).toBe(8);
+    expect(viewer.view.insiderTurns).toBe(1);
     expect(viewer.view.players.every((p) => p.bot)).toBe(true);
     expect(viewer.view.players.some((p) => p.id === viewer.view.me)).toBe(
       false,
@@ -109,12 +120,12 @@ it("runs a real bot-only match, protects secrets from the observer, reconnects a
       replacement.entry({ type: "rejoin", code: ack.code, token: ack.token }),
     ).toMatchObject({ ok: true });
     expect(replacement.view.me).toBe(viewer.view.me);
-    await vi.advanceTimersByTimeAsync(5 * (60000 + 120000 + 8000));
+    await vi.advanceTimersByTimeAsync(8 * (60000 + 120000 + 8000));
     expect(replacement.view.phase).toBe("FINAL");
-    expect(replacement.view.history).toHaveLength(5);
+    expect(replacement.view.history).toHaveLength(8);
     expect(
       replacement.view.history.every(
-        (r) => r.outcomes.filter((o) => o.guess).length === 4,
+        (r) => r.outcomes.filter((o) => o.guess).length === 7,
       ),
     ).toBe(true);
     for (const v of [...viewer.views, ...replacement.views]) {

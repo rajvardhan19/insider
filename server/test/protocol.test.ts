@@ -124,3 +124,33 @@ describe("original-v1 rules", () => {
     });
   });
 });
+
+it("validates custom turns and commands throughout a 400-round game", () => {
+  for (const n of [1, 20])
+    expect(
+      commandSchema.safeParse({
+        commandId: "rounds-test",
+        gameId: null,
+        roundId: 0,
+        action: { type: "rounds", insiderTurns: n },
+      }).success,
+    ).toBe(true);
+  for (const n of [0, 21, 1.5, "2"])
+    expect(
+      commandSchema.safeParse({
+        commandId: "rounds-test",
+        gameId: null,
+        roundId: 0,
+        action: { type: "rounds", insiderTurns: n },
+      }).success,
+    ).toBe(false);
+  expect(
+    commandSchema.safeParse({
+      commandId: "rounds-test",
+      gameId: "game",
+      roundId: 400,
+      action: { type: "leave" },
+    }).success,
+  ).toBe(true);
+  expect(totalRounds(20, "QUICK", 20)).toBe(400);
+});

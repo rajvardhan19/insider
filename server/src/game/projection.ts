@@ -7,6 +7,7 @@ export interface ProjectableRoom {
   revision: number;
   hostId: string;
   mode: "QUICK" | "FULL";
+  insiderTurns?: number;
   solo: boolean;
   simulation?: boolean;
   commentary?: { published: import("@insider/shared").CommentaryLine[] };
@@ -37,6 +38,7 @@ export function buildPlayerView(
     me,
     hostId: room.hostId,
     mode: room.mode,
+    insiderTurns: room.insiderTurns,
     solo: room.solo,
     spectating: room.simulation ?? false,
     phase,

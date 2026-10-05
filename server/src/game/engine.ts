@@ -1,3 +1,4 @@
+import { MAX_PLAYERS, MAX_INSIDER_TURNS } from "@insider/shared";
 import type { Guess, Mode, News, Tip } from "@insider/shared";
 import { samples } from "./rng.js";
 import { RULES as R, totalRounds } from "./rules.js";
@@ -30,22 +31,30 @@ export function startGame(
   pool: News[],
   firstGame = false,
   simulation = false,
+  insiderTurns?: number,
 ): GameState {
-  requireRule(players.length >= 2 && players.length <= 5, "INVALID_ROSTER");
+  requireRule(
+    players.length >= 2 && players.length <= MAX_PLAYERS,
+    "INVALID_ROSTER",
+  );
   requireRule(
     new Set(players.map((p) => p.id)).size === players.length &&
       (simulation ? players.every((p) => p.bot) : players.some((p) => !p.bot)),
     "INVALID_ROSTER",
+  );
+  requireRule(
+    insiderTurns === undefined ||
+      (Number.isInteger(insiderTurns) &&
+        insiderTurns >= 1 &&
+        insiderTurns <= MAX_INSIDER_TURNS),
+    "INVALID_ROUNDS",
   );
   requireRule(mode === "QUICK" || mode === "FULL", "INVALID_MODE");
   requireRule(
     new Set(pool.map((n) => n.id)).size === pool.length,
     "DUPLICATE_NEWS",
   );
-  requireRule(
-    pool.length >= totalRounds(players.length, mode),
-    "NOT_ENOUGH_NEWS",
-  );
+  requireRule(pool.length > 0, "NOT_ENOUGH_NEWS");
   const g: Omit<GameState, "current"> = {
     id,
     rulesVersion: R.version,
@@ -56,7 +65,7 @@ export function startGame(
     })),
     phase: "LOBBY",
     round: 0,
-    totalRounds: totalRounds(players.length, mode),
+    totalRounds: totalRounds(players.length, mode, insiderTurns),
     phaseStartedAt: now,
     phaseEndsAt: now,
     history: [],
@@ -82,6 +91,8 @@ export function startRound(
   const g = structuredClone(state),
     [draws, next] = samples(g.rng, 3);
   g.rng = next;
+  // Long matches reuse the deck only after every entry has appeared.
+  if (g.usedNews.length >= pool.length) g.usedNews = [];
   const available = pool.filter((n) => !g.usedNews.includes(n.id));
   requireRule(available.length, "NOT_ENOUGH_NEWS");
   const news = available[Math.floor(draws[0] * available.length)];

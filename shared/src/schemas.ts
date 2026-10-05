@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MAX_INSIDER_TURNS, MAX_ROUNDS } from "./session.js";
 import { PHRASES } from "./phrases.js";
 export const nameSchema = z
   .string()
@@ -10,6 +11,7 @@ export const nameSchema = z
     (s) => !/(fuck|shit|bitch|cunt|nigger|faggot)/i.test(s),
     "Choose another display name.",
   );
+const insiderTurns = z.number().int().min(1).max(MAX_INSIDER_TURNS);
 const direction = z.enum(["UP", "DOWN"]);
 export const actionSchema = z.discriminatedUnion("type", [
   z
@@ -18,6 +20,7 @@ export const actionSchema = z.discriminatedUnion("type", [
       emoji: z.enum(["tomato", "laugh", "shark"]),
     })
     .strict(),
+  z.object({ type: z.literal("rounds"), insiderTurns }).strict(),
   z.object({ type: z.literal("start") }).strict(),
   z.object({ type: z.literal("replay") }).strict(),
   z.object({ type: z.literal("leave") }).strict(),
@@ -68,7 +71,7 @@ export const commandSchema = z
   .object({
     commandId: z.string().min(8).max(80),
     gameId: z.string().max(80).nullable(),
-    roundId: z.number().int().min(0).max(100),
+    roundId: z.number().int().min(0).max(MAX_ROUNDS),
     action: actionSchema,
   })
   .strict();
@@ -91,12 +94,13 @@ export const entrySchema = z.discriminatedUnion("type", [
           ]),
         )
         .min(2)
-        .max(5)
+        .max(8)
         .refine(
           (bots) => new Set(bots).size === bots.length,
           "Choose distinct bots.",
         ),
       mode: z.enum(["QUICK", "FULL"]),
+      insiderTurns: insiderTurns.optional(),
     })
     .strict(),
   z.object({ type: z.literal("create"), name: nameSchema }).strict(),

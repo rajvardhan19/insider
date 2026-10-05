@@ -23,8 +23,4 @@ export const RULES = {
   firstTell: 0.85,
   personalityRate: 0.8,
 } as const;
-export function totalRounds(count: number, mode: "QUICK" | "FULL") {
-  return (
-    count * (count >= 4 ? 1 : count === 3 ? 2 : 3) * (mode === "FULL" ? 2 : 1)
-  );
-}
+export { sessionRounds as totalRounds } from "@insider/shared";
