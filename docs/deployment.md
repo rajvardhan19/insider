@@ -74,3 +74,15 @@ This creates two temporary test seats and removes them on success. Run between p
 ### Timer update — October 4, 2026
 
 Live application commit: `029abd4`. Insider decisions allow 60 seconds and discussion/guessing allows 120 seconds in both modes. Public smoke verifies those server timestamps. Verification-only commits after this application commit do not require redeployment.
+
+### Larger groups update — October 5, 2026
+
+Live application commit: `f9529ff`. Rooms support 20 seats, hosts select 1–20 Insider turns per player, and bot watch supports all eight personalities. Quick/Full presets remain available; custom games preserve equal turns. Existing 60/120-second phase timers remain unchanged.
+
+The public twenty-client check passed against this deployment:
+
+```sh
+node scripts/smoke-public.mjs https://insider-playtest.onrender.com 20
+```
+
+It verified the shared 60-round configuration, a complete round, privacy, reactions, and reconnect, then removed all test seats. This is synthetic correctness verification, not a guarantee of performance under many simultaneous large rooms on free compute.

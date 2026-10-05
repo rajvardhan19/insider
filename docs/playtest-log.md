@@ -51,3 +51,5 @@ Try a multiplayer game with mixed commentary levels, then a solo and bot-watch m
 - Verified 375×667 roster wrapping and zero horizontal overflow. Saved `custom-rounds.jpg` and `twenty-player-mobile.jpg`; restored viewport afterward.
 - Automated checks cover host authorization, 21st-seat rejection, shared custom settings, unchanged 60/120-second timers, reconnect/replay, eight unique bots, news recycling, and all 400 rounds with 20 equal turns per player.
 - These are synthetic checks; a real 20-person playtest on the free server is still needed to assess responsiveness and discussion pacing.
+
+Public follow-up: Render deployed `f9529ff` successfully. The 20-client public smoke passed with custom turns and unchanged phase timers, then removed its test seats. Browser confirmed the live custom choice and that adding a bot updated five turns each to ten total rounds. Saved `public-custom-rounds.jpg`.
