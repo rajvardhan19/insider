@@ -337,6 +337,13 @@ function App() {
             </div>
           </div>
           <div className="tutorial-comedy">
+            <p>
+              Rooms support 2–20 players. In the lobby, the host can choose 1–20
+              Insider turns per player or keep a Quick/Full preset. The
+              displayed round count updates with the roster, and everyone gets
+              equal turns. After the news deck is exhausted, it can appear
+              again.
+            </p>
             <h3>The drama is cosmetic. The receipts are real.</h3>
             <p>
               The Insider has up to 60 seconds to choose BUY or SELL. Then

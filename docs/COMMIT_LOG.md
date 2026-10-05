@@ -155,3 +155,12 @@ Verification details and human-playtest follow-up: see `playtest-log.md` and `co
 - Insider signal selection now allows 60 seconds; discussion/guessing allows 120 seconds in Quick and Full games. Round counts and scoring remain unchanged.
 - Existing early completion remains: posting the tip starts discussion, and the last locked guess starts reveal. Tutorial explains the new limits.
 - Added deadline-boundary checks for both modes and updated the bot simulation's virtual-time allowance.
+
+## 18 — Twenty-player rooms and custom equal-turn games
+
+- Raised the room limit to 20 human/bot seats. Bot-only watch mode supports all eight distinct personalities.
+- Hosts can choose 1–20 Insider turns per player; the lobby previews the total (up to 400 rounds). Quick/Full presets remain, and choosing a preset clears the custom override.
+- Server validates and broadcasts settings, rejects non-host/mid-game edits, and preserves the choice across reconnect/replay. Round commands work through round 400.
+- The news deck recycles only after exhausting all entries. Timers, payouts, and equal Insider rotation remain unchanged.
+- Large player rosters wrap into readable tiles. Updated entry copy and tutorial.
+- Verification: 99 tests passed including 20-client synchronized reveal, admission boundaries, custom settings, reconnect/replay, eight-bot simulation, and a complete 400-round engine run. Browser checked a 20-seat/60-round lobby and persisted selection after refresh; 375px game layout has no horizontal overflow.

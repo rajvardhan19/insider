@@ -7,7 +7,15 @@ import {
   ShieldCheck,
   Radio,
 } from "lucide-react";
-import { BOTS, type Personality, type Mode, nameSchema } from "@insider/shared";
+import {
+  MAX_PLAYERS,
+  MAX_INSIDER_TURNS,
+  sessionRounds,
+  BOTS,
+  type Personality,
+  type Mode,
+  nameSchema,
+} from "@insider/shared";
 import { Modal, Sparkline } from "../components/Common";
 import {
   readSaved,
@@ -34,11 +42,17 @@ export function Home({
     "sam",
     "rex",
   ]);
+  const [watchTurns, setWatchTurns] = useState<number | undefined>();
   const [watchMode, setWatchMode] = useState<Mode>("QUICK");
   const disabled = !connection.ready || connection.busy;
   async function enter(type: "create" | "join" | "solo" | "watch") {
     if (type === "watch") {
-      await connection.enter({ type, bots: watchBots, mode: watchMode });
+      await connection.enter({
+        type,
+        bots: watchBots,
+        mode: watchMode,
+        insiderTurns: watchTurns,
+      });
       return;
     }
     const parsed = nameSchema.safeParse(name);
@@ -107,8 +121,8 @@ export function Home({
             Watch bots play <Radio size={17} />
           </button>
           <p className="note">
-            2–5 players <span>•</span> No accounts <span>•</span> Zero real
-            money
+            2–{MAX_PLAYERS} players <span>•</span> No accounts <span>•</span>{" "}
+            Zero real money
           </p>
         </div>
         <div
@@ -224,7 +238,7 @@ export function Home({
             {panel === "watch" && (
               <>
                 <p>
-                  Choose 2–5 bots. You’ll watch from the sidelines; the bots
+                  Choose 2–8 bots. You’ll watch from the sidelines; the bots
                   handle every decision.
                 </p>
                 <div className="watch-picker">
@@ -239,7 +253,7 @@ export function Home({
                         type="checkbox"
                         checked={watchBots.includes(id)}
                         disabled={
-                          !watchBots.includes(id) && watchBots.length >= 5
+                          !watchBots.includes(id) && watchBots.length >= 8
                         }
                         onChange={() =>
                           setWatchBots((bots) =>
@@ -260,14 +274,44 @@ export function Home({
                   Session length
                   <select
                     value={watchMode}
-                    onChange={(e) => setWatchMode(e.target.value as Mode)}
+                    onChange={(e) => {
+                      setWatchMode(e.target.value as Mode);
+                      setWatchTurns(undefined);
+                    }}
                   >
                     <option value="QUICK">Quick</option>
                     <option value="FULL">Full</option>
                   </select>
                 </label>
+                <label>
+                  Insider turns per bot
+                  <select
+                    value={watchTurns ?? "preset"}
+                    onChange={(e) =>
+                      setWatchTurns(
+                        e.target.value === "preset"
+                          ? undefined
+                          : Number(e.target.value),
+                      )
+                    }
+                  >
+                    <option value="preset">Use session preset</option>
+                    {Array.from(
+                      { length: MAX_INSIDER_TURNS },
+                      (_, i) => i + 1,
+                    ).map((n) => (
+                      <option value={n} key={n}>
+                        {n} turns each
+                      </option>
+                    ))}
+                  </select>
+                </label>
                 <p className="note">
-                  {watchBots.length} / 5 bots selected. Secrets stay hidden
+                  {sessionRounds(watchBots.length, watchMode, watchTurns)}{" "}
+                  rounds · Equal Insider turns.
+                </p>
+                <p className="note">
+                  {watchBots.length} / 8 bots selected. Secrets stay hidden
                   until each reveal.
                 </p>
               </>

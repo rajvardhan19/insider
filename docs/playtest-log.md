@@ -44,3 +44,10 @@ Try a multiplayer game with mixed commentary levels, then a solo and bot-watch m
 - Deployed `029abd4`: Insider TIP deadline 60,000 ms; discussion/GUESS deadline 120,000 ms in both modes. Early submission behavior is unchanged.
 - All 94 tests and production checks pass. Public smoke passed with explicit assertions for the live 60/120-second deadlines, along with multiplayer, reactions, and reconnect.
 - Public tutorial verified and screenshot saved as `screenshots/discussion-timers.jpg`.
+
+## October 5, 2026 — larger groups and custom game length
+
+- Local browser: populated 20 seats, selected three Insider turns each (60 total rounds), refreshed and recovered that selection, then started Round 1/60.
+- Verified 375×667 roster wrapping and zero horizontal overflow. Saved `custom-rounds.jpg` and `twenty-player-mobile.jpg`; restored viewport afterward.
+- Automated checks cover host authorization, 21st-seat rejection, shared custom settings, unchanged 60/120-second timers, reconnect/replay, eight unique bots, news recycling, and all 400 rounds with 20 equal turns per player.
+- These are synthetic checks; a real 20-person playtest on the free server is still needed to assess responsiveness and discussion pacing.

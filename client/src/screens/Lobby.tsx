@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { ArrowRight, Check, Copy, Plus, Users, X } from "lucide-react";
 import { Credit } from "../components/Comedy";
-import { BOTS, copy, type Personality, type PlayerView } from "@insider/shared";
+import {
+  MAX_PLAYERS,
+  MAX_INSIDER_TURNS,
+  sessionRounds,
+  BOTS,
+  copy,
+  type Personality,
+  type PlayerView,
+} from "@insider/shared";
 import { Avatar, Modal } from "../components/Common";
 import type { Connection } from "../net/connection";
 
@@ -25,8 +33,6 @@ export function Lobby({
       setCopied(false);
     }
   }
-  const turns =
-    view.players.length >= 4 ? 1 : view.players.length === 3 ? 2 : 3;
   return (
     <section className="lobby">
       <div className="page-heading">
@@ -46,7 +52,9 @@ export function Lobby({
             <h2>
               <Users size={20} /> At the table
             </h2>
-            <span className="micro">{view.players.length} / 5 SEATS</span>
+            <span className="micro">
+              {view.players.length} / {MAX_PLAYERS} SEATS
+            </span>
           </div>
           <div className="seat-list">
             {view.players.map((p, i) => (
@@ -86,7 +94,7 @@ export function Lobby({
                 )}
               </div>
             ))}
-            {view.players.length < 5 && (
+            {view.players.length < MAX_PLAYERS && (
               <button
                 className="empty-seat"
                 disabled={!host || disabled}
@@ -116,17 +124,43 @@ export function Lobby({
                 <button
                   key={mode}
                   disabled={!host || disabled}
-                  aria-pressed={view.mode === mode}
+                  aria-pressed={
+                    view.mode === mode && view.insiderTurns === undefined
+                  }
                   onClick={() => void connection.act({ type: "mode", mode })}
                 >
                   {mode === "QUICK" ? "Quick game" : "Full game"}
                 </button>
               ))}
             </div>
+            <label htmlFor="insider-turns">Insider turns per player</label>
+            <select
+              id="insider-turns"
+              disabled={!host || disabled}
+              value={view.insiderTurns ?? "preset"}
+              onChange={(e) =>
+                void connection.act({
+                  type: "rounds",
+                  insiderTurns: Number(e.target.value),
+                })
+              }
+            >
+              <option value="preset" disabled>
+                Using {view.mode === "QUICK" ? "Quick" : "Full"} preset
+              </option>
+              {Array.from({ length: MAX_INSIDER_TURNS }, (_, i) => i + 1).map(
+                (n) => (
+                  <option key={n} value={n}>
+                    {n} {n === 1 ? "turn" : "turns"} each ·{" "}
+                    {view.players.length * n} rounds
+                  </option>
+                ),
+              )}
+            </select>
             <p className="note">
               {view.players.length < 2
                 ? "Add another player or a bot to begin."
-                : `${view.players.length * turns * (view.mode === "FULL" ? 2 : 1)} rounds · Everyone gets equal Insider turns.`}
+                : `${sessionRounds(view.players.length, view.mode, view.insiderTurns)} rounds · Everyone gets equal Insider turns.`}
             </p>
             <button
               className="primary full"
@@ -152,7 +186,7 @@ export function Lobby({
               disabled={
                 disabled ||
                 view.players.some((p) => p.bot === id) ||
-                view.players.length >= 5
+                view.players.length >= MAX_PLAYERS
               }
               onClick={async () => {
                 if (await connection.act({ type: "addBot", bot: id }))

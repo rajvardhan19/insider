@@ -1,9 +1,13 @@
-// Creates and removes two test seats on the explicitly supplied deployment.
+// Creates and removes 2–20 test seats on the explicitly supplied deployment.
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { io } from "socket.io-client";
 const origin = new URL(process.argv[2]).origin;
 assert.equal(new URL(origin).protocol, "https:");
+const playerCount = Number(process.argv[3] ?? 2);
+assert.ok(
+  Number.isInteger(playerCount) && playerCount >= 2 && playerCount <= 20,
+);
 const sockets = [],
   views = new Map();
 const until = async (predicate) => {
@@ -63,16 +67,25 @@ try {
     code: seat.code,
     name: "Test Guest",
   });
+  const extras = [];
+  for (let i = 2; i < playerCount; i++) {
+    const s = await connect();
+    extras.push(s);
+    await enter(s, { type: "join", code: seat.code, name: `Test ${i}` });
+  }
   await until(
     () =>
-      views.get(host)?.players.length === 2 &&
-      views.get(guest)?.players.length === 2,
+      views.get(host)?.players.length === playerCount &&
+      views.get(guest)?.players.length === playerCount,
   );
+  await act(host, { type: "rounds", insiderTurns: 3 });
+  await until(() => views.get(guest)?.insiderTurns === 3);
   const page = await fetch(`${origin}/r/${seat.code}`);
   assert.equal(page.status, 200);
   assert.match(await page.text(), /<div id="root"><\/div>/);
   await act(host, { type: "start" });
   await until(() => views.get(guest)?.phase === "TIP");
+  assert.equal(views.get(guest).totalRounds, playerCount * 3);
   assert.equal(
     views.get(guest).phaseEndsAt - views.get(guest).phaseStartedAt,
     60000,
@@ -91,6 +104,15 @@ try {
     views.get(guesser).phaseEndsAt - views.get(guesser).phaseStartedAt,
     120000,
   );
+  for (const s of extras) {
+    assert.equal(views.get(s).secrets, undefined);
+    await act(s, {
+      type: "guess",
+      direction: "UP",
+      stake: 100,
+      callShark: false,
+    });
+  }
   await act(guesser, {
     type: "guess",
     direction: "UP",
@@ -119,10 +141,13 @@ try {
       views.get(restored)?.me === guestId &&
       views.get(restored)?.history.length === 1,
   );
+  assert.equal(views.get(restored).insiderTurns, 3);
+  assert.equal(views.get(restored).result.outcomes.length, playerCount);
+  for (const s of extras) await act(s, { type: "leave" });
   await act(restored, { type: "leave" });
   await act(host, { type: "leave" });
   console.info(
-    "Public smoke passed: HTTPS health, direct room link, two-player WebSockets, private roles, tip, guess, reveal, synced reaction, and authenticated reconnect. Test seats removed.",
+    `Public smoke passed: ${playerCount} players, custom equal turns, HTTPS health, direct room link, WebSockets, private roles, tip, guess, reveal, synced reaction, and authenticated reconnect. Test seats removed.`,
   );
 } finally {
   clearTimeout(watchdog);

@@ -2255,3 +2255,22 @@ details p {
     font-size: 32px;
   }
 }
+
+/* Large tables wrap into readable tiles instead of compressing twenty names. */
+.avatar-row {
+  flex-wrap: wrap;
+}
+.avatar-row .player-tile {
+  flex: 0 0 82px;
+  min-width: 72px;
+  max-width: 100px;
+}
+.lobby-side select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
